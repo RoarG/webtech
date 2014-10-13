@@ -1,0 +1,63 @@
+/*MAIN*/
+
+.main {
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/*HEADER*/
+
+.header {
+	background-color: rgb(119, 119, 119);
+	border: 1px solid black;
+	height: 120px;
+}
+
+.header > .box {
+	background-color: rgb(170, 170, 170);
+	border: 1px solid black;
+	border-radius: 15px;
+	text-align: center;
+	width: 110px;
+	height: 40px;
+	float: left;
+	margin: 10px;
+	position: relative;
+	left: 450px;
+	top: 35px;
+}
+
+.box > a {
+	position: relative;
+	top: 10px;
+}
+
+.login > .loginId {
+	float: right;
+	margin: 5px;
+}
+
+/*NAV*/
+
+.nav {
+	background-color: rgb(255, 99, 71);
+	border: 1px solid black;
+	height: 200px;
+	position: relative;
+	top: 5px;
+}
+
+.nav > .category {
+	background-color: rgb(255, 255, 255);
+	border: 1px solid black;
+	border-radius: 15px;
+	text-align: center;
+	width: 100px;
+	height: 100px;
+	float: left;
+	position: relative;
+	left: 40px;
+	top: 20px;
+	margin: 20px;
+}
