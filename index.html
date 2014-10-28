@@ -7,7 +7,7 @@
 	</head>
 	<body>
 	
-		<section class="main">
+		<section class="page">
 			<div class="header">
 				<div class="login">
 					<div class="loginId">
@@ -19,36 +19,117 @@
 						</div>
 					</div>
 				</div>
-				<div class="box">
-					<a></a>
+				<div class="logo">
+					<img src="./images/logo.png"></img>
 				</div>
 				<div class="box">
-					<a></a>
+					<a>Min Side</a>
 				</div>
 				<div class="box">
-					<a></a>
+					<a>Hjelp</a>
+				</div>
+				<div class="box">
+					<a>Om Siden</a>
 				</div>
 			</div>
 			
 			<div class="nav">
 				<div class="category">
+					<a>Husarbeid</a>
 				</div>
 				<div class="category">
+					<a>Flytting</a>
 				</div>
 				<div class="category">
+					<a>Personlig Assistent</a>
 				</div>
 				<div class="category">
+					<a>Annet</a>
 				</div>
 			</div>
 			
-			<div class="section">
+			<div class="main" id="main">
+				<div class="image" id="image0">
+					<img src="./images/forsidebilde.png" id="img0"></img>
+				</div>
+				<div class="text" id="text0">
+					<p>En veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig lang tekst.
+					</p>
+				</div>
+				<div class="text" id="text1">
+					<p>En veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig lang tekst.
+					</p>
+				</div>
 			</div>
 			
 			<div class="footer">
+				<hr>
+				<p>En footer</p>
 			</div>
 		</section>
 		
 		<script>
+			var main = document.getElementById("main");
+			var image0 = document.getElementById("image0");
+			var text0 = document.getElementById("text0");
+			var text1 = document.getElementById("text1");
+		
+			function firstLogin(response) {
+				removeMain();
+				
+				var imgDiv = document.createElement("div");
+				imgDiv.id = "image1";
+				
+				var img = document.createElement("img");
+				img.id = "img1";
+				img.class = "image";
+				img.src = "https://graph.facebook.com/"+response.id+"/picture?type=large";
+				imgDiv.appendChild(img);
+				
+				var buttonDiv = document.createElement("div");
+				buttonDiv.id = "buttons";
+				
+				var button = document.createElement("button");
+				button.id = "button0";
+				button.addEventListener("click", function() {
+					restoreMain();
+				});
+				
+				var buttonText = document.createTextNode("OK");				
+				button.appendChild(buttonText);
+				buttonDiv.appendChild(button);
+			
+				var formDiv = document.createElement("div");
+				formDiv.id = "form0";
+				
+				var textArea = document.createElement("textArea");
+				textArea.id = "name";
+				textArea.value = response.first_name + " " + response.last_name;
+				formDiv.appendChild(textArea);
+				
+				var textArea1 = document.createElement("textArea");
+				textArea1.id = "email";
+				textArea1.value = response.email;
+				formDiv.appendChild(textArea1);
+
+				main.appendChild(imgDiv);
+				main.appendChild(formDiv);
+				main.appendChild(buttonDiv);
+			}
+		
+			function removeMain() {
+				main.removeChild(image0);
+				main.removeChild(text0);
+				main.removeChild(text1);
+			}
+		
+			function restoreMain() {
+				main.innerHTML = "";
+				main.appendChild(image0);
+				main.appendChild(text0);
+				main.appendChild(text1);
+			}
+		
 			function statusChangeCallback(response) {
 				if (response.status === 'connected') {
 					FB.api('/me', function(response) {
@@ -64,7 +145,11 @@
 
 			function checkLoginState() {
 				FB.getLoginStatus(function(response) {
-					statusChangeCallback(response);
+					//statusChangeCallback(response);
+					//console.log(JSON.stringify(response));
+					FB.api('/me', function(response) {
+						firstLogin(response);
+					});
 				});
 			}
 
@@ -75,7 +160,7 @@
 					xfbml      : true,
 					version    : 'v2.1'
 				});
-
+				
 				FB.getLoginStatus(function(response) {
 					statusChangeCallback(response);
 				});
