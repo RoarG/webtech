@@ -1,0 +1,167 @@
+/*Main*/ 
+#container{
+	width:1000px;
+	position:relative;
+	margin-left:auto;
+	margin-right:auto;
+	font-family: sans-serif;
+	font: 12px;
+}
+
+/*Headers*/
+#pageHeader{
+	width: 1000px;
+	height: 60px;
+	margin-top: 15px;
+	float: left;
+	font-size: 16px;
+	text-align: center;
+}
+
+.inputHeader{
+	float: left;
+	margin-bottom: 20px;
+	text-align:bottom;
+	font-size: 20px;
+	padding-bottom: 5px;
+	border-bottom: 3px solid green;
+	width: 640px;
+}
+#calHeader{
+	margin-right: 40px;
+	width: 320px;
+}
+
+/*Inputboxes*/
+.inputbox{
+	margin-top: 20px;
+	padding-top: 10px;
+	float: left;
+}
+
+/*Calendar*/
+#calendar{
+	margin-right: 40px;
+	width: 320px;
+	height: 550px;
+}
+#calendar h4{
+	width: 140px;
+	border-bottom: 2px solid green;
+	vertical-align:top;
+	font-size: 16px;
+	margin-left: 30px;
+}
+.dateTime{
+	margin-left: 50px;
+	height: 25px;
+	font-size: 20px;
+	padding-left:5px;
+}
+
+#mydate{
+	width: 220px; /*Bredden på kalenderen*/
+}
+
+#time h4{
+	margin-top: 280px;
+}
+#mytime{
+	width: 70px;
+}
+
+/*Categories*/
+#categories{
+	width: 635px;
+	height: 220px;
+}
+.cat{
+	height: 120px;
+	width: 125px;
+	margin-left: 2px;
+	float: left;
+}
+
+.catButton{
+	background-color: rgba(0,99,0,0.4);
+	width: 120px;
+	height: 40px;
+	margin-top: 2px;
+	margin-bottom: 5px;
+	float: left;
+	font-size: 14px;
+	outline: none;
+}
+
+.catButton:hover{
+	background-color: rgba(0,99,0,0.6);
+}
+
+.underCat{
+	margin-top: 60px;
+	margin-left: 3px;
+	width: 115px;
+	height: 120px;
+}
+#divText{
+	width: 110px;
+	height: 100px;
+}
+#searchButton{
+	width: 50px;
+	float: right;
+}
+
+/*Map*/
+#map{
+	width: 405px;
+	height: 500px;
+	position: relative;
+}	
+#map-canvas{
+	width: 400px;
+	height: 400px;
+	margin-right: 5px;
+}
+#search{
+	margin-top: 10px;
+	height: 20px;
+	width: 200px;
+}
+
+/*People*/
+#people{
+	width: 200px;
+	height: 390px;
+	margin-top: 100px;
+	margin-left: 25px;
+	float: right;
+	overflow: auto;
+}
+.workersRadio{
+	display: block;
+	height: 30px;
+	width: 50px;
+	float: left;
+	margin-bottom: 5px;
+	margin-right: 3px;
+	text-align: center;
+	padding-top: 15px;
+}
+
+.workers{
+	display: block;
+	height: 50px;
+	width: 140px;
+	float: left;
+	margin-bottom: 5px;
+	padding-top: 10px;
+}
+
+.submitButton{
+	width: 200px;
+	height: 40px;
+	margin-top: 30px;
+	margin-left: 30px;
+	margin-bottom: 60px;
+}
