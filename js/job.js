@@ -138,7 +138,7 @@ function updateMap(underCategory){
 		}
 	}
 	/*Henter personer som jobber med aktuell kategori*/
-	xmlhttp.open("GET", "/getUsersNearBy.php?q="+underCat[underCategory], true);
+	xmlhttp.open("GET", "./getUsersNearBy.php?q="+underCat[underCategory], true);
 	xmlhttp.send();
 }
 
