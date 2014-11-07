@@ -1,0 +1,38 @@
+/*Account*/
+
+
+.accountView {
+	background-color: rgb(119, 119, 119);
+	border: 1px solid black;
+	height: 300px;
+}
+
+.account {
+	text-align: center;
+	position: relative;
+}
+
+#accountHeader {
+	font-size: 30px;
+}
+
+.button {
+  padding:5px;
+  background-color: #dcdcdc;
+  border: 1px solid #666;
+  color:#000;
+  text-decoration:none;
+}
+
+#accountImg {
+	height: 100px;
+	width: 100px;
+}
+
+.accountCont {
+	text-align: center;
+}
+
+.rating {
+	text-align: center;
+}

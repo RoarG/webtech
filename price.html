@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Account Side</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/account.css">
+	<meta charset="UTF-8">
+</head>
+<body>
+			<section class="page">
+			<div class="header">
+				<div class="login">
+					<div class="loginId">
+						<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+						</fb:login-button>
+					</div>
+					<div class="loginId">
+						<div id="name">
+						</div>
+					</div>
+				</div>
+				<div class="logo">
+					<img src="./images/logo.png"></img>
+				</div>
+				<div class="box">
+					<a>Min Side</a>
+				</div>
+				<div class="box">
+					<a>Hjelp</a>
+				</div>
+				<div class="box">
+					<a>Om Siden</a>
+				</div>
+			</div>
+			
+			<div class="account">
+				<h3 id="accountHeader"> Din Konto</h3> 
+				<span class="accountNav">
+  					<button class="button" onclick="location.href='account.html'">Konto</button>
+  					<button class="button" onclick="location.href='price.html'">Pris</button>
+  					<button class="button" onclick="location.href='notifications.html'">Varslinger</button>
+  					<button class="button" onclick="location.href='place.html'">Steder</button>
+  					<button class="button" onclick="location.href='info.html'">Kontakt</button>
+				</span>
+
+				<div class="accountView" id="accountView">
+					<div class="name">
+						PRIS
+					</div>
+
+					<div class="summary">
+						<input type="range" min="0" max="1000" value="0" step="5" onchange="showValue(this.value)" /> <br>
+						<span id="range">0</span><br>
+
+						<script type="text/javascript">
+						function showValue(newValue)
+						{
+							document.getElementById("range").innerHTML=newValue + "Kr/Time";
+						}
+						</script>
+
+					<button class="button" onclick="edit'">Lagre</button>
+					</div>
+	
+			</div>
+			
+			
+			<div class="footer">
+				<hr>
+				<p>En footer</p>
+			</div>
+		</section>
+</body>
+</html>

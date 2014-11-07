@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Account Side</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/account.css">
+	<meta charset="UTF-8">
+</head>
+<body>
+			<section class="page">
+			<div class="header">
+				<div class="login">
+					<div class="loginId">
+						<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+						</fb:login-button>
+					</div>
+					<div class="loginId">
+						<div id="name">
+						</div>
+					</div>
+				</div>
+				<div class="logo">
+					<img src="./images/logo.png"></img>
+				</div>
+				<div class="box">
+					<a>Min Side</a>
+				</div>
+				<div class="box">
+					<a>Hjelp</a>
+				</div>
+				<div class="box">
+					<a>Om Siden</a>
+				</div>
+			</div>
+			
+			<div class="account">
+				<h3 id="accountHeader"> Din Konto</h3> 
+				<span class="accountNav">
+  					<button class="button" onclick="location.href='account.html'">Konto</button>
+  					<button class="button" onclick="location.href='price.html'">Pris</button>
+  					<button class="button" onclick="location.href='notifications.html'">Varslinger</button>
+  					<button class="button" onclick="location.href='place.html'">Steder</button>
+  					<button class="button" onclick="location.href='info.html'">Kontakt</button>
+				</span>
+
+				<div class="accountView" id="accountView">
+					<div class="name">
+						STED
+					</div>
+
+					<div class="summary">
+						<div id="map" class="inputbox" >
+							<h3 id="mapHeader" class="inputHeader">3. velg hvor du vil vises hos andre brukere</h3>
+							<input id="search" type="text" placeholder="Skriv inn din adresse">
+							<div id="map-canvas"></div>
+						</div>
+
+					</div>
+	
+			</div>
+			
+			
+			<div class="footer">
+				<hr>
+				<p>En footer</p>
+			</div>
+		</section>
+	<script src="js/job.js"></script>
+	<script src="lib/jquery-2.1.1.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+</body>
+</html>
