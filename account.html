@@ -40,38 +40,33 @@
   					<button class="button" onclick="location.href='price.html'">Pris</button>
   					<button class="button" onclick="location.href='notifications.html'">Varslinger</button>
   					<button class="button" onclick="location.href='place.html'">Steder</button>
-  					<button class="button" onclick="location.href='info.html'">Kontakt</button>
+  					<button class="button" onclick="location.href='info.html'">Synlig Profil</button>
 				</span>
 
 				<div class="accountView" id="accountView">
-					<div class="accountCont">
-						Navn :
-						<p>ROAR</p> 
-					</div>
-
+					<form action="demo_form.asp">
+						First name: <input type="text" name="FirstName" value="Mickey"><br>
+						Last name: <input type="text" name="LastName" value="Mouse"><br>
+					</form>
 					
-
+					<div class="image" id="accountImg">
+						<img src="./images/forsidebilde.png" id="accountImg"></img>
+					</div>
+					
 					<div class="bio">
 						<div class="about">OM:</div>
-						<p> Om: En veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig lang BIO.
-						</p>
-					<button class="button" onclick="edit'">Endre</button>
-
-					<div class="image" id="accountImg">
-					<img src="./images/forsidebilde.png" id="accountImg"></img>
-
-					<div class="rating">
-					<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+						<textarea rows="5" cols="75">
+							EN LANG TEXT, nei dette er en litt mindre.
+						</textarea>
 					</div>
-
-					</div>
-	
-			</div>
-			
-			
-			<div class="footer">
-				<hr>
-				<p>En footer</p>
+					<form action="">
+						<input type="checkbox" name="category" value="husarbeid">Husarbeid
+						<input type="checkbox" name="category" value="Personlig Assistent">Personlig Assistent
+						<input type="checkbox" name="category" value="Handyman">Husarbeid
+						<input type="checkbox" name="category" value="Diverse">Husarbeid
+					</form>
+					<button class="button" onclick="save'">Lagre</button>
+				</div>
 			</div>
 		</section>
 </body>
