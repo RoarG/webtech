@@ -1,52 +1,39 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Jobbforespøsel sendt</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/style.css">
-	</head>
-	<body>
-		<div class="page">
-			<div class="header">
-				<div class="login">
-					<div class="loginId">
-					</div>
-					<div class="loginId">
-						<div id="name">
-						</div>
-					</div>
-				</div>
-				<div class="logo">
-					<img src="webtech/images/logo.png">
-				</div>
-				<div class="box">
-					<a>Min Side</a>
-				</div>
-				<div class="box">
-					<a>Hjelp</a>
-				</div>
-				<div class="box">
-					<a>Om Siden</a>
-				</div>
-			</div>
-			<div>
-				<?php
-					$date = $_POST['date'];
-					$time = $_POST['time'];
-					$category = $_POST['category'];
-					$selectedWorker = $_POST['workersGroup'];
-					
-					echo "Følgende verdier ble sendt:<br> Dato: ";
-					echo($date);
-					echo "<br> Tid: ";
-					echo($time);
-					echo "<br> Kategori: ";
-					echo($category);
-					echo "<br> Valgt arbeidstaker: ";
-					echo($selectedWorker);
+<?php
+	/*TODO: kjoperId/brukerId, lengdegrad, breddegrad må hentes fra Facebook*/
 
-				?>
-			</div>
-		</div>
-	</body>
-</html>
+	$date = strval($_POST['date']);
+	$time = strval($_POST['time']);
+	$worker = strval($_POST['worker']);
+	
+	$dateArray = explode(".", $date);
+	$dateFormatted = "$dateArray[2]-$dateArray[1]-$dateArray[0] $time:00";
+	
+	/*TODO: kan lage et eget PHP-skript for tilkobling til databasen*/
+	$db = mysqli_connect("mysql.stud.ntnu.no","audunasa_webtek","it2805","audunasa_prosjekt");
+	//$db = myqsli_connect("localhost","roargcom_audun","it2805","roargcom_webtek");
+	
+	if (!$db) {
+	  die('Could not connect: ' . mysqli_error($db));
+	}
+	
+	/*Lagrer jobb*/
+	
+	$query ="INSERT INTO
+			jobber (jobbId,kjoperId, selgerId, tidspunkt, breddegrad, lengdegrad, pris, varighet,kommentar, tilbakemelding, rating)
+			VALUES (NULL,1,".$worker.",'".$dateFormatted."',
+			NULL,NULL,NULL,NULL,NULL,NULL, 0);";
+	
+	$result = mysqli_query($db, $query) or die(mysqli_error($db));
+
+	/*Lagrer notification
+	LAST_INSERT_ID henter jobbId fra den nettopp insatte jobben*/
+	
+	$query2 = "INSERT INTO
+				varslinger (varslingId, brukerId, jobbId, tidspunkt, lest)
+				VALUES (NULL, 1, LAST_INSERT_ID(), NOW(), false );";
+	
+	$result2 = mysqli_query($db, $query2) or die(mysqli_error($db));
+	
+	$db->close();
+
+?>

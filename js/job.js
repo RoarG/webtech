@@ -1,32 +1,132 @@
 window.onload = function (){
 	initializeCal();
-	initializeCat();
 	loadMap();
 }
+
+function submitJob(){
+	if(!checkForm()){
+		return;
+	}
+	var date = document.getElementById('mydate').value;
+	var time = document.getElementById('mytime').value;
+	var worker = document.querySelector('input[name="workersGroup"]:checked').value;
+	var message = "Jobbforespørsel sendt! <br> Dato: "+date+"<br> Tid:"+time+"<br> Arbeidstaker:"+worker;
+	
+	var params = "date="+date+"&time="+time+"&worker="+worker;
+			
+	xmlhttp = new XMLHttpRequest();
+	
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			openPopupWindow(message, 0);
+		}
+	}
+	/*Sender jobben til php-skript*/
+	xmlhttp.open("POST", "./submitJob.php", true);
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send(params);
+}
+
+function checkForm(){
+	var dateElement = document.getElementById("mydate");
+	var timeElement = document.getElementById("mytime");
+	/*Henter elementet i arbeiderlisten som er valgt*/
+	var workerElement = document.querySelector('input[name="workersGroup"]:checked');
+
+	if(!dateElement.value || !timeElement.value){
+		return false;
+	}
+	if(!document.getElementById('underCat').hasChildNodes()){
+		openPopupWindow("Velg kategori!", 1);
+		return false;
+	}
+	if(!document.getElementById('people').hasChildNodes() && document.getElementById('underCat').childNodes[0].id != 'diverseMessage'){
+		openPopupWindow("Velg underkategori!", 1);
+		return false;
+	}
+	if(!workerElement){
+		return false;
+	}	
+	return true;
+}
+
+function openPopupWindow(message, value){
+	var overlay = document.getElementById("popupOverlay");
+	var popup = document.getElementById("popupWindow");
+	var tekst = document.getElementById("confirmTekst");
+	
+	overlay.style.display = "block";
+	popup.style.display = "block";
+	tekst.innerHTML = message;
+      
+	var confirmButton = document.createElement('button');
+	confirmButton.setAttribute('type', 'button');
+	confirmButton.id = 'confirmButton';
+	confirmButton.innerHTML = "OK";
+	
+	if (value > 0) {
+		confirmButton.setAttribute('onclick', 'emptyForm(1)');
+	}else {
+		confirmButton.setAttribute('onclick', 'emptyForm(0)');
+	}
+	
+	popup.appendChild(confirmButton);
+}
+
+ function emptyForm(value){
+	var overlay = document.getElementById("popupOverlay");
+	var popup = document.getElementById("popupWindow");
+	overlay.style.display = "none";
+	popup.style.display = "none";
+	
+	/*Fjerner input bare dersom jobb er sendt til database*/
+	if(value < 1){
+		emptyUnderCategories();
+		removeMapMarkers();
+		emptyWorkersList();
+		document.getElementById("mydate").value = "";
+		document.getElementById("mytime").value = "";
+	}
+ }
 
 /*MAP FUNCTIONS*/
 
 var map;
-var markers = [];
-var userLat = 63.418
-var userLng = 10.444
+var workerMarkers = [];
+
+/*Disse verdiene må hentes fra Facebook/database*/
+var userLat = 63.417
+var userLng = 10.43
 
 function initializeMap() {
 	var mapOptions = {
 		center: {lat: userLat, lng: userLng},
-		zoom: 10
 	};
 
 	map = new google.maps.Map(document.getElementById('map-canvas'),
 		mapOptions);
+	
+	var marker = new google.maps.Marker({
+		position:{lat:userLat,
+					lng:userLng},
+		icon: {
+			url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+		},
+		map: map,
+		title: "Her er du!"
+	});
 	addSearchBox();
+	google.maps.event.addListenerOnce(map, 'bounds_changed', function(){
+		this.setZoom(11);
+	});
 }
+/*Ikke sikker på hva denne skal brukes til*/
 function addSearchBox(){ //https://developers.google.com/maps/documentation/javascript/examples/places-searchbox
 	var markers = [];
 	
 	var defaultBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(63.318, 10.344),
-      new google.maps.LatLng(63.518, 10.544));
+      new google.maps.LatLng(userLat-0.1, userLng-0.1),
+      new google.maps.LatLng(userLat+0.1, userLng+0.1));
 	map.fitBounds(defaultBounds);
 	
 	var input = document.getElementById('search');
@@ -100,35 +200,40 @@ function setMapMarkers(workersXML){
 			position: {lat: parseFloat(workers[i].childNodes[3].childNodes[0].nodeValue), 
 						lng: parseFloat(workers[i].childNodes[5].childNodes[0].nodeValue)},
 			map: map,
-			title: "id:"+workers[i].childNodes[1].childNodes[0].nodeValue,
+			title: "Id:"+workers[i].childNodes[1].childNodes[0].nodeValue,
+			icon: {
+				url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+			}
 		});
-		markers.push(marker);
+		workerMarkers.push(marker);
 		google.maps.event.addListener(marker, 'click', function(){
 			highlightWorkerAndMarker(this.getTitle());
 		});
 	}
-	map.setZoom(12);
 }	
 function removeMapMarkers(){
-	for(var i=0; i<markers.length; i++){
-		markers[i].setMap(null);
+	for(var i=0; i<workerMarkers.length; i++){
+		workerMarkers[i].setMap(null);
 	}
 	workersArray = [];
-	markers = [];
+	workerMarkers = [];
+	labels = [];
+	
+	document.getElementById("changingUnderCat").innerHTML = "";
 }	
 
 function updateMap(underCategory){
-	if(underCategory<0 || underCategory>6){
-		return;
-	}
 	removeMapMarkers();
 	emptyWorkersList();
+	
+	var mapHeader = document.getElementById("changingUnderCat");
+	mapHeader.innerHTML = underCategory;
 	
 	xmlhttp = new XMLHttpRequest();
 	
 	xmlhttp.onreadystatechange=function() {
 		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-			/*Lagrer XMl-string fra database*/
+			/*Lagrer XML-string fra database*/
 			var x = xmlhttp.responseText;
 			/*Parser string til DOM-objekt*/
 			var parser = new DOMParser();
@@ -137,27 +242,26 @@ function updateMap(underCategory){
 			setWorkersList();
 		}
 	}
-	/*Henter personer som jobber med aktuell kategori*/
-	xmlhttp.open("GET", "./getUsersNearBy.php?q="+underCat[underCategory], true);
+	/*Henter personer som jobber med aktuell kategori i nærheten*/
+	xmlhttp.open("GET", "./getUsersNearBy.php?cat="+underCategory+
+											"&lat="+userLat+"&long="+userLng, true);
 	xmlhttp.send();
 }
 
 function highlightWorkerAndMarker(id){
 	for(var i=0; i<workersArray.length; i++){
 		if(workersArray[i].id===id.split(":")[1]){
-			workersArray[i].checked = true;
-			labels[i].style.backgroundColor = "#D5E0D9";
-			markers[i].setIcon({
-				url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-				size: new google.maps.Size(36,44)
+			workersArray[i].firstChild.firstChild.checked = true;
+			workersArray[i].style.backgroundColor = "rgba(119,209,119,0.6)";
+			workerMarkers[i].setIcon({
+				url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
 			});
 		}
 		else {
-			workersArray[i].checked = false;
-			labels[i].style.backgroundColor = "white";
-			markers[i].setIcon({
-				url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
-				size: new google.maps.Size(36,44)
+			workersArray[i].firstChild.firstChild.checked = false;
+			workersArray[i].style.backgroundColor = "";
+			workerMarkers[i].setIcon({
+				url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
 			});
 		}
 	}
@@ -167,28 +271,50 @@ var labels = [];
 
 function setWorkersList(){
 	var parent = document.getElementById('people');
+	if(workers.length < 1){
+		var noWorker = document.createElement('p');
+		noWorker.innerHTML = "Ingen arbeidstakere i aktuell underkategori";
+		
+		parent.appendChild(noWorker);
+		return;
+	}
+	
 	for(var i=0; i<workers.length; i++){
+		var newSpan = document.createElement('span');
+		newSpan.className = "workers";
+		newSpan.id = workers[i].childNodes[1].childNodes[0].nodeValue;;
+		
 		var newRadio = document.createElement('input');
 		newRadio.setAttribute('type', 'radio');
 		newRadio.setAttribute('name', 'workersGroup');
-		newRadio.setAttribute('value', "Id: "+workers[i].childNodes[1].childNodes[0].nodeValue);
+		newRadio.setAttribute('value', workers[i].childNodes[1].childNodes[0].nodeValue);
+		newRadio.setAttribute('required', '');
 		
 		newRadio.id = workers[i].childNodes[1].childNodes[0].nodeValue;
 		
-		var radioSpan = document.createElement('span');
-		radioSpan.className = "workersRadio";
-		radioSpan.appendChild(newRadio);
+		var radioButtonSpan = document.createElement('span');
+		radioButtonSpan.className = "workersRadio";
+		radioButtonSpan.appendChild(newRadio);
+		
+		var pictureSpan = document.createElement('span');
+		pictureSpan.className = "workerPicture";
+		pictureSpan.innerHTML = "Bilde";
 		
 		var radioLabel = document.createElement('label');
-		radioLabel.className = "workers";
+		radioLabel.className = "labels";
 		
-		radioLabel.innerHTML += "Id: "+workers[i].childNodes[1].childNodes[0].nodeValue +"<br>";
-		radioLabel.innerHTML += "Bio: "+workers[i].childNodes[7].childNodes[0].nodeValue + "<br>";
+		radioLabel.innerHTML += "Navn: "+workers[i].childNodes[11].childNodes[0].nodeValue+" <br>";
+		radioLabel.innerHTML += "Rating: "+workers[i].childNodes[13].childNodes[0].nodeValue+" <br>";
+		radioLabel.innerHTML += "Avstand fra deg: "+workers[i].childNodes[9].childNodes[0].nodeValue +"km <br>";
+		radioLabel.innerHTML += "Bio: "+workers[i].childNodes[7].childNodes[0].nodeValue +"<br>";
 		
-		parent.appendChild(radioSpan);
-		parent.appendChild(radioLabel);
+		newSpan.appendChild(radioButtonSpan);
+		newSpan.appendChild(pictureSpan);
+		newSpan.appendChild(radioLabel);
 		
-		workersArray.push(newRadio);
+		parent.appendChild(newSpan);
+		
+		workersArray.push(newSpan);
 		labels.push(radioLabel);
 	}
 	for(var j=0; j<workersArray.length; j++){
@@ -203,63 +329,101 @@ function emptyWorkersList(){
 	while(peopleNode.firstChild){
 		peopleNode.removeChild(peopleNode.firstChild);
 	}
+	workersArray = [];
 }
 
 /*CALENDAR FUNCTIONS*/
 
 function initializeCal(){
+	var date = new Date();
+	var year = date.getFullYear();
+	var month = date.getMonth();
+	var day = date.getDate();
 	$('#mydate').glDatePicker(
 		{
-			showAlways:true,
+			showAlways:false,
 			dowOffset: 1,
 			selectableDateRange:[
-				{from: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()),
-				to: new Date(9999,1,1)}
+				{from: new Date(year, month, day),
+				to: new Date(year+1, month, day)}
 			]
 	});
 	
 	$('#mytime').timepicker(
 	{
-		'timeFormat': 'H:i'
+		'timeFormat': 'H:i',
+		'scrollDefault': '12:00'
 	});	
 }
 
-
-
 /*CATEGORY FUNCTIONS*/
 
-var categories = ["hus", "flytt", "pers", "handy", "diverse"];
-var underCat = ["plenklipping", "handling", "lekser", "hund", "bilde", "møbel", "pc"];
-var underCategories = document.getElementsByClassName("underCat");
+var categories = {
+			"husarbeid":["Plenklipping", "Vasking", "Rydding"],
+			"personlig assistent":["Lekser", "Gå tur med hunden", "Handling"], 
+			"handyman":["Flytting", "Møbelsammensetting", "PC-hjelp", "Bilderedigering"], 
+			"diverse":[]
+};
 
-function initializeCat(){
-	for(var i in underCategories){
-		if(underCategories[i].tagName == "SPAN"){
-			underCategories[i].style.display = 'none';
+var catButtonList = [];
+
+function changeCatButtonStyle(underCategory){
+	for(var i=0; i<catButtonList.length; i++){
+		if(catButtonList[i].value == underCategory){
+			catButtonList[i].style.backgroundColor = "rgb(255,99,71)";
+		}
+		else{
+			catButtonList[i].style.backgroundColor = "";
 		}
 	}
 }
 
-function showUnderCat(category){
-	var newActiveElement = document.getElementById([categories[category]]);
-	for(var i in categories){
-		if(categories[i] != "flytt" && (categories.indexOf(categories[i]) > -1)){
-			var element = document.getElementById(categories[i]);
-			var button = document.getElementById([categories[i]]+"Button");
-			if (element == newActiveElement){
-				if(element.style.display == 'block'){
-					element.style.display = 'none';
-					button.style.backgroundColor = "rgba(0,99,0,0.4)";
-				}
-				else{
-					element.style.display = 'block';
-					button.style.backgroundColor = "rgba(0,99,0,0.6)";
-				}
-			}
-			else {
-				element.style.display = 'none';
-				button.style.backgroundColor = "rgba(0,99,0,0.4)";
-			}
-		}
+function emptyUnderCategories(){
+	document.getElementById("changingCat").innerHTML = "";
+	var parentNode = document.getElementById("underCat");
+	while(parentNode.firstChild){
+		parentNode.removeChild(parentNode.firstChild);
 	}
+	catButtonList = [];
+}
+
+function showUnderCat(category){
+	emptyUnderCategories();
+	
+	var underCatHeader = document.getElementById("changingCat");
+	var parentNode = document.getElementById("underCat");
+	if(category == "diverse"){
+		underCatHeader.innerHTML = "";
+		
+		var diverseMessage = document.createElement('p');
+		diverseMessage.id = "diverseMessage";
+		diverseMessage.innerHTML = "Se kart for alle arbeidstakere som har krysset av for at de kan utføre diverse oppgaver";
+		
+		parentNode.appendChild(diverseMessage);
+		emptyWorkersList();
+		updateMap(category);
+		return;
+	}
+	underCatHeader.innerHTML = " i kategorien " + category;
+
+	var underCatArray = categories[category];
+	for(var i=0; i<underCatArray.length; i++){
+		var underCat = underCatArray[i];
+
+		var newUnderCat = document.createElement('input');
+		newUnderCat.setAttribute('required', '');
+		newUnderCat.type = "button";
+		newUnderCat.value = underCat;
+		newUnderCat.innerHTML = underCat;
+		newUnderCat.className = "underCatButton";
+		
+		catButtonList.push(newUnderCat);
+		
+		newUnderCat.onclick = function(){
+			changeCatButtonStyle(this.value);
+			updateMap(this.value);
+		}			
+		parentNode.appendChild(newUnderCat);		
+	}
+	
 }

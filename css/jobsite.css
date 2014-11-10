@@ -1,6 +1,6 @@
 /*Main*/ 
 #container{
-	width:1000px;
+	width:900px;
 	position:relative;
 	margin-left:auto;
 	margin-right:auto;
@@ -9,41 +9,41 @@
 }
 
 /*Headers*/
-#pageHeader{
-	width: 1000px;
-	height: 60px;
-	margin-top: 15px;
-	float: left;
-	font-size: 16px;
-	text-align: center;
-}
-
 .inputHeader{
 	float: left;
-	margin-bottom: 20px;
 	text-align:bottom;
 	font-size: 20px;
 	padding-bottom: 5px;
 	border-bottom: 3px solid green;
-	width: 640px;
+	background-color: white;
+	width: 560px;
+	margin-top: 0px;
 }
+.inputHeader p{
+	margin:0px;
+	padding:0px;
+	display: inline;
+}
+
 #calHeader{
 	margin-right: 40px;
-	width: 320px;
+	width: 300px;
+}
+#mapHeader{
+	width: 900px;
 }
 
 /*Inputboxes*/
 .inputbox{
-	margin-top: 20px;
-	padding-top: 10px;
+	margin-top: 40px;
 	float: left;
 }
 
 /*Calendar*/
 #calendar{
 	margin-right: 40px;
-	width: 320px;
-	height: 550px;
+	width: 300px;
+	height: 280px;
 }
 #calendar h4{
 	width: 140px;
@@ -60,68 +60,45 @@
 }
 
 #mydate{
-	width: 220px; /*Bredden på kalenderen*/
+	width: 200px; /*Bredden på kalenderen*/
 }
 
 #time h4{
-	margin-top: 280px;
+	margin-top: 40px;
 }
 #mytime{
 	width: 70px;
 }
 
-/*Categories*/
+/*Undercategories*/
 #categories{
-	width: 635px;
-	height: 220px;
-}
-.cat{
-	height: 120px;
-	width: 125px;
-	margin-left: 2px;
-	float: left;
+	width: 560px;
+	height: 280px;
 }
 
-.catButton{
-	background-color: rgba(0,99,0,0.4);
-	width: 120px;
+.underCatButton{
+	margin-top: 15px;
 	height: 40px;
-	margin-top: 2px;
-	margin-bottom: 5px;
 	float: left;
-	font-size: 14px;
+	margin-left: 20px;
+	color: white;
+	font-size: 18px;
+	background-color: rgb(191,191,191);
+	border: 0;
 	outline: none;
-}
-
-.catButton:hover{
-	background-color: rgba(0,99,0,0.6);
-}
-
-.underCat{
-	margin-top: 60px;
-	margin-left: 3px;
-	width: 115px;
-	height: 120px;
-}
-#divText{
-	width: 110px;
-	height: 100px;
-}
-#searchButton{
-	width: 50px;
-	float: right;
+	border-radius: 5px;
 }
 
 /*Map*/
 #map{
-	width: 405px;
-	height: 500px;
+	width: 900px;
+	height: 550px;
 	position: relative;
 }	
 #map-canvas{
-	width: 400px;
-	height: 400px;
-	margin-right: 5px;
+	width: 450px;
+	height: 450px;
+	float: left;
 }
 #search{
 	margin-top: 10px;
@@ -129,39 +106,117 @@
 	width: 200px;
 }
 
-/*People*/
+/*List of Workers*/
 #people{
-	width: 200px;
-	height: 390px;
-	margin-top: 100px;
-	margin-left: 25px;
-	float: right;
+	width: 410px;
+	height: 400px;
+	margin-left: 40px;
+	float: left;
 	overflow: auto;
 }
+
+.workers input[type='radio'] {
+	transform: scale(1.5);
+}
+
+.workers{
+	display: block;
+	height: 80px;
+	width: 405px;
+	float: left;
+	padding-top: 8px;
+	border-bottom: 2px solid #BFC9C3;
+	background-color: white;
+}
+
 .workersRadio{
 	display: block;
-	height: 30px;
+	height: 80px;
 	width: 50px;
 	float: left;
 	margin-bottom: 5px;
 	margin-right: 3px;
 	text-align: center;
-	padding-top: 15px;
+	padding-top: 27px;
+}
+.workerPicture {
+	display: block;
+	margin-top: 5px;
+	height: 60px;
+	width: 60px;
+	float: left;
+	border: 1px solid #999999;
 }
 
-.workers{
+.labels{
 	display: block;
-	height: 50px;
-	width: 140px;
+	margin-left: 10px;
+	height: 80px;
+	width: 220px;
 	float: left;
-	margin-bottom: 5px;
-	padding-top: 10px;
+}
+
+/*Submit*/
+#submitDiv{
+	width: 900px;
+	float: left;
+	height: 150px;
 }
 
 .submitButton{
 	width: 200px;
-	height: 40px;
+	height: 60px;
+	float: right;
 	margin-top: 30px;
-	margin-left: 30px;
-	margin-bottom: 60px;
+	margin-bottom: 80px;
+	margin-right: 20px;
+	border-radius: 5px;
+	background-color: rgb(255,99,71);
+	color: white;
+	font-size: 16px;
+	border: 0;
+}
+#popupOverlay{
+	position: relative;
+	position: fixed;
+	top:0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: #eeeeee;
+	opacity: 0.4;
+	display: none;
+}
+#popupWindow{
+	top: 50%;
+	left: 50%;
+	width: 300px;
+	height: 200px;
+	margin-left: -150px;
+	margin-top: -100px;
+	position: fixed;
+	background-color: white;
+	border: 2px solid rgba(255,99,71,1);
+	display: none;
+	border-radius: 5px;
+}
+
+#confirmTekst {
+	padding-top: 10px;
+	font-size: 20px;
+	text-align: center;
+}
+
+#confirmButton {
+	left: 50%;
+	position: absolute;
+	width: 100px;
+	margin-left: -50px;
+	bottom: 25px;
+	height: 40px;
+	border-radius: 5px;
+	background-color: rgb(255,99,71);
+	color: white;
 }

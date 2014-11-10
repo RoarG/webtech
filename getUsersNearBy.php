@@ -1,17 +1,32 @@
 <?php
+	session_start();
 	ini_set('display_errors',1);
 		
-	$q = strval($_GET['q']);
+	$cat = strval($_GET['cat']);
+	$lat = strval($_GET['lat']);
+	$long = strval($_GET['long']);
 	
 	$db = mysqli_connect("mysql.stud.ntnu.no","audunasa_webtek","it2805","audunasa_prosjekt");
-
+	//$db = myqsli_connect("localhost","roargcom_audun","it2805","roargcom_webtek");
+		
 	if (!$db) {
-	  die('Could not connect: ' . mysqli_error($db));
+	  echo('Could not connect: ' . mysqli_error($db));
 	}
 	
-	$result = mysqli_query($db, "SELECT m.id,m.breddegrad, m.lengdegrad,bio
-								FROM members AS m LEFT JOIN category AS c ON m.id=c.personID
-								WHERE c.navn='".$q."';");
+	$query = "SELECT id,m.navn AS navn, breddegrad, lengdegrad, bio, ifnull(m2.r,0) as rating,
+			ROUND((6371 * ACOS( COS( RADIANS(".$lat.") ) * COS( RADIANS(breddegrad) ) 
+			* COS( RADIANS(".$long.") - RADIANS(lengdegrad) ) + 
+			SIN( RADIANS(".$lat.") ) * SIN( RADIANS(breddegrad) ) ) ),2) AS avstand
+			FROM medlemmer AS m 
+			LEFT JOIN kategori AS c ON m.id=c.personId
+			LEFT JOIN (SELECT selgerId, avg(rating) as r
+						FROM jobber
+						GROUP BY selgerId) AS m2 on m2.selgerId=m.id
+			WHERE c.navn='".$cat."'
+			HAVING avstand<50
+			ORDER BY avstand;";
+	
+	$result = mysqli_query($db, $query);
 	
 	if (!$result) {
 		printf("Error: %s\n", mysqli_error($db));
@@ -42,6 +57,18 @@
 		$bio = $xml->createElement("bio");
 		$bio->appendChild($xml->createTextNode($row['bio']));
 		$person->appendChild($bio);
+		
+		$avstand = $xml->createElement("avstand");
+		$avstand->appendChild($xml->createTextNode($row['avstand']));
+		$person->appendChild($avstand);
+		
+		$navn = $xml->createElement("navn");
+		$navn->appendChild($xml->createTextNode($row['navn']));
+		$person->appendChild($navn);
+		
+		$rating = $xml->createElement("rating");
+		$rating->appendChild($xml->createTextNode($row['rating']));
+		$person->appendChild($rating);
 		
 		$root->appendChild($person);
 	}
