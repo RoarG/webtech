@@ -4,7 +4,7 @@
 .accountView {
 	background-color: rgb(119, 119, 119);
 	border: 1px solid black;
-	height: 400px;
+	height: 600px;
 }
 
 .account {
@@ -80,4 +80,15 @@
 
 .starRating:hover input:hover + label{
   background : url('stars.png') repeat-x 0 -48px;
+}
+
+#map-canvas{
+	width: 400px;
+	height: 300px;
+	margin-left: 250px;
+}
+#search{
+	margin-top: 10px;
+	height: 20px;
+	width: 220px;
 }

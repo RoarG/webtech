@@ -50,22 +50,46 @@
 
 					<div class="summary">
 						<div id="map" class="inputbox" >
-							<h3 id="mapHeader" class="inputHeader">3. velg hvor du vil vises hos andre brukere</h3>
+							<h3 id="mapHeader" class="inputHeader">Velg et utgangspunkt for ditt arbeidsområde ved å trykke på kartet</h3>
 							<input id="search" type="text" placeholder="Skriv inn din adresse">
 							<div id="map-canvas"></div>
 						</div>
-
+						
+						<h4 id="radiusHeader" class="inputHeader">Velg radius for ditt arbeidsområde</h4>
+						<input type="range" id="radiusSlider" min="0" max="100" value="0" step="1" onchange="setCircleRadius(this.value)"/>
+						<span id="range">0</span><br>
+						
+						<button class="button" onclick="edit'">Lagre</button>
 					</div>
-	
 			</div>
-			
-			
+						
 			<div class="footer">
-				<hr>
-				<p>En footer</p>
+				<div id="contact" class="footerBox">
+					<h4 class="footerHeader">Kontakt oss</h4>
+					
+					<form id="contactForm">
+					<h5 class="contactFormHeader">Navn: </h5>
+					<input class="contactFormElement" type="text" name="senderName" required>
+					<h5 class="contactFormHeader">Mailadresse: </h5>
+					<input class="contactFormElement" type="email" name="senderMail" required>
+					<h5 class="contactFormHeader">Melding: </h5>
+					<textarea class="contactFormElement" id="comment" name="textarea" required ></textarea>
+					<input type="submit" id="sendMessageButton" value="Send melding">
+					</form>
+					
+				</div>
+				<div id="divLinks" class="footerBox">
+					<h4 class="footerHeader">Linker</h4><br><br>
+					<a>Site map</a><br><br>
+					<a>Referanseside</a>
+					<br><br><br>&copy Roar Gjøvaag, Audun Sæther, Runar Heggset
+				</div>
+				<div id="logo" class="footerBox">
+					<img id="footerLogo" src="./images/logo.png"></img>
+				</div>
 			</div>
 		</section>
-	<script src="js/job.js"></script>
+	<script src="./js/map.js"></script>
 	<script src="lib/jquery-2.1.1.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 </body>

@@ -7,7 +7,7 @@
 		<link rel="stylesheet" href="css/jobsite.css">
 		<link rel="stylesheet" href="lib/glDatePicker-2.0/styles/glDatePicker.default.css" type="text/css">
 		<link rel="stylesheet" href="lib/jonthornton-jquery-timepicker-1.4.13-5-g917772a/jonthornton-jquery-timepicker-917772a/jquery.timepicker.css" type="text/css">
-		<script src="js/job.js"></script>
+		<script src="./js/job.js"></script>
 		<script src="lib/jquery-2.1.1.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 		<script src="lib/glDatePicker-2.0/glDatePicker.js"></script>
@@ -38,7 +38,7 @@
 					<a>Om Siden</a>
 				</div>
 			</div>
-			<div class="nav">
+			<div class="nav" id="nav">
 				<div class="category" onclick="showUnderCat('husarbeid')">
 					<a>Husarbeid</a>
 				</div>
@@ -49,32 +49,38 @@
 					<a>Handyman</a>
 				</div>
 				<div class="category" onclick="showUnderCat('diverse')">
-					<a>Diverse</a>
+					<a>Annet<a>
+				</div>
+				<div class="button">
+					<input type="checkbox" name="toggle" id="toggle" />
+					<label for="toggle"></label>
 				</div>
 			</div>
-			<div id="calendar" class="inputbox">
-				<h3 id="calHeader" class="inputHeader">1. Velg dato og tidspunkt</h3>
-				<div id="date">
-					<h4>Dato</h4>
-					<input type="text" name="date" autocomplete="off" id="mydate" gldp-id="mydate" required class="dateTime"/>
+			<div class="main" id="main">
+				<div id="calendar" class="inputbox">
+					<h3 id="calHeader" class="inputHeader">1. Velg dato og tidspunkt</h3>
+					<div id="date">
+						<h4>Dato</h4>
+						<input type="text" name="date" autocomplete="off" id="mydate" gldp-id="mydate" required class="dateTime"/>
+					</div>
+					<div id="time">
+						<h4>Tidspunkt</h4>
+						<input type="text" name="time" autocomplete="off" id="mytime" required class="dateTime"/>
+					</div>
 				</div>
-				<div id="time">
-					<h4>Tidspunkt</h4>
-					<input type="text" name="time" autocomplete="off" id="mytime" required class="dateTime"/>
+				<div id="categories" class="inputbox">
+					<h3 id="catHeader" class="inputHeader">2. Velg underkategori<p id="changingCat"></p></h3>
+					<div id="underCat"></div>
 				</div>
-			</div>
-			<div id="categories" class="inputbox">
-				<h3 id="catHeader" class="inputHeader">2. Velg underkategori<p id="changingCat"></p></h3>
-				<div id="underCat"></div>
-			</div>
-			<div id="map" class="inputbox" >
-				<h3 id="mapHeader" class="inputHeader">3. Velg arbeidstaker i nærheten av deg i underkategorien: <p id="changingUnderCat"></p></h3>
-				<input id="search" type="text" placeholder="Skriv inn din adresse">
-				<div id="map-canvas"></div>
-				<div id="people"></div>
-			</div>
-			<div id="submitDiv" class="inputbux">
-				<input type="submit" name="submit" class="submitButton" onclick="submitJob()" value="Send jobbforespørsel">
+				<div id="map" class="inputbox" >
+					<h3 id="mapHeader" class="inputHeader">3. Velg arbeidstaker i nærheten av deg i underkategorien: <p id="changingUnderCat"></p></h3>
+					<input id="search" type="text" placeholder="Skriv inn din adresse">
+					<div id="map-canvas"></div>
+					<div id="people"></div>
+				</div>
+				<div id="submitDiv" class="inputbux">
+					<input type="submit" name="submit" class="submitButton" onclick="submitJob()" value="Send jobbforespørsel">
+				</div>
 			</div>
 			<div class="footer">
 				<hr>
@@ -86,5 +92,6 @@
 		<div id="popupWindow">
 			<p id="confirmTekst"></p>
 		</div>
+		<script src="./js/slide.js"></script>
 	</body>
 </html>
