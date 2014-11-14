@@ -4,12 +4,13 @@
 	width: 900px;
 	margin-left: auto;
 	margin-right: auto;
+	background-color: #F6F5F2;
 }
 
 /*HEADER*/
 
 .header {
-	background-color: rgb(119, 119, 119);
+	background-color: #4a5a66 ;
 	border: 1px solid black;
 	height: 120px;
 }
@@ -22,7 +23,7 @@
 }
 
 .header > .box {
-	background-color: rgb(170, 170, 170);
+	background-color: #DFDDDA   ;
 	border: 1px solid black;
 	border-radius: 15px;
 	text-align: center;
@@ -39,6 +40,41 @@
 	position: relative;
 	top: 10px;
 }
+
+
+/*Må justere litt på fagene*/
+.header-button {
+   border-top: 1px solid #f7f7f7;
+   background: #303d45;
+   background: -webkit-gradient(linear, left top, left bottom, from(#e1e5e8), to(#303d45));
+   background: -webkit-linear-gradient(top, #e1e5e8, #303d45);
+   background: -moz-linear-gradient(top, #e1e5e8, #303d45);
+   background: -ms-linear-gradient(top, #e1e5e8, #303d45);
+   background: -o-linear-gradient(top, #e1e5e8, #303d45);
+   padding: 9.5px 19px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: #2ebfa7;
+   font-size: 15px;
+   font-family: Georgia, Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.header-button:hover {
+   border-top-color: #ed7842;
+   background: #ed7842;
+   color: #f7f2f7;
+   }
+.header-button:active {
+   border-top-color: #ffffff;
+   background: #ffffff;
+   }
+
 
 .login > .loginId {
 	float: right;
@@ -57,7 +93,8 @@
 	position:absolute;
 	cursor:pointer;
 	padding:10px;
-	background: #26ae90;
+	background: #6D6C6C ;
+	hover: ;
 	width: 100px;
 	right: 0px;
 	border-radius: 3px;
@@ -71,22 +108,31 @@
 	transition:all 500ms ease;
 }
 
+/* Denen fungerer ikke atm
+#toggle:hover {
+	background-color: black; 
+	color: white;
+}*/
+
 #toggle + label:after {
 	content:"Open" 
 }
 
 #toggle:checked + label {
-	background:#dd6149;
+	/*background:#dd6149;*/
+	background:#6D6C6C;
+
 }
 
 #toggle:checked + label:after {
 	content:"Close"
 }
 
+
 /*NAV*/
 
 .nav {
-	background-color: rgb(255, 99, 71);
+	background-color: #4AAAA5 ;
 	border: 1px solid black;
 	height: 35px;
 	position: relative;
@@ -163,8 +209,9 @@
 .footer{
 	height: 50px; 
 	position: fixed;
-	background-color: white;
+	background-color: #7ACCC8 ;
 	bottom: 0;
 	width: inherit;
 	text-align: center;
 }
+
