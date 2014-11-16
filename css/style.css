@@ -12,7 +12,7 @@
 .header {
 	background-color: #4a5a66 ;
 	border: 1px solid black;
-	height: 120px;
+	height: 180px;
 }
 
 .header > .logo {
@@ -23,52 +23,53 @@
 }
 
 .header > .box {
-	background-color: #DFDDDA   ;
-	border: 1px solid black;
-	border-radius: 15px;
+	background-color: #4a5a66;
+	border: 0px solid black;
+	border-radius: 10px;
 	text-align: center;
-	width: 110px;
+	width: 100px;
 	height: 40px;
 	float: left;
-	margin: 10px;
+	margin: 15px;
 	position: relative;
 	left: 450px;
 	top: 35px;
 }
 
-.box > a {
+/*.box > a {
 	position: relative;
 	top: 10px;
-}
+}*/
 
-.img {
+/*.img {
 	max-height: 100%;
 	max-width: 100%;
-}
+}*/
 
 
 /*Må justere litt på fagene*/
 .header-button {
-   border-top: 1px solid #f7f7f7;
-   background: #303d45;
-   background: -webkit-gradient(linear, left top, left bottom, from(#e1e5e8), to(#303d45));
-   background: -webkit-linear-gradient(top, #e1e5e8, #303d45);
-   background: -moz-linear-gradient(top, #e1e5e8, #303d45);
-   background: -ms-linear-gradient(top, #e1e5e8, #303d45);
-   background: -o-linear-gradient(top, #e1e5e8, #303d45);
-   padding: 9.5px 19px;
-   -webkit-border-radius: 8px;
-   -moz-border-radius: 8px;
-   border-radius: 8px;
-   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-   box-shadow: rgba(0,0,0,1) 0 1px 0;
-   text-shadow: rgba(0,0,0,.4) 0 1px 0;
-   color: #2ebfa7;
-   font-size: 15px;
-   font-family: Georgia, Serif;
-   text-decoration: none;
-   vertical-align: middle;
+	border-top: 1px solid #f7f7f7;
+	background: #E45F56; 
+	background: -webkit-gradient(linear, left top, left bottom, from(#e1e5e8), to(#303d45));
+	background: -webkit-linear-gradient(top, #e1e5e8, #303d45);
+	background: -moz-linear-gradient(top, #e1e5e8, #303d45);
+	background: -ms-linear-gradient(top, #e1e5e8, #303d45);
+	background: -o-linear-gradient(top, #e1e5e8, #303d45);
+	padding: 12px 10px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	-webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+	-moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+	box-shadow: rgba(0,0,0,1) 0 1px 0;
+	text-shadow: rgba(0,0,0,.4) 0 1px 0;
+	color: #7ACCC8;
+	font-size: 15px;
+	font-weight: bold;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	text-decoration: none;
+vertical-align: middle;
    }
 .header-button:hover {
    border-top-color: #ed7842;
@@ -113,18 +114,12 @@
 	transition:all 500ms ease;
 }
 
-/* Denen fungerer ikke atm
-#toggle:hover {
-	background-color: black; 
-	color: white;
-}*/
 
 #toggle + label:after {
 	content:"Open" 
 }
 
 #toggle:checked + label {
-	/*background:#dd6149;*/
 	background:#6D6C6C;
 
 }
@@ -173,32 +168,33 @@
 	top: 35px;
 }
 
+.category > img {
+	width: 80px;
+	height: 80px;
+
+}
+
+img:hover {
+ -webkit-filter: invert(80%);  
+
+}
+
 /*MAIN*/
 
 .main {
-	height: 600px;
+	height: 400px;
 	position: relative;
 	top: 10px;
 }
 
-.main > .image {
-	width: 416px;
-	height: 416px;
-	border: 1px solid black;
-	position: relative;
-	float: left;
-	margin: 20px;
-}
 
-.main > #image0 {
-	border: 1px solid black;
-}
-
-.main > #text0 > p {
+.main > #topliste > p {
 	float: right;
 	position: relative;
-	width: 400px;
+	width: 300px;
 	margin: 20px;
+	border: 2px;
+
 }
 
 .main > #text1 > p {
@@ -291,5 +287,88 @@
 	bottom: 10px;
 	right: 20px;
 	position: absolute;
+}
+
+.css-slideshow{
+	position: relative;
+	max-width: 495px;
+	height: 370px;
+	margin: 5em auto .5em auto;
+	width: 495px;
+	float: left;
+	border: 1px solid black;
+	margin: 10px;
+}
+.css-slideshow figure{
+   margin: 0;
+   position: absolute;
+}
+.css-slideshow figcaption{
+   position: absolute;
+   top: 0;
+   color: #fff;
+   background: rgba(0,0,0, .3);
+   font-size: .8em;
+   padding: 8px 12px;
+   opacity: 0;
+   transition: opacity .5s;
+}
+.css-slideshow:hover figure figcaption{
+   transition: opacity .5s;
+   opacity: 1;
+}
+.css-slideshow figure{
+   opacity:0;
+}
+
+.topliste {
+	position: right;
+	border: 1px solid black;
+	float: right;
+	margin: 10px;
+}
+
+
+figure:nth-child(1) {
+   animation: xfade 48s 42s infinite;
+}
+figure:nth-child(2) {
+   animation: xfade 48s 36s infinite;
+}
+figure:nth-child(3) {
+   animation: xfade 48s 30s infinite;
+}
+figure:nth-child(4) {
+   animation: xfade 48s 24s infinite;
+}
+figure:nth-child(5) {
+   animation: xfade 48s 18s infinite;
+}
+figure:nth-child(6) {
+   animation: xfade 48s 12s infinite;
+}
+figure:nth-child(7) {
+   animation: xfade 48s 6s infinite;
+}
+figure:nth-child(8) {
+   animation: xfade 48s 0s infinite;
+}
+
+@keyframes xfade{
+   0%{
+      opacity: 1;
+   }
+   10.5% {
+      opacity:1;
+   }
+   12.5%{
+      opacity: 0;
+   }
+   98% {
+      opacity:0;
+   }
+   100% {
+      opacity:1;
+   }
 }
 

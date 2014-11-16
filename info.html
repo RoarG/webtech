@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 </head>
 <body>
-			<section class="page">
+		<section class="page">
 			<div class="header">
 				<div class="login">
 					<div class="loginId">
@@ -20,36 +20,46 @@
 					</div>
 				</div>
 				<div class="logo">
-					<img src="./images/logo.png"></img>
+					<a href="./index.html">
+						<img src="./images/logo.png" />
+					</a>
 				</div>
 				<div class="box">
-					<a>Min Side</a>
+					<span id="categoryImg">
+					<button class="header-button" id="minside" onclick="location.href='./account.php'"> Min Side </button>
+					</span>
 				</div>
 				<div class="box">
-					<a>Hjelp</a>
+					<button class="header-button" id="hjelp" onclick="location.href='./hjelp.php'"> Hjelp</button>
 				</div>
 				<div class="box">
-					<a>Om Siden</a>
+					<button class="header-button" id="omsiden" onclick="location.href='./omsiden.php'"> Om Siden </button>
 				</div>
 			</div>
+			
 			<div class="nav" id="nav">
 				<div class="category" onclick="openCategoryPage('husarbeid')"> 
+					<img src="./images/house4.png">
 					<a>Husarbeid</a>
 				</div>
 				<div class="category" onclick="openCategoryPage('personlig assistent')">
+					<img src="./images/assistent.svg">
 					<a>Personlig assistent</a>
 				</div>
 				<div class="category" onclick="openCategoryPage('handyman')">
+					<img src="./images/flyttingbil.svg">
 					<a>Handyman</a>
 				</div>
 				<div class="category" onclick="openCategoryPage('annet')">
+					<img src="./images/annet.svg">
 					<a>Annet</a>
 				</div>
-				<div>
+				<div class="button">
 					<input type="checkbox" name="toggle" id="toggle" />
 					<label for="toggle"></label>
 				</div>
 			</div>
+
 			<div class="account">
 				<h3 id="accountHeader"> Din Konto</h3> 
 
