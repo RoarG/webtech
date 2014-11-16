@@ -50,10 +50,49 @@
 					<label for="toggle"></label>
 				</div>
 			</div>
+			
+			<?php
+				ini_set('display_errors',1);
+				
+				$id = "0";
+				$cookie_name = "userId";
+				if(isset($_COOKIE[$cookie_name])) {
+					$id = $_COOKIE[$cookie_name];
+				} else {
+					header("Location: ./index.html");
+					die();
+				}
+				
+				$db = new mysqli("66.147.244.100:3306", "roargcom_audun", "it2805", "roargcom_webtek");
+
+				if (!$db) {
+					echo('Could not connect: ' . mysqli_error($db));
+				}
+				
+				$query = "SELECT * FROM medlemmer
+							WHERE id = '".$id."';";
+				$result = mysqli_query($db, $query);
+				
+				$firstname = "Mickey";
+				$lastname = "Mouse";
+				$image = "./images/forsidebilde.png";
+				$bio = "EN LANG TEXT, nei dette er en litt mindre.";
+				
+				if ($result->num_rows > 0) {
+					while($row = $result->fetch_assoc()) {
+						$name = explode(" ", $row["navn"]);
+						$firstname = $name[0];
+						$lastname = $name[1];
+						$image = $row["bildeURL"];
+						$bio = $row["bio"];
+					}
+				} else {
+					echo "0 results";
+				}
+			?>
+			
 			<div class="account">
 				<h3 id="accountHeader"> Din Konto</h3> 
-
-					
 				<span class="accountNav">
   					<button class="button" onclick="location.href='account.php'">Konto</button>
   					<button class="button" onclick="location.href='price.php'">Pris</button>
@@ -63,32 +102,27 @@
 				</span>
 
 				<div class="accountView" id="accountView">
-					<div class="name">
-						Kontakt informasjon
+					<form action="demo_form.asp">
+						First name: <input type="text" name="FirstName" value=<?php echo($firstname);?>><br>
+						Last name: <input type="text" name="LastName" value=<?php echo($lastname);?>><br>
+					</form>
+					
+					<div class="image" id="accountImg">
+						<img src=<?php echo($image);?> id="accountImg"></img>
 					</div>
-
-					<div class="starRating">
-					  <div>
-					    <div>
-					      <div>
-					        <div>
-					          <input id="rating1" type="radio" name="rating" value="1">
-					          <label for="rating1"><span>1</span></label>
-					        </div>
-					        <input id="rating2" type="radio" name="rating" value="2">
-					        <label for="rating2"><span>2</span></label>
-					      </div>
-					      <input id="rating3" type="radio" name="rating" value="3">
-					      <label for="rating3"><span>3</span></label>
-					    </div>
-					    <input id="rating4" type="radio" name="rating" value="4">
-					    <label for="rating4"><span>4</span></label>
-					  </div>
-					  <input id="rating5" type="radio" name="rating" value="5">
-					  <label for="rating5"><span>5</span></label>
+					
+					<div class="bio">
+						<div class="about">OM:</div>
+						<textarea rows="5" cols="75" name="bio"><?php echo($bio);?></textarea>
 					</div>
-				
-	
+					<form action="">
+						<input type="checkbox" name="category" value="husarbeid">Husarbeid
+						<input type="checkbox" name="category" value="Personlig Assistent">Personlig Assistent
+						<input type="checkbox" name="category" value="Handyman">Husarbeid
+						<input type="checkbox" name="category" value="Diverse">Husarbeid
+					</form>
+					<button class="button" onclick="updateDatabase();">Lagre</button>
+				</div>
 			</div>
 			<div class="footer">
 				<div id="contact" class="footerBox">
@@ -121,5 +155,34 @@
 			</div>
 		</section>
 		<script src="./js/slide.js"></script>
+		
+		<script>
+		
+		function updateDatabase() {
+			var id = parseInt(getCookie("userId"));
+			var first = document.getElementsByName("FirstName")[0].value;
+			var last = document.getElementsByName("LastName")[0].value;
+			var bio = document.getElementsByName("bio")[0].value;
+		
+			var params = "id="+id+"&name="+first+" "+last+"&bio="+bio;
+			
+			xmlhttp = new XMLHttpRequest();	
+			xmlhttp.open("POST", "updateUser.php", true);
+			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xmlhttp.send(params);
+		}
+		
+		function getCookie(cname) {
+			var name = cname + "=";
+			var ca = document.cookie.split(';');
+			for(var i=0; i<ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0)==' ') c = c.substring(1);
+				if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+			}
+			return "";
+		}
+		
+		</script>
 </body>
 </html>

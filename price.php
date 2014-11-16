@@ -50,45 +50,79 @@
 					<label for="toggle"></label>
 				</div>
 			</div>
+			
+			<?php
+				ini_set('display_errors',1);
+				
+				$id = "0";
+				$cookie_name = "userId";
+				if(isset($_COOKIE[$cookie_name])) {
+					$id = $_COOKIE[$cookie_name];
+				} else {
+					header("Location: ./index.html");
+					die();
+				}
+				
+				$db = new mysqli("66.147.244.100:3306", "roargcom_audun", "it2805", "roargcom_webtek");
+
+				if (!$db) {
+					echo('Could not connect: ' . mysqli_error($db));
+				}
+				
+				$query = "SELECT * FROM medlemmer
+							WHERE id = '".$id."';";
+				$result = mysqli_query($db, $query);
+				
+				$price = 100;
+				
+				if ($result->num_rows > 0) {
+					while($row = $result->fetch_assoc()) {
+						$price = $row["pris"];
+					}
+				} else {
+					echo "0 results";
+				}
+			?>
+			
 			<div class="account">
 				<h3 id="accountHeader"> Din Konto</h3> 
-
-					
 				<span class="accountNav">
   					<button class="button" onclick="location.href='account.php'">Konto</button>
   					<button class="button" onclick="location.href='price.php'">Pris</button>
   					<button class="button" onclick="location.href='notifications.php'">Varslinger</button>
   					<button class="button" onclick="location.href='place.php'">Steder</button>
-  					<button class="button" onclick="location.href='info.html'">Synlig Profil</button>
+  					<button class="button" onclick="location.href='info.html'">Kontakt</button>
 				</span>
 
 				<div class="accountView" id="accountView">
 					<div class="name">
-						Kontakt informasjon
+						PRIS
 					</div>
 
-					<div class="starRating">
-					  <div>
-					    <div>
-					      <div>
-					        <div>
-					          <input id="rating1" type="radio" name="rating" value="1">
-					          <label for="rating1"><span>1</span></label>
-					        </div>
-					        <input id="rating2" type="radio" name="rating" value="2">
-					        <label for="rating2"><span>2</span></label>
-					      </div>
-					      <input id="rating3" type="radio" name="rating" value="3">
-					      <label for="rating3"><span>3</span></label>
-					    </div>
-					    <input id="rating4" type="radio" name="rating" value="4">
-					    <label for="rating4"><span>4</span></label>
-					  </div>
-					  <input id="rating5" type="radio" name="rating" value="5">
-					  <label for="rating5"><span>5</span></label>
+					<div class="summary">
+						<input type="range" min="0" max="1000" name="price" value=<?php echo($price);?> step="5" onchange="showValue(this.value)" /> <br>
+						<span id="range">0</span><br>
+
+						<script type="text/javascript">
+						function showValue(newValue)
+						{
+							document.getElementById("range").innerHTML=newValue + "Kr/Time";
+						}
+						showValue(document.getElementsByName("price")[0].value);
+						</script>
+
+						Betalingsform:
+						<select>
+						  <option value="visa">Visa</option>
+						  <option value="mastercard">MasterCard</option>
+						  <option value="paypal">Paypal</option>
+						  <option value="kontant">Kontant</option>
+
+						</select>
+
+						<button class="button" onclick="updateDatabase();">Lagre</button>
 					</div>
-				
-	
+				</div>
 			</div>
 			<div class="footer">
 				<div id="contact" class="footerBox">
@@ -121,5 +155,30 @@
 			</div>
 		</section>
 		<script src="./js/slide.js"></script>
+		
+		<script>
+			function updateDatabase() {
+				var id = parseInt(getCookie("userId"));
+				var price = document.getElementsByName("price")[0].value;
+			
+				var params = "id="+id+"&price="+price;
+				
+				xmlhttp = new XMLHttpRequest();	
+				xmlhttp.open("POST", "updateUser.php", true);
+				xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xmlhttp.send(params);
+			}
+			
+			function getCookie(cname) {
+				var name = cname + "=";
+				var ca = document.cookie.split(';');
+				for(var i=0; i<ca.length; i++) {
+					var c = ca[i];
+					while (c.charAt(0)==' ') c = c.substring(1);
+					if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+				}
+				return "";
+			}
+		</script>
 </body>
 </html>

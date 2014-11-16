@@ -3,8 +3,8 @@ window.onload = function(){
 }
 
 var map;
-var userLat = 63.41;
-var userLng = 10.44;
+var userLat = parseFloat(document.getElementById("lat").innerHTML);
+var userLng = parseFloat(document.getElementById("lng").innerHTML);
 
 function loadMap(){
 	var script = document.createElement('script');
@@ -23,6 +23,8 @@ function initializeMap() {
 
 	map = new google.maps.Map(document.getElementById('map-canvas'),
 		mapOptions);
+	
+	placeMarker(new google.maps.LatLng(userLat, userLng));
 	
 	google.maps.event.addListener(map, 'click', function(event){
 		placeMarker(event.latLng);

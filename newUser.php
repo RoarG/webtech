@@ -1,28 +1,35 @@
 <?php
-	$id = intval($_POST['id']);
+	session_start();
+	ini_set('display_errors',1);
+
+	$id = strval($_POST['id']);
 	$name = strval($_POST['name']);
 	$email = strval($_POST['email']);
-	$latitude = floatval($_POST['lat']);
-	$longitude = floatval($_POST['long']);
+	$latitude = floatval($_POST['latitude']);
+	$longitude = floatval($_POST['longitude']);
 	$image = strval($_POST['image']);
-
-	$db = mysqli_connect("mysql.stud.ntnu.no","audunasa_webtek","it2805","audunasa_prosjekt");
+	
+	$db = new mysqli("66.147.244.100:3306", "roargcom_audun", "it2805", "roargcom_webtek");
 
 	if (!$db) {
 		echo('Could not connect: ' . mysqli_error($db));
 	}
 	
 	$query = "SELECT * FROM medlemmer
-				WHERE id = ".$id.";";
+				WHERE id = '".$id."';";
 	$result = mysqli_query($db, $query);
 	
-	if ($result != false) {
+	if (!$result) {
 		$query = "INSERT INTO
-				medlemmer (id, navn, email, breddegrad, lengdegrad, pris, bio, bildeURL)
-				VALUES (".$id.",".$name.",".$email.",".$latitude.",".$longitude.",0,null,".$image.");";
+					medlemmer (id, navn, mail, breddegrad, lengdegrad, pris, bio, bildeURL)
+					VALUES ('".$id."','".$name."','".$email."',".$latitude.",".$longitude.",0,null,'".$image."');";
 		$result = mysqli_query($db, $query);
+		
+		if (!$result) {
+			echo('Could not add to db, '.mysqli_error($db));
+		}
 	} else {
-		echo "Already exists in database!";
+		echo('Already exists in database!');
 	}
 	
 	$db->close();	

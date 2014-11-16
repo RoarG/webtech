@@ -1,9 +1,8 @@
 function statusChangeCallback(response) {
 	if (response.status === 'connected') {
 		FB.api('/me', function(response) {
-			//console.log(JSON.stringify(response));
-			login(response);
 			document.getElementById('name').innerHTML = response.name;
+			setCookie("userId", response.id, 60);
 		});
 	} else if (response.status === 'not_authorized') {
 		document.getElementById('name').innerHTML = 'Ikke logget inn.';
@@ -15,7 +14,9 @@ function statusChangeCallback(response) {
 function checkLoginState() {
 	FB.getLoginStatus(function(response) {
 		statusChangeCallback(response);
-		console.log(JSON.stringify(response));
+		FB.api('/me', function(response) {
+			login(response);
+		});
 	});
 }
 
@@ -44,23 +45,21 @@ function login(response) {
 	var id = parseInt(response.id);
 	var name = response.name;
 	var email = response.email;
-	var latitude = 63.00;
-	var longitude = 63.00;
+	var latitude = 63.41;
+	var longitude = 10.44;
 	var image = "https://graph.facebook.com/" + response.id + "/picture?type=large";
-	
-	//var message = "Jobbforespørsel sendt! <br> Dato: "+date+"<br> Tid:"+time+"<br> Arbeidstaker:"+worker;
-	
+
 	var params = "id="+id+"&name="+name+"&email="+email+"&latitude="+latitude+"&longitude="+longitude+"&image="+image;
 			
-	xmlhttp = new XMLHttpRequest();
-	
-	/*xmlhttp.onreadystatechange=function() {
-		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-			openPopupWindow(message, 0);
-		}
-	}*/
-
-	xmlhttp.open("POST", "./newUser.php", true);
+	xmlhttp = new XMLHttpRequest();	
+	xmlhttp.open("POST", "newUser.php", true);
 	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp.send(params);
+}
+
+function setCookie(cname, cvalue, exmin) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exmin*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
 }
