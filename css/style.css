@@ -213,7 +213,6 @@
 
 .footer{
 	height: 350px; 
-	margin-top: 100px;
 	background-color: #7ACCC8 ;
 	bottom: 0;
 	width: inherit;
@@ -248,21 +247,49 @@
 }
 #comment {
 	height: 100px;
-	float: left;
 }
 #sendMessageButton {
 	margin-top: 20px;
 	float: right;
+	height: 30px;	
 }
 
 #divLinks{
 	width: 270px;
 }
+#copyright {
+	margin-top: 50px;
+	width: 290px;
+	height: 100px;
+}
+.copy{
+	float: left;
+	height: 100px;
+}
+#copyrightSpan{
+	width: 50px;
+	text-align: center;
+	vertical-align: center;
+	margin-left: 50px;
+}
+#copyrightSymbol {
+	transform: scale(1.7);
+}
+#names{
+	width: 140px;
+	text-align: left;
+}
+
 #logo{
-	width: 284px;
+	width: 290px;
+	height: 180px;
+	position: relative;
 }
 #footerLogo{
 	margin-top: 40px;
 	width: 250px;
+	bottom: 10px;
+	right: 20px;
+	position: absolute;
 }
 

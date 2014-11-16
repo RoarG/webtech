@@ -1,6 +1,10 @@
 window.onload = function (){
+	document.getElementById('toggle').click();
 	initializeCal();
 	loadMap();
+	if(sessionStorage.category){
+		showUnderCat(sessionStorage.category);
+	}
 }
 
 function submitJob(){
@@ -227,7 +231,7 @@ function updateMap(underCategory){
 	emptyWorkersList();
 	
 	var mapHeader = document.getElementById("changingUnderCat");
-	mapHeader.innerHTML = underCategory;
+	mapHeader.innerHTML = "i underkategorien "+underCategory;
 	
 	xmlhttp = new XMLHttpRequest();
 	
@@ -362,7 +366,7 @@ var categories = {
 			"husarbeid":["Plenklipping", "Vasking", "Rydding"],
 			"personlig assistent":["Lekser", "Gå tur med hunden", "Handling"], 
 			"handyman":["Flytting", "Møbelsammensetting", "PC-hjelp", "Bilderedigering"], 
-			"diverse":[]
+			"annet":[]
 };
 
 var catButtonList = [];
@@ -392,7 +396,7 @@ function showUnderCat(category){
 	
 	var underCatHeader = document.getElementById("changingCat");
 	var parentNode = document.getElementById("underCat");
-	if(category == "diverse"){
+	if(category == "annet"){
 		underCatHeader.innerHTML = "";
 		
 		var diverseMessage = document.createElement('p');

@@ -14,3 +14,8 @@ toggle.onclick = function () {
 		}, 800);
 	}
 };
+
+function openCategoryPage(category){
+	sessionStorage.category = category;
+	window.location.href = "./job.html#nav";
+}

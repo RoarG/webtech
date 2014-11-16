@@ -14,8 +14,7 @@
 		<script src="lib/jonthornton-jquery-timepicker-1.4.13-5-g917772a/jonthornton-jquery-timepicker-917772a/jquery.timepicker.min.js"></script>
 	</head>
 	<body>
-		<form id="jobForm" onsubmit="return false">
-		<div id="container">
+		<section class="page">
 			<div class="header">
 				<div class="login">
 					<div class="loginId">
@@ -48,7 +47,7 @@
 				<div class="category" onclick="showUnderCat('handyman')">
 					<a>Handyman</a>
 				</div>
-				<div class="category" onclick="showUnderCat('diverse')">
+				<div class="category" onclick="showUnderCat('annet')">
 					<a>Annet<a>
 				</div>
 				<div class="button">
@@ -56,7 +55,8 @@
 					<label for="toggle"></label>
 				</div>
 			</div>
-			<div class="main" id="main">
+			<form id="jobForm" onsubmit="return false">
+			<div class="inputForm" id="inputForm">
 				<div id="calendar" class="inputbox">
 					<h3 id="calHeader" class="inputHeader">1. Velg dato og tidspunkt</h3>
 					<div id="date">
@@ -73,7 +73,7 @@
 					<div id="underCat"></div>
 				</div>
 				<div id="map" class="inputbox" >
-					<h3 id="mapHeader" class="inputHeader">3. Velg arbeidstaker i nærheten av deg i underkategorien: <p id="changingUnderCat"></p></h3>
+					<h3 id="mapHeader" class="inputHeader">3. Velg arbeidstaker i nærheten av deg <p id="changingUnderCat"></p></h3>
 					<input id="search" type="text" placeholder="Skriv inn din adresse">
 					<div id="map-canvas"></div>
 					<div id="people"></div>
@@ -82,12 +82,37 @@
 					<input type="submit" name="submit" class="submitButton" onclick="submitJob()" value="Send jobbforespørsel">
 				</div>
 			</div>
+			</form>
 			<div class="footer">
-				<hr>
-				<p>En footer</p>
+				<div id="contact" class="footerBox">
+					<h4 class="footerHeader">Kontakt oss</h4>
+					
+					<form id="contactForm">
+						<h5 class="contactFormHeader">Navn: </h5>
+						<input class="contactFormElement" type="text" name="senderName" required>
+						<h5 class="contactFormHeader">Mailadresse: </h5>
+						<input class="contactFormElement" type="email" name="senderMail" required>
+						<h5 class="contactFormHeader">Melding: </h5>
+						<textarea class="contactFormElement" id="comment" name="textarea" required ></textarea>
+						<input type="submit" id="sendMessageButton" value="Send melding">
+					</form>
+					
+				</div>
+				<div id="divLinks" class="footerBox">
+					<h4 class="footerHeader">Linker</h4><br><br>
+					<a href="./siteMap.html">Site map</a><br><br>
+					<a href="./references.html">Referanser</a>
+				</div>
+				<div id="copyright" class="footerBox">
+					<span id="copyrightSpan" class="copy"><p id="copyrightSymbol">&copy; </p></span> 
+					<span id="names" class="copy">Roar Gjøvaag <br> 
+					Runar Heggset <br> Audun Sæther</span>
+				</div>
+				<div id="logo" class="footerBox">
+					<img id="footerLogo" src="./images/logo.png"></img>
+				</div>
 			</div>
-		</div>
-		</form>
+		</section>
 		<div id="popupOverlay"></div>
 		<div id="popupWindow">
 			<p id="confirmTekst"></p>

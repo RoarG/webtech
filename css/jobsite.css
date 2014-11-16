@@ -1,20 +1,10 @@
-/*Main*/ 
-#container{
-	width:900px;
-	position:relative;
-	margin-left:auto;
-	margin-right:auto;
-	font-family: sans-serif;
-	font: 12px;
-}
-
 /*Headers*/
 .inputHeader{
 	float: left;
 	text-align:bottom;
 	font-size: 20px;
 	padding-bottom: 5px;
-	border-bottom: 3px solid green;
+	border-bottom:3px solid #4a5a66;
 	background-color: white;
 	width: 560px;
 	margin-top: 0px;
@@ -47,7 +37,7 @@
 }
 #calendar h4{
 	width: 140px;
-	border-bottom: 2px solid green;
+	border-bottom: 2px solid #4a5a66;
 	vertical-align:top;
 	font-size: 16px;
 	margin-left: 30px;
@@ -87,6 +77,9 @@
 	border: 0;
 	outline: none;
 	border-radius: 5px;
+}
+.underCatButton:hover{
+	background-color: rgb(255,99,71);
 }
 
 /*Map*/
@@ -198,7 +191,7 @@
 	margin-top: -100px;
 	position: fixed;
 	background-color: white;
-	border: 2px solid rgba(255,99,71,1);
+	border: 2px solid #6d6c6c;
 	display: none;
 	border-radius: 5px;
 }

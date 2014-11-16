@@ -32,7 +32,24 @@
 					<a>Om Siden</a>
 				</div>
 			</div>
-			
+			<div class="nav" id="nav">
+				<div class="category" onclick="openCategoryPage('husarbeid')"> 
+					<a>Husarbeid</a>
+				</div>
+				<div class="category" onclick="openCategoryPage('personlig assistent')">
+					<a>Personlig assistent</a>
+				</div>
+				<div class="category" onclick="openCategoryPage('handyman')">
+					<a>Handyman</a>
+				</div>
+				<div class="category" onclick="openCategoryPage('annet')">
+					<a>Annet</a>
+				</div>
+				<div>
+					<input type="checkbox" name="toggle" id="toggle" />
+					<label for="toggle"></label>
+				</div>
+			</div>
 			<div class="account">
 				<h3 id="accountHeader"> Din Konto</h3> 
 				<span class="accountNav">
@@ -51,7 +68,7 @@
 					<div class="summary">
 						<div id="map" class="inputbox" >
 							<h3 id="mapHeader" class="inputHeader">Velg et utgangspunkt for ditt arbeidsområde ved å trykke på kartet</h3>
-							<input id="search" type="text" placeholder="Skriv inn din adresse">
+							<!--<input id="search" type="text" placeholder="Skriv inn din adresse">-->
 							<div id="map-canvas"></div>
 						</div>
 						
@@ -68,21 +85,25 @@
 					<h4 class="footerHeader">Kontakt oss</h4>
 					
 					<form id="contactForm">
-					<h5 class="contactFormHeader">Navn: </h5>
-					<input class="contactFormElement" type="text" name="senderName" required>
-					<h5 class="contactFormHeader">Mailadresse: </h5>
-					<input class="contactFormElement" type="email" name="senderMail" required>
-					<h5 class="contactFormHeader">Melding: </h5>
-					<textarea class="contactFormElement" id="comment" name="textarea" required ></textarea>
-					<input type="submit" id="sendMessageButton" value="Send melding">
+						<h5 class="contactFormHeader">Navn: </h5>
+						<input class="contactFormElement" type="text" name="senderName" required>
+						<h5 class="contactFormHeader">Mailadresse: </h5>
+						<input class="contactFormElement" type="email" name="senderMail" required>
+						<h5 class="contactFormHeader">Melding: </h5>
+						<textarea class="contactFormElement" id="comment" name="textarea" required ></textarea>
+						<input type="submit" id="sendMessageButton" value="Send melding">
 					</form>
 					
 				</div>
 				<div id="divLinks" class="footerBox">
 					<h4 class="footerHeader">Linker</h4><br><br>
-					<a>Site map</a><br><br>
-					<a>Referanseside</a>
-					<br><br><br>&copy Roar Gjøvaag, Audun Sæther, Runar Heggset
+					<a href="./siteMap.html">Site map</a><br><br>
+					<a href="./references.html">Referanser</a>
+				</div>
+				<div id="copyright" class="footerBox">
+					<span id="copyrightSpan" class="copy"><p id="copyrightSymbol">&copy; </p></span> 
+					<span id="names" class="copy">Roar Gjøvaag <br> 
+					Runar Heggset <br> Audun Sæther</span>
 				</div>
 				<div id="logo" class="footerBox">
 					<img id="footerLogo" src="./images/logo.png"></img>
@@ -91,6 +112,7 @@
 		</section>
 	<script src="./js/map.js"></script>
 	<script src="lib/jquery-2.1.1.min.js"></script>
+	<script src="./js/slide.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 </body>
 </html>

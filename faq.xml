@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<faq>
+	<QA>
+		<question>Jeg ønsker ikke å bruke Facebook til å logge meg inn på siden. Finnes det andre muligheter?</question>
+		<answer>Nei, ikke foreløpig. Det jobbes med å implementere dette.</answer>
+	</QA>
+	<QA>
+		<question>Hvorfor er det ikke mulig å registrere timespris per kategori? Det virker ulogisk at alle ulike jobber
+		har lik timespris</question>
+		<answer>Dette er ikke mulig fordi nettstedets prioritet er tid snarere enn penger. Man kjøper seg en time fri
+		og da spiller det liten rolle hva denne timen inneholder.</answer>
+	</QA>
+	<QA>
+		<question>Jeg ønsker å registrere flere arbeidsområder, men dette ser ikke ut til å være mulig. Har jeg oversett noe?</question>
+		<answer>Nei, det har du ikke. Dette vil være mulig i fremtiden.</answer>
+	</QA>
+</faq>

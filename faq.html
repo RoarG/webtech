@@ -1,18 +1,44 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>IT2805 Prosjekt</title>
+		<title>FAQ</title>
+		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/style.css">
-		<meta charset="UTF-8">
+		<script src="./js/faq.js"></script>
+		<style>
+			#FAQHeader{
+				text-align: center;
+			}
+			
+			.question{
+				width: 850px;
+				padding: 5px;
+				height: 50px; 
+				margin-top: 30px;
+				background-color: #d3d3d3;
+				position: relative;
+				float: left;
+				margin-left: 20px;
+				border-radius: 4px;
+				font-size: 18px;
+			}
+			
+			.answer{
+				margin-top: 5px;
+				margin-left: 40px;
+				width: 830px;
+				height: 50px;
+				position: relative;
+				float: left;
+				font-size: 18px;
+			}		
+		</style>
 	</head>
 	<body>
-	
 		<section class="page">
 			<div class="header">
 				<div class="login">
 					<div class="loginId">
-						<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-						</fb:login-button>
 					</div>
 					<div class="loginId">
 						<div id="name">
@@ -20,13 +46,10 @@
 					</div>
 				</div>
 				<div class="logo">
-					<a href="./index.html">
-						<img src="./images/logo.png" />
-					</a>
+					<img src="./images/logo.png">
 				</div>
 				<div class="box">
-					<button class="header-button" id="minside" onclick="location.href='./account.html'"> Min Side </button>
-					<!-- <a href="./account.html">Min Side</a> -->
+					<a>Min Side</a>
 				</div>
 				<div class="box">
 					<a>Hjelp</a>
@@ -35,7 +58,6 @@
 					<a>Om Siden</a>
 				</div>
 			</div>
-			
 			<div class="nav" id="nav">
 				<div class="category" onclick="openCategoryPage('husarbeid')"> 
 					<a>Husarbeid</a>
@@ -49,26 +71,15 @@
 				<div class="category" onclick="openCategoryPage('annet')">
 					<a>Annet</a>
 				</div>
-				<div class="button">
+				<div>
 					<input type="checkbox" name="toggle" id="toggle" />
 					<label for="toggle"></label>
 				</div>
 			</div>
-			
 			<div class="main" id="main">
-				<div class="image" id="image0">
-					<img src="./images/forsidebilde.png" id="img0"></img>
-				</div>
-				<div class="text" id="text0">
-					<p>En veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig lang tekst.
-					</p>
-				</div>
-				<div class="text" id="text1">
-					<p>En veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig veldig lang tekst.
-					</p>
-				</div>
+				<h2 id="FAQHeader">FAQ</h2>
+				<div id="faqs"></div>
 			</div>
-			
 			<div class="footer">
 				<div id="contact" class="footerBox">
 					<h4 class="footerHeader">Kontakt oss</h4>
@@ -99,8 +110,6 @@
 				</div>
 			</div>
 		</section>
-		
-		<script src="./js/login.js"></script>
 		<script src="./js/slide.js"></script>
 	</body>
 </html>
