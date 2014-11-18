@@ -72,7 +72,7 @@
 					die();
 				}
 				
-				$db = new mysqli("66.147.244.100:3306", "roargcom_audun", "it2805", "roargcom_webtek");
+				$db = new mysqli("localhost", "roargcom_audun", "it2805", "roargcom_webtek");
 
 				if (!$db) {
 					echo('Could not connect: ' . mysqli_error($db));
@@ -103,11 +103,19 @@
 			<div class="account">
 				<h3 id="accountHeader"> Din Konto</h3> 
 				<span class="accountNav">
+<<<<<<< HEAD
   					<button class="button" id="accountButton" onclick="location.href='account.php'">Konto</button>
   					<button class="button" id="accountButton" onclick="location.href='price.php'">Pris</button>
   					<button class="button" id="accountButton" onclick="location.href='notifications.php'">Varslinger</button>
   					<button class="button" id="accountButton" onclick="location.href='place.php'">Steder</button>
   					<button class="button" id="accountButton" onclick="location.href='info.html'">Kontakt</button>
+=======
+  					<button class="button" onclick="location.href='account.php'">Konto</button>
+  					<button class="button" onclick="location.href='price.php'">Pris</button>
+  					<button class="button" onclick="location.href='notifications.php'">Varslinger</button>
+  					<button class="button" onclick="location.href='place.php'">Steder</button>
+  					<button class="button" onclick="location.href='info.php'">Kontakt</button>
+>>>>>>> da5ee456cfeca8fb772c6cdc417f0b44b678e0d8
 				</span>
 
 				<div class="accountView" id="accountView">
@@ -164,7 +172,7 @@
 	<script src="lib/jquery-2.1.1.min.js"></script>
 	<script src="./js/slide.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-	
+	<script src="./js/login.js"></script>
 	<script>
 		function updateDatabase() {
 			var id = parseInt(getCookie("userId"));

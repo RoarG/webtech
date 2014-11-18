@@ -5,7 +5,7 @@
 	$lat = strval($_GET['lat']);
 	$long = strval($_GET['long']);
 	
-	$db = mysqli_connect("mysql.stud.ntnu.no","audunasa_webtek","it2805","audunasa_prosjekt");
+	$db = mysqli_connect("localhost","audunasa_webtek","it2805","audunasa_prosjekt");
 	//$db = myqsli_connect("localhost","roargcom_audun","it2805","roargcom_webtek");
 		
 	if (!$db) {

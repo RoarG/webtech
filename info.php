@@ -78,8 +78,8 @@
 			<?php
 				ini_set('display_errors',1);
 								
-				$db = mysqli_connect("mysql.stud.ntnu.no","audunasa_webtek","it2805","audunasa_prosjekt");
-				//$db = new mysqli("localhost", "roargcom_audun", "it2805", "roargcom_webtek");
+				//$db = mysqli_connect("mysql.stud.ntnu.no","audunasa_webtek","it2805","audunasa_prosjekt");
+				$db = new mysqli("localhost", "roargcom_audun", "it2805", "roargcom_webtek");
 
 				if (!$db) {
 					echo('Could not connect: ' . mysqli_error($db));
@@ -187,7 +187,10 @@
 				
 				<div id="userBio" class="infoBox">Om <? echo($name);?> :<br><br> <? echo($bio);?></div>
 				
-				<div id="userCategories" class="infoBox">Tar jobber i kategoriene:<br><br> <? for ($x=0; $x <count($categories); $x++){echo($categories[$x]);echo('<br>');}?></div>
+				<div id="userCategories" class="infoBox">Tar jobber i kategoriene:<br><br> 
+				<? if(count($categories)>0){
+				for ($x=0; $x <count($categories); $x++){echo($categories[$x]);echo('<br>');}}
+				?></div>
 			</div>
 			<div class="footer">
 				<div id="contact" class="footerBox">
@@ -220,5 +223,6 @@
 			</div>
 		</section>
 		<script src="./js/slide.js"></script>
+		<script src="./js/login.js"></script>
 </body>
 </html>
