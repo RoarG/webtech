@@ -61,8 +61,6 @@
 			</div>
 			
 			<?php
-				ini_set('display_errors',1);
-				
 				$id = "0";
 				$cookie_name = "userId";
 				if(isset($_COOKIE[$cookie_name])) {
@@ -72,14 +70,13 @@
 					die();
 				}
 				
-				$db = new mysqli("66.147.244.100:3306", "roargcom_audun", "it2805", "roargcom_webtek");
+				$db = new mysqli("localhost", "roargcom_audun", "it2805", "roargcom_webtek");
 
 				if (!$db) {
 					echo('Could not connect: ' . mysqli_error($db));
 				}
 				
-				$query = "SELECT * FROM medlemmer
-							WHERE id = '".$id."';";
+				$query = "SELECT * FROM medlemmer WHERE id = '".$id."';";
 				$result = mysqli_query($db, $query);
 				
 				$firstname = "Mickey";
@@ -98,6 +95,33 @@
 				} else {
 					echo "0 results";
 				}
+				
+				$query = "SELECT * FROM kategori WHERE personId = '".$id."';";
+				$result = mysqli_query($db, $query);
+				
+				$husarb = false;
+				$handyman = false;
+				$assistent = false;
+				$diverse = false;
+				
+				if ($result->num_rows > 0) {
+					while($row = $result->fetch_assoc()) {
+						if ($row["navn"] == "Husarbeid") {
+							$husarb = true;
+						}
+						if ($row["navn"] == "Personlig Assistent") {
+							$assistent = true;
+						}
+						if ($row["navn"] == "Diverse") {
+							$diverse = true;
+						}
+						if ($row["navn"] == "Handyman") {
+							$handyman = true;
+						}
+					}
+				} else {
+					//echo "0 results";
+				}
 			?>
 			
 			<div class="account">
@@ -107,7 +131,7 @@
   					<button class="button" onclick="location.href='price.php'">Pris</button>
   					<button class="button" onclick="location.href='notifications.php'">Varslinger</button>
   					<button class="button" onclick="location.href='place.php'">Steder</button>
-  					<button class="button" onclick="location.href='info.html'">Synlig Profil</button>
+  					<button class="button" onclick="location.href='info.php'">Synlig Profil</button>
 				</span>
 
 				<div class="accountView" id="accountView">
@@ -125,10 +149,10 @@
 						<textarea rows="5" cols="75" name="bio"><?php echo($bio);?></textarea>
 					</div>
 					<form action="">
-						<input type="checkbox" name="category" value="husarbeid">Husarbeid
-						<input type="checkbox" name="category" value="Personlig Assistent">Personlig Assistent
-						<input type="checkbox" name="category" value="Handyman">Husarbeid
-						<input type="checkbox" name="category" value="Diverse">Husarbeid
+						<input type="checkbox" name="category" value="husarbeid" <?php if ($husarb == true) echo "checked='checked'"; ?>>Husarbeid
+						<input type="checkbox" name="category" value="Personlig Assistent" <?php if ($assistent == true) echo "checked='checked'"; ?>>Personlig Assistent
+						<input type="checkbox" name="category" value="Handyman" <?php if ($handyman == true) echo "checked='checked'"; ?>>Handyman
+						<input type="checkbox" name="category" value="Diverse" <?php if ($diverse == true) echo "checked='checked'"; ?>>Diverse
 					</form>
 					<button class="button" onclick="updateDatabase();">Lagre</button>
 				</div>
@@ -164,7 +188,7 @@
 			</div>
 		</section>
 		<script src="./js/slide.js"></script>
-		
+		<script src="./js/login.js"></script>
 		<script>
 		
 		function updateDatabase() {
@@ -172,8 +196,12 @@
 			var first = document.getElementsByName("FirstName")[0].value;
 			var last = document.getElementsByName("LastName")[0].value;
 			var bio = document.getElementsByName("bio")[0].value;
+			var husarb = document.getElementsByName("category")[0].checked;
+			var assistent = document.getElementsByName("category")[1].checked;
+			var handyman = document.getElementsByName("category")[2].checked;
+			var diverse = document.getElementsByName("category")[3].checked;
 		
-			var params = "id="+id+"&name="+first+" "+last+"&bio="+bio;
+			var params = "id="+id+"&name="+first+" "+last+"&bio="+bio+"&husarb="+husarb+"&assistent="+assistent+"&handyman="+handyman+"&diverse="+diverse;
 			
 			xmlhttp = new XMLHttpRequest();	
 			xmlhttp.open("POST", "updateUser.php", true);
