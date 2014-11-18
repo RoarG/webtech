@@ -143,11 +143,11 @@
 
 					
 				<span class="accountNav">
-  					<button class="button" onclick="location.href='account.php'">Konto</button>
-  					<button class="button" onclick="location.href='price.php'">Pris</button>
-  					<button class="button" onclick="location.href='notifications.php'">Varslinger</button>
-  					<button class="button" onclick="location.href='place.php'">Steder</button>
-  					<button class="button" onclick="location.href='info.html'">Synlig Profil</button>
+  					<button class="button" id="accountButton" onclick="location.href='account.php'">Konto</button>
+  					<button class="button" id="accountButton" onclick="location.href='price.php'">Pris</button>
+  					<button class="button" id="accountButton" onclick="location.href='notifications.php'">Varslinger</button>
+  					<button class="button" id="accountButton" onclick="location.href='place.php'">Steder</button>
+  					<button class="button" id="accountButton" onclick="location.href='info.html'">Synlig Profil</button>
 				</span>
 
 				<div class="accountView" id="accountView">

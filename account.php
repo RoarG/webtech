@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Account Side</title>
+	<title>Fri Tid</title>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/account.css">
 	<meta charset="UTF-8">
@@ -103,34 +103,55 @@
 			<div class="account">
 				<h3 id="accountHeader"> Din Konto</h3> 
 				<span class="accountNav">
-  					<button class="button" onclick="location.href='account.php'">Konto</button>
-  					<button class="button" onclick="location.href='price.php'">Pris</button>
-  					<button class="button" onclick="location.href='notifications.php'">Varslinger</button>
-  					<button class="button" onclick="location.href='place.php'">Steder</button>
-  					<button class="button" onclick="location.href='info.html'">Synlig Profil</button>
+  					<button class="button" id="accountButton" onclick="location.href='account.php'">Konto</button>
+  					<button class="button" id="accountButton" onclick="location.href='price.php'">Pris</button>
+  					<button class="button" id="accountButton" onclick="location.href='notifications.php'">Varslinger</button>
+  					<button class="button" id="accountButton" onclick="location.href='place.php'">Steder</button>
+  					<button class="button" id="accountButton" onclick="location.href='info.html'">Synlig Profil</button>
 				</span>
 
 				<div class="accountView" id="accountView">
-					<form action="demo_form.asp">
-						First name: <input type="text" name="FirstName" value=<?php echo($firstname);?>><br>
-						Last name: <input type="text" name="LastName" value=<?php echo($lastname);?>><br>
-					</form>
-					
-					<div class="image" id="accountImg">
-						<img src=<?php echo($image);?> id="accountImg"></img>
+					<div id="imagename">
+						<div class="form" id="nameform">
+							<form action="demo_form.asp">
+								First name: <input id="namform" size="25" type="text" name="FirstName" value=<?php echo($firstname);?>><br>
+								Last name: <input id="namform" size="25" type="text" name="LastName" value=<?php echo($lastname);?>><br>
+							</form>
+						</div>
+
+						<div class="image" id="accountImg">
+							<img src=<?php echo($image);?> id="accountImg"></img>
+						</div>
 					</div>
-					
+
 					<div class="bio">
 						<div class="about">OM:</div>
 						<textarea rows="5" cols="75" name="bio"><?php echo($bio);?></textarea>
 					</div>
-					<form action="">
-						<input type="checkbox" name="category" value="husarbeid">Husarbeid
-						<input type="checkbox" name="category" value="Personlig Assistent">Personlig Assistent
-						<input type="checkbox" name="category" value="Handyman">Husarbeid
-						<input type="checkbox" name="category" value="Diverse">Husarbeid
-					</form>
+					<div class="categoryCont">
+						<div id="categoryspan">
+							<label>
+								<input type="checkbox" name="category" value="husarbeid"><span>Husarbeid</span>
+							</label>
+						</div>
+						<div id="categoryspan">
+							<label>
+								<input type="checkbox" name="category" value="Personlig Assistent"><span>Personlig Assistent</span>
+							</label>
+						</div>
+						<div id="categoryspan">
+							<label>
+								<input type="checkbox" name="category" value="Handyman"><span>Husarbeid</span>
+							</label>
+						</div>
+						<div id="categoryspan">
+							<label>
+								<input type="checkbox" name="category" value="Diverse"><span>Diverse</span>
+							</label>
+						</div>
+					</div>
 					<button class="button" onclick="updateDatabase();">Lagre</button>
+
 				</div>
 			</div>
 			<div class="footer">

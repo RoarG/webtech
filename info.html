@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 </head>
 <body>
-			<section class="page">
+		<section class="page">
 			<div class="header">
 				<div class="login">
 					<div class="loginId">
@@ -30,10 +30,10 @@
 					</span>
 				</div>
 				<div class="box">
-					<button class="header-button" id="hjelp" onclick="location.href='./faq.html'"> Hjelp</button>
+					<button class="header-button" id="hjelp" onclick="location.href='./hjelp.php'"> Hjelp</button>
 				</div>
 				<div class="box">
-					<button class="header-button" id="omsiden" onclick="location.href='./omsiden.html'"> Om Siden </button>
+					<button class="header-button" id="omsiden" onclick="location.href='./omsiden.php'"> Om Siden </button>
 				</div>
 			</div>
 			
@@ -54,82 +54,52 @@
 					<img src="./images/annet.svg">
 					<a>Annet</a>
 				</div>
-				<div>
+				<div class="button">
 					<input type="checkbox" name="toggle" id="toggle" />
 					<label for="toggle"></label>
 				</div>
 			</div>
-			
-			<?php
-				ini_set('display_errors',1);
-				
-				$id = "0";
-				$cookie_name = "userId";
-				if(isset($_COOKIE[$cookie_name])) {
-					$id = $_COOKIE[$cookie_name];
-				} else {
-					header("Location: ./index.html");
-					die();
-				}
-				
-				$db = new mysqli("66.147.244.100:3306", "roargcom_audun", "it2805", "roargcom_webtek");
 
-				if (!$db) {
-					echo('Could not connect: ' . mysqli_error($db));
-				}
-				
-				$query = "SELECT * FROM medlemmer
-							WHERE id = '".$id."';";
-				$result = mysqli_query($db, $query);
-				
-				$lat = 63.41;
-				$lng = 10.44;
-				
-				if ($result->num_rows > 0) {
-					while($row = $result->fetch_assoc()) {
-						$lat = $row["breddegrad"];
-						$lng = $row["lengdegrad"];
-					}
-				} else {
-					echo "0 results";
-				}
-			?>
-			
-			<div class="coords" style="display: none;">
-				<p id="lat"><?php echo($lat);?>></p>
-				<p id="lng"><?php echo($lng);?></p>
-			</div>
-			
 			<div class="account">
 				<h3 id="accountHeader"> Din Konto</h3> 
+
+					
 				<span class="accountNav">
   					<button class="button" id="accountButton" onclick="location.href='account.php'">Konto</button>
   					<button class="button" id="accountButton" onclick="location.href='price.php'">Pris</button>
   					<button class="button" id="accountButton" onclick="location.href='notifications.php'">Varslinger</button>
   					<button class="button" id="accountButton" onclick="location.href='place.php'">Steder</button>
-  					<button class="button" id="accountButton" onclick="location.href='info.html'">Kontakt</button>
+  					<button class="button" id="accountButton" onclick="location.href='info.html'">Synlig Profil</button>
 				</span>
 
 				<div class="accountView" id="accountView">
 					<div class="name">
-						STED
+						Kontakt informasjon
 					</div>
 
-					<div class="summary">
-						<div id="map" class="inputbox" >
-							<h3 id="mapHeader" class="inputHeader">Velg et utgangspunkt for ditt arbeidsområde ved å trykke på kartet</h3>
-							<!--<input id="search" type="text" placeholder="Skriv inn din adresse">-->
-							<div id="map-canvas"></div>
-						</div>
-						
-						<h4 id="radiusHeader" class="inputHeader">Velg radius for ditt arbeidsområde</h4>
-						<input type="range" id="radiusSlider" min="0" max="100" value="0" step="1" onchange="setCircleRadius(this.value)"/>
-						<span id="range">0</span><br>
-						
-						<button class="button" onclick="updateDatabase();">Lagre</button>
+					<div class="starRating">
+					  <div>
+					    <div>
+					      <div>
+					        <div>
+					          <input id="rating1" type="radio" name="rating" value="1">
+					          <label for="rating1"><span>1</span></label>
+					        </div>
+					        <input id="rating2" type="radio" name="rating" value="2">
+					        <label for="rating2"><span>2</span></label>
+					      </div>
+					      <input id="rating3" type="radio" name="rating" value="3">
+					      <label for="rating3"><span>3</span></label>
+					    </div>
+					    <input id="rating4" type="radio" name="rating" value="4">
+					    <label for="rating4"><span>4</span></label>
+					  </div>
+					  <input id="rating5" type="radio" name="rating" value="5">
+					  <label for="rating5"><span>5</span></label>
 					</div>
+				
+	
 			</div>
-						
 			<div class="footer">
 				<div id="contact" class="footerBox">
 					<h4 class="footerHeader">Kontakt oss</h4>
@@ -160,35 +130,6 @@
 				</div>
 			</div>
 		</section>
-	<script src="./js/map.js"></script>
-	<script src="lib/jquery-2.1.1.min.js"></script>
-	<script src="./js/slide.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-	
-	<script>
-		function updateDatabase() {
-			var id = parseInt(getCookie("userId"));
-			var lat = marker.getPosition().lat();
-			var lng = marker.getPosition().lng();
-			
-			var params = "id="+id+"&latitude="+lat+"&longitude="+lng;
-				
-			xmlhttp = new XMLHttpRequest();	
-			xmlhttp.open("POST", "updateUser.php", true);
-			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			xmlhttp.send(params);
-		}
-			
-		function getCookie(cname) {
-			var name = cname + "=";
-			var ca = document.cookie.split(';');
-			for(var i=0; i<ca.length; i++) {
-				var c = ca[i];
-				while (c.charAt(0)==' ') c = c.substring(1);
-				if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
-			}
-			return "";
-		}
-		</script>
+		<script src="./js/slide.js"></script>
 </body>
 </html>

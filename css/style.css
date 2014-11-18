@@ -176,6 +176,7 @@ vertical-align: middle;
 
 img:hover {
  -webkit-filter: invert(80%);  
+ -moz-filter: invert(80%);
 
 }
 
