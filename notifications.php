@@ -30,10 +30,10 @@
 					</span>
 				</div>
 				<div class="box">
-					<button class="header-button" id="hjelp" onclick="location.href='./hjelp.php'"> Hjelp</button>
+					<button class="header-button" id="hjelp" onclick="location.href='./faq.html'"> Hjelp</button>
 				</div>
 				<div class="box">
-					<button class="header-button" id="omsiden" onclick="location.href='./omsiden.php'"> Om Siden </button>
+					<button class="header-button" id="omsiden" onclick="location.href='./omsiden.html'"> Om Siden </button>
 				</div>
 			</div>
 			
@@ -54,7 +54,7 @@
 					<img src="./images/annet.svg">
 					<a>Annet</a>
 				</div>
-				<div class="button">
+				<div>
 					<input type="checkbox" name="toggle" id="toggle" />
 					<label for="toggle"></label>
 				</div>

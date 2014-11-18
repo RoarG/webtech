@@ -5,9 +5,24 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/account.css">
 	<meta charset="UTF-8">
+	<style>
+		#userInfo{
+			margin-top: 20px;
+		}
+	
+		.infoBox{
+			text-align: center;
+			width: 300px;
+			margin-left: 280px;
+			padding: 20px;
+			float: left;
+			background-color: #DFDDDA;
+			border-bottom: 1px solid grey;
+		}
+	</style>
 </head>
 <body>
-			<section class="page">
+		<section class="page">
 			<div class="header">
 				<div class="login">
 					<div class="loginId">
@@ -59,77 +74,121 @@
 					<label for="toggle"></label>
 				</div>
 			</div>
-			
+
 			<?php
 				ini_set('display_errors',1);
-				
-				$id = "0";
-				$cookie_name = "userId";
-				if(isset($_COOKIE[$cookie_name])) {
-					$id = $_COOKIE[$cookie_name];
-				} else {
-					header("Location: ./index.html");
-					die();
-				}
-				
-				$db = new mysqli("66.147.244.100:3306", "roargcom_audun", "it2805", "roargcom_webtek");
+								
+				$db = mysqli_connect("mysql.stud.ntnu.no","audunasa_webtek","it2805","audunasa_prosjekt");
+				//$db = new mysqli("localhost", "roargcom_audun", "it2805", "roargcom_webtek");
 
 				if (!$db) {
 					echo('Could not connect: ' . mysqli_error($db));
 				}
 				
+				//Må hente id fra et sted
+				$id = 1497403270535912;
+				
 				$query = "SELECT * FROM medlemmer
 							WHERE id = '".$id."';";
 				$result = mysqli_query($db, $query);
 				
-				$lat = 63.41;
-				$lng = 10.44;
+				$name = "";
+				$image = "";
+				$rating = "";
+				$bio = "";
+				$categories = "";
 				
 				if ($result->num_rows > 0) {
 					while($row = $result->fetch_assoc()) {
-						$lat = $row["breddegrad"];
-						$lng = $row["lengdegrad"];
+						$name = $row['navn'];
+						$email = $row["mail"];
+						$bio = $row['bio'];
+						$image = $row['bildeURL'];
 					}
 				} else {
 					echo "0 results";
 				}
+				
+				$query2 = "SELECT selgerId, avg(rating) as rating
+						FROM jobber
+						WHERE selgerId='".$id."'
+						GROUP BY selgerId;";
+				
+				$result2 = mysqli_query($db, $query2);
+				
+				if ($result2->num_rows > 0) {
+					while($row = $result2->fetch_assoc()) {
+						$rating = $row['rating'];
+					}
+				} else {
+					echo "0 results for rating";
+				}
+				
+				$query3 = "SELECT navn FROM kategori WHERE personId='".$id."';";
+
+				$result3 = mysqli_query($db, $query3);
+				
+				if ($result3->num_rows > 0) {
+					while($row = $result3->fetch_assoc()) {
+						$categories[] = $row['navn'];
+					}
+				} else {
+					echo "0 results for kategori";
+				}
+				
 			?>
-			
-			<div class="coords" style="display: none;">
-				<p id="lat"><?php echo($lat);?>></p>
-				<p id="lng"><?php echo($lng);?></p>
-			</div>
 			
 			<div class="account">
 				<h3 id="accountHeader"> Din Konto</h3> 
+
+					
 				<span class="accountNav">
   					<button class="button" onclick="location.href='account.php'">Konto</button>
   					<button class="button" onclick="location.href='price.php'">Pris</button>
   					<button class="button" onclick="location.href='notifications.php'">Varslinger</button>
   					<button class="button" onclick="location.href='place.php'">Steder</button>
-  					<button class="button" onclick="location.href='info.html'">Kontakt</button>
+  					<button class="button" onclick="location.href='info.html'">Synlig Profil</button>
 				</span>
 
 				<div class="accountView" id="accountView">
-					<div class="name">
-						STED
-					</div>
-
-					<div class="summary">
-						<div id="map" class="inputbox" >
-							<h3 id="mapHeader" class="inputHeader">Velg et utgangspunkt for ditt arbeidsområde ved å trykke på kartet</h3>
-							<!--<input id="search" type="text" placeholder="Skriv inn din adresse">-->
-							<div id="map-canvas"></div>
+					<div id="userInfo">
+						<div id="userName" class="infoBox"><? echo($name);?></div>
+						<div id="userImage" class="infoBox"><img src=<?php echo($image);?> id="accountImg"></img></div>
+						
+						<div id="userRating" class="infoBox">
+							<div class="starRating" id="ratingDiv">
+							  <div>
+								<div>
+								  <div>
+									<div>
+									  <input id="rating1" type="radio" name="rating" value="1">
+									  <label for="rating1"><span>1</span></label>
+									</div>
+									<input id="rating2" type="radio" name="rating" value="2">
+									<label for="rating2"><span>2</span></label>
+								  </div>
+								  <input id="rating3" type="radio" name="rating" value="3">
+								  <label for="rating3"><span>3</span></label>
+								</div>
+								<input id="rating4" type="radio" name="rating" value="4">
+								<label for="rating4"><span>4</span></label>
+							  </div>
+							  <input id="rating5" type="radio" name="rating" value="5">
+							  <label for="rating5"><span>5</span></label>
+							</div>
 						</div>
-						
-						<h4 id="radiusHeader" class="inputHeader">Velg radius for ditt arbeidsområde</h4>
-						<input type="range" id="radiusSlider" min="0" max="100" value="0" step="1" onchange="setCircleRadius(this.value)"/>
-						<span id="range">0</span><br>
-						
-						<button class="button" onclick="updateDatabase();">Lagre</button>
 					</div>
+					<script>
+						var labels = document.getElementById('ratingDiv').getElementsByTagName('label');
+						for (var i=0; i<Math.ceil(<? echo($rating);?>); i++){
+							labels[i].style.background = "url('stars.png') repeat-x 0 -24px";
+						}		
+					</script>
+				
+				<div id="userBio" class="infoBox">Om <? echo($name);?> :<br><br> <? echo($bio);?></div>
+				
+				<div id="userCategories" class="infoBox">Tar jobber i kategoriene:<br><br> <? for ($x=0; $x <count($categories); $x++){echo($categories[$x]);echo('<br>');}?></div>
 			</div>
-						
 			<div class="footer">
 				<div id="contact" class="footerBox">
 					<h4 class="footerHeader">Kontakt oss</h4>
@@ -160,35 +219,6 @@
 				</div>
 			</div>
 		</section>
-	<script src="./js/map.js"></script>
-	<script src="lib/jquery-2.1.1.min.js"></script>
-	<script src="./js/slide.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-	
-	<script>
-		function updateDatabase() {
-			var id = parseInt(getCookie("userId"));
-			var lat = marker.getPosition().lat();
-			var lng = marker.getPosition().lng();
-			
-			var params = "id="+id+"&latitude="+lat+"&longitude="+lng;
-				
-			xmlhttp = new XMLHttpRequest();	
-			xmlhttp.open("POST", "updateUser.php", true);
-			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			xmlhttp.send(params);
-		}
-			
-		function getCookie(cname) {
-			var name = cname + "=";
-			var ca = document.cookie.split(';');
-			for(var i=0; i<ca.length; i++) {
-				var c = ca[i];
-				while (c.charAt(0)==' ') c = c.substring(1);
-				if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
-			}
-			return "";
-		}
-		</script>
+		<script src="./js/slide.js"></script>
 </body>
 </html>

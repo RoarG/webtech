@@ -1,0 +1,28 @@
+Bruk av ulike teknikker:
+
+a. Form Controls
+
+- account.php: bruker kan skrive inn for- og etternavn i tekstfelt, info om seg selv i et textarea, samt velge kategorier den kan jobbe i via checkboxer.
+- job.html: bruker velger dato og tidspunkt i tekstfelt, og arbeidstaker blant en gruppering radiobuttons. En submit-knapp for å sende forespørselen.
+- notifications.php: bruker huker av checkboxer for om den vil motta epost- og sms-varsler og skriver inn epostadresse og tlfnummer i tekstfelt.
+- place.php: bruker velger radius for sitt arbeidsområde vha. en slider.
+- pric.php: bruker velger timespris vha. en slider.
+- alle sider: det er en checkbox i navigasjonsbaren der en velge om denne skal vises eller ikke.
+- alle sider: som en del av footeren er det et kontaktskjema der man kan sende meldinger ved å skrive inn navn og mailadresse i tekstfelt, og meldingen i et textarea. En submit-knapp for å sende meldingen.
+
+b. CSS
+
+- alle sider: ett css.dokument('style.css') er brukt på samtlige sider for layout på header, navigasjonsbar, footer og sidebakgrunn.
+- account.css gir layout til alle kontosider, og er derfor external style sheet.
+- jobsite.css git layout til jobbsiden. Denne brukes ikke av andre sider, men er såpass omfattende at det ville blitt rotete å ha i headeren til html-dokumentet.
+- faq.html og siteMap.html bruker internal style sheet. Dette fordi css-en er begrenset i omfang og bare gjelder en side.  
+
+c. XML
+
+- faq.html: faq.xml lagrer data om frequently asked questions. Bruker JavaScript for å hente å ut info herfra å vise frem i faq.html. Gjør det lett å legge til nye FAQs.
+- job.html: henter arbeidstakere i gitt kategori i nærheten fra database vha. php hvor det lages et xml-dokument som sendes tilbake til klienten.
+
+d. JavaScript
+
+- 
+e. PHP

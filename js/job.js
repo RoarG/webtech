@@ -1,5 +1,5 @@
 window.onload = function (){
-	document.getElementById('toggle').click();
+	getLocation();
 	initializeCal();
 	loadMap();
 	if(sessionStorage.category){
@@ -99,8 +99,51 @@ var map;
 var workerMarkers = [];
 
 /*Disse verdiene må hentes fra Facebook/database*/
-var userLat = 63.417
-var userLng = 10.43
+var userLat;
+var userLng;
+
+function getLocation(){
+	var userId = parseInt(getCookie("userId"));
+
+	xmlRequest = new XMLHttpRequest();
+	
+	xmlhttp = new XMLHttpRequest();
+	
+	xmlhttp.onreadystatechange=function() {
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			/*Lagrer XML-string fra database*/
+			var x = xmlhttp.responseText;
+						
+			/*Parser string til DOM-objekt*/
+			var parser = new DOMParser();
+			var xmlDoc = parser.parseFromString(x,"text/xml");
+
+			var info = xmlDoc.getElementsByTagName('info');
+			if (info.length<1){
+				userLat=63.4;
+				userLng=10.44;
+			}
+			for (var i=0; i<info.length; i++){
+				userLat = parseFloat(info[i].childNodes[1].childNodes[0].nodeValue);
+				userLng = parseFloat(info[i].childNodes[3].childNodes[0].nodeValue);
+			}
+		}
+	}
+	xmlhttp.open("GET", "./getLocation.php?id="+userId, true);
+	xmlhttp.send();	
+}	
+			
+function getCookie(cname) {
+	var name = cname + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0; i<ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1);
+		if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+	}
+	return "";
+}
+
 
 function initializeMap() {
 	var mapOptions = {
@@ -363,7 +406,7 @@ function initializeCal(){
 /*CATEGORY FUNCTIONS*/
 
 var categories = {
-			"husarbeid":["Plenklipping", "Vasking", "Rydding"],
+			"husarbeid":["Plenklipping", "Vasking", "Rydding", "Snømåking"],
 			"personlig assistent":["Lekser", "Gå tur med hunden", "Handling"], 
 			"handyman":["Flytting", "Møbelsammensetting", "PC-hjelp", "Bilderedigering"], 
 			"annet":[]

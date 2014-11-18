@@ -37,27 +37,27 @@
 					</span>
 				</div>
 				<div class="box">
-					<button class="header-button" id="hjelp" onclick="location.href='./hjelp.php'"> Hjelp</button>
+					<button class="header-button" id="hjelp" onclick="location.href='./faq.html'"> Hjelp</button>
 				</div>
 				<div class="box">
-					<button class="header-button" id="omsiden" onclick="location.href='./omsiden.php'"> Om Siden </button>
+					<button class="header-button" id="omsiden" onclick="location.href='./omsiden.html'"> Om Siden </button>
 				</div>
 			</div>
 			
 			<div class="nav" id="nav">
-				<div class="category" onclick="openCategoryPage('husarbeid')"> 
+				<div class="category" onclick="showUnderCat('husarbeid')"> 
 					<img src="./images/house4.png">
 					<a>Husarbeid</a>
 				</div>
-				<div class="category" onclick="openCategoryPage('personlig assistent')">
+				<div class="category" onclick="showUnderCat('personlig assistent')">
 					<img src="./images/assistent.svg">
 					<a>Personlig assistent</a>
 				</div>
-				<div class="category" onclick="openCategoryPage('handyman')">
+				<div class="category" onclick="showUnderCat('handyman')">
 					<img src="./images/flyttingbil.svg">
 					<a>Handyman</a>
 				</div>
-				<div class="category" onclick="openCategoryPage('annet')">
+				<div class="category" onclick="showUnderCat('annet')">
 					<img src="./images/annet.svg">
 					<a>Annet</a>
 				</div>
@@ -65,9 +65,13 @@
 					<input type="checkbox" name="toggle" id="toggle" />
 					<label for="toggle"></label>
 				</div>
+				<script src="./js/slide.js"></script>
+				<script type="text/javascript">
+					document.getElementById('toggle').click();
+				</script>
 			</div>
 			<form id="jobForm" onsubmit="return false">
-			<div class="inputForm" id="inputForm">
+			<div class="main" id="main">
 				<div id="calendar" class="inputbox">
 					<h3 id="calHeader" class="inputHeader">1. Velg dato og tidspunkt</h3>
 					<div id="date">
@@ -128,6 +132,5 @@
 		<div id="popupWindow">
 			<p id="confirmTekst"></p>
 		</div>
-		<script src="./js/slide.js"></script>
 	</body>
 </html>
