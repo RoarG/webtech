@@ -15,8 +15,8 @@ function submitJob(){
 	var time = document.getElementById('mytime').value;
 	var worker = document.querySelector('input[name="workersGroup"]:checked').value;
 	var message = "Jobbforespørsel sendt! <br> Dato: "+date+"<br> Tid:"+time+"<br> Arbeidstaker:"+worker;
-	
-	var params = "date="+date+"&time="+time+"&worker="+worker;
+	console.log(date, time, worker, chosenUnderCat);
+	var params = "date="+date+"&time="+time+"&worker="+worker+"&cat="+chosenUnderCat;
 			
 	xmlhttp = new XMLHttpRequest();
 	
@@ -115,9 +115,15 @@ function getLocation(){
 			var x = xmlhttp.responseText;
 						
 			/*Parser string til DOM-objekt*/
-			var parser = new DOMParser();
-			var xmlDoc = parser.parseFromString(x,"text/xml");
-
+			var xmlDoc;
+			if(window.DOMParser){
+				var parser = new DOMParser();
+				xmlDoc = parser.parseFromString(x,'text/xml');
+			}else{//code for IE
+				xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+				xmlDoc.async=false;
+				xmlDoc.loadXML(x);  
+			}
 			var info = xmlDoc.getElementsByTagName('info');
 			if (info.length<1){
 				userLat=63.4;
@@ -268,8 +274,9 @@ function removeMapMarkers(){
 	
 	document.getElementById("changingUnderCat").innerHTML = "";
 }	
-
+var chosenUnderCat;
 function updateMap(underCategory){
+	chosenUnderCat = underCategory;
 	removeMapMarkers();
 	emptyWorkersList();
 	

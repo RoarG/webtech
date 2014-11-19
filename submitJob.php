@@ -1,14 +1,16 @@
 <?php
 	/*TODO: kjoperId/brukerId, lengdegrad, breddegrad må hentes fra Facebook*/
 
+	ini_set('display_errors',1);
+	
 	$date = strval($_POST['date']);
 	$time = strval($_POST['time']);
 	$worker = strval($_POST['worker']);
+	$category = strval($_POST['cat']);
 	
 	$dateArray = explode(".", $date);
 	$dateFormatted = "$dateArray[2]-$dateArray[1]-$dateArray[0] $time:00";
 	
-	/*TODO: kan lage et eget PHP-skript for tilkobling til databasen*/
 	$db = mysqli_connect("mysql.stud.ntnu.no","audunasa_webtek","it2805","audunasa_prosjekt");
 	//$db = myqsli_connect("localhost","roargcom_audun","it2805","roargcom_webtek");
 	
@@ -19,9 +21,9 @@
 	/*Lagrer jobb*/
 	
 	$query ="INSERT INTO
-			jobber (jobbId,kjoperId, selgerId, tidspunkt, breddegrad, lengdegrad, pris, varighet,kommentar, tilbakemelding, rating)
+			jobber (jobbId,kjoperId, selgerId, tidspunkt, breddegrad, lengdegrad, pris, varighet,kommentar, tilbakemelding, rating, kategorinavn)
 			VALUES (NULL,1,".$worker.",'".$dateFormatted."',
-			NULL,NULL,NULL,NULL,NULL,NULL, 0);";
+			NULL,NULL,NULL,NULL,NULL,NULL, 0, '".$category."');";
 	
 	$result = mysqli_query($db, $query) or die(mysqli_error($db));
 

@@ -78,8 +78,8 @@
 			<?php
 				ini_set('display_errors',1);
 								
-				//$db = mysqli_connect("mysql.stud.ntnu.no","audunasa_webtek","it2805","audunasa_prosjekt");
-				$db = new mysqli("localhost", "roargcom_audun", "it2805", "roargcom_webtek");
+				$db = mysqli_connect("mysql.stud.ntnu.no","audunasa_webtek","it2805","audunasa_prosjekt");
+				//$db = new mysqli("localhost", "roargcom_audun", "it2805", "roargcom_webtek");
 
 				if (!$db) {
 					echo('Could not connect: ' . mysqli_error($db));
@@ -109,7 +109,7 @@
 					echo "0 results";
 				}
 				
-				$query2 = "SELECT selgerId, avg(rating) as rating
+				$query2 = "SELECT selgerId, ROUND(avg(rating),2) as rating
 						FROM jobber
 						WHERE selgerId='".$id."'
 						GROUP BY selgerId;";
@@ -176,22 +176,43 @@
 							  <input id="rating5" type="radio" name="rating" value="5">
 							  <label for="rating5"><span>5</span></label>
 							</div>
+							<div id="textRating">
+							<? echo($rating);?>/5
+							</div>
 						</div>
+						
 					</div>
 					<script>
 						var labels = document.getElementById('ratingDiv').getElementsByTagName('label');
-						for (var i=0; i<Math.ceil(<? echo($rating);?>); i++){
-							labels[i].style.background = "url('stars.png') repeat-x 0 -24px";
-						}		
+
+						//Finner hvor mye det er igjen av rating etter å ha fylt ut de hele stjernene
+						var rest = <? echo($rating);?> - Math.floor(<? echo($rating);?>);
+						
+						//Finner stjernen som er første ikke-hele stjerne. (labels er 0-indeksert).
+						var labelNum = Math.floor(<? echo($rating);?>);
+						
+						//Finner hvor langt til høyre denne stjernen er. 24 er bredden av en stjerne.
+						var nextStar = labelNum*24;
+						
+						//Finner ut hvor langt vi skal fylle opp den siste stjernen
+						var sliceOfLastStar = nextStar+Math.ceil((rest*24));
+						
+						//Fyller ut stjernene.
+						labels[labelNum].style.background = "url('stars.png') -"+nextStar+"px -24px";
+						labels[labelNum].position = "absolute";
+						
+						//Clip tar et utklipp i form av et rektangel(top, right, bottom, left) av den siste stjernen
+						//tilsvarende hvor mye den skal utfylles. SliceOfLastStar forteller hvor langt til høyre utklippet skal gå, dvs hvor mye stjernen skal fylles opp.
+						labels[labelNum].style.clip = "rect(0, "+sliceOfLastStar+"px, 24px, 0)";
 					</script>
 				
-				<div id="userBio" class="infoBox">Om <? echo($name);?> :<br><br> <? echo($bio);?></div>
-				
-				<div id="userCategories" class="infoBox">Tar jobber i kategoriene:<br><br> 
-				<? if(count($categories)>0){
-				for ($x=0; $x <count($categories); $x++){echo($categories[$x]);echo('<br>');}}
-				?></div>
-			</div>
+					<div id="userBio" class="infoBox">Om <? echo($name);?> :<br><br> <? echo($bio);?></div>
+					
+					<div id="userCategories" class="infoBox">Tar jobber i kategoriene:<br><br> 
+					<? if(count($categories)>0){
+					for ($x=0; $x <count($categories); $x++){echo($categories[$x]);echo('<br>');}}
+					?></div>
+				</div>
 			<div class="footer">
 				<div id="contact" class="footerBox">
 					<h4 class="footerHeader">Kontakt oss</h4>
