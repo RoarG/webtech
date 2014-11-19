@@ -103,19 +103,13 @@
 			<div class="account">
 				<h3 id="accountHeader"> Din Konto</h3> 
 				<span class="accountNav">
-<<<<<<< HEAD
+				
   					<button class="button" id="accountButton" onclick="location.href='account.php'">Konto</button>
   					<button class="button" id="accountButton" onclick="location.href='price.php'">Pris</button>
   					<button class="button" id="accountButton" onclick="location.href='notifications.php'">Varslinger</button>
   					<button class="button" id="accountButton" onclick="location.href='place.php'">Steder</button>
   					<button class="button" id="accountButton" onclick="location.href='info.php'">Synlig profil</button>
-=======
-  					<button class="button" onclick="location.href='account.php'">Konto</button>
-  					<button class="button" onclick="location.href='price.php'">Pris</button>
-  					<button class="button" onclick="location.href='notifications.php'">Varslinger</button>
-  					<button class="button" onclick="location.href='place.php'">Steder</button>
-  					<button class="button" onclick="location.href='info.php'">Kontakt</button>
->>>>>>> da5ee456cfeca8fb772c6cdc417f0b44b678e0d8
+
 				</span>
 
 				<div class="accountView" id="accountView">
