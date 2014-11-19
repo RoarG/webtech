@@ -36,7 +36,7 @@
 				</div>
 				<div class="logo">
 					<a href="./index.html">
-						<img src="./images/logo.png" />
+						<img src="./images/logo.jpg"  height="130" width="450" />
 					</a>
 				</div>
 				<div class="box">
@@ -218,7 +218,7 @@
 					Runar Heggset <br> Audun Sæther</span>
 				</div>
 				<div id="logo" class="footerBox">
-					<img id="footerLogo" src="./images/logo.png"></img>
+					<img id="footerLogo" src="./images/logo.jpg"></img>
 				</div>
 			</div>
 		</section>

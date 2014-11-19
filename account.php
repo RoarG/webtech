@@ -21,7 +21,7 @@
 				</div>
 				<div class="logo">
 					<a href="./index.html">
-						<img src="./images/logo.png" />
+						<img src="./images/logo.jpg"  height="130" width="450" />
 					</a>
 				</div>
 				<div class="box">
@@ -127,19 +127,13 @@
 			<div class="account">
 				<h3 id="accountHeader"> Din Konto</h3> 
 				<span class="accountNav">
-<<<<<<< HEAD
+
   					<button class="button" id="accountButton" onclick="location.href='account.php'">Konto</button>
   					<button class="button" id="accountButton" onclick="location.href='price.php'">Pris</button>
   					<button class="button" id="accountButton" onclick="location.href='notifications.php'">Varslinger</button>
   					<button class="button" id="accountButton" onclick="location.href='place.php'">Steder</button>
   					<button class="button" id="accountButton" onclick="location.href='info.html'">Synlig Profil</button>
-=======
-  					<button class="button" onclick="location.href='account.php'">Konto</button>
-  					<button class="button" onclick="location.href='price.php'">Pris</button>
-  					<button class="button" onclick="location.href='notifications.php'">Varslinger</button>
-  					<button class="button" onclick="location.href='place.php'">Steder</button>
-  					<button class="button" onclick="location.href='info.php'">Synlig Profil</button>
->>>>>>> da5ee456cfeca8fb772c6cdc417f0b44b678e0d8
+
 				</span>
 
 				<div class="accountView" id="accountView">
@@ -160,38 +154,34 @@
 						<div class="about">OM:</div>
 						<textarea rows="5" cols="75" name="bio"><?php echo($bio);?></textarea>
 					</div>
-<<<<<<< HEAD
+
 					<div class="categoryCont">
-						<div id="categoryspan">
-							<label>
-								<input type="checkbox" name="category" value="husarbeid"><span>Husarbeid</span>
-							</label>
-						</div>
-						<div id="categoryspan">
-							<label>
-								<input type="checkbox" name="category" value="Personlig Assistent"><span>Personlig Assistent</span>
-							</label>
-						</div>
-						<div id="categoryspan">
-							<label>
-								<input type="checkbox" name="category" value="Handyman"><span>Husarbeid</span>
-							</label>
-						</div>
-						<div id="categoryspan">
-							<label>
-								<input type="checkbox" name="category" value="Diverse"><span>Diverse</span>
-							</label>
-						</div>
-					</div>
-=======
 					<form action="">
-						<input type="checkbox" name="category" value="husarbeid" <?php if ($husarb == true) echo "checked='checked'"; ?>>Husarbeid
-						<input type="checkbox" name="category" value="Personlig Assistent" <?php if ($assistent == true) echo "checked='checked'"; ?>>Personlig Assistent
-						<input type="checkbox" name="category" value="Handyman" <?php if ($handyman == true) echo "checked='checked'"; ?>>Handyman
-						<input type="checkbox" name="category" value="Diverse" <?php if ($diverse == true) echo "checked='checked'"; ?>>Diverse
+						<div id="categoryspan">
+							<label>
+								<input type="checkbox" name="category" value="husarbeid" <?php if ($husarb == true) echo "checked='checked'"; ?><span>Husarbeid</span>
+							</label>
+						</div>
+						<div id="categoryspan">
+							<label>
+								<input type="checkbox" name="category" value="Personlig Assistent" <?php if ($assistent == true) echo "checked='checked'"; ?><span>Personlig Assistent</span>
+							</label>
+						</div>
+						<div id="categoryspan">
+							<label>
+								<input type="checkbox" name="category" value="Handyman" <?php if ($handyman == true) echo "checked='checked'"; ?><span>Handyman</span>
+							</label>
+						</div>
+						<div id="categoryspan">
+							<label>
+								<input type="checkbox" name="category" value="Diverse" <?php if ($diverse == true) echo "checked='checked'"; ?><span>Diverse</span>
+							</label>
+						</div>
 					</form>
->>>>>>> da5ee456cfeca8fb772c6cdc417f0b44b678e0d8
+					</div>
 					<button class="button" onclick="updateDatabase();">Lagre</button>
+
+
 
 				</div>
 			</div>
@@ -221,7 +211,7 @@
 					Runar Heggset <br> Audun Sæther</span>
 				</div>
 				<div id="logo" class="footerBox">
-					<img id="footerLogo" src="./images/logo.png"></img>
+					<img id="footerLogo" src="./images/logo.jpg"></img>
 				</div>
 			</div>
 		</section>
