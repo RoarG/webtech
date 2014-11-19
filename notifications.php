@@ -21,7 +21,7 @@
 				</div>
 				<div class="logo">
 					<a href="./index.html">
-						<img src="./images/logo.png" />
+						<img src="./images/logo.jpg"  height="130" width="450" />
 					</a>
 				</div>
 				<div class="box">
@@ -96,19 +96,13 @@
 			<div class="account">
 				<h3 id="accountHeader"> Din Konto</h3> 
 				<span class="accountNav">
-<<<<<<< HEAD
+
   					<button class="button" id="accountButton" onclick="location.href='account.php'">Konto</button>
   					<button class="button" id="accountButton" onclick="location.href='price.php'">Pris</button>
   					<button class="button" id="accountButton" onclick="location.href='notifications.php'">Varslinger</button>
   					<button class="button" id="accountButton" onclick="location.href='place.php'">Steder</button>
   					<button class="button" id="accountButton" onclick="location.href='info.html'">Kontakt</button>
-=======
-  					<button class="button" onclick="location.href='account.php'">Konto</button>
-  					<button class="button" onclick="location.href='price.php'">Pris</button>
-  					<button class="button" onclick="location.href='notifications.php'">Varslinger</button>
-  					<button class="button" onclick="location.href='place.php'">Steder</button>
-  					<button class="button" onclick="location.href='info.php'">Kontakt</button>
->>>>>>> da5ee456cfeca8fb772c6cdc417f0b44b678e0d8
+
 				</span>
 
 				<div class="accountView" id="accountView">
@@ -154,7 +148,7 @@
 					Runar Heggset <br> Audun Sæther</span>
 				</div>
 				<div id="logo" class="footerBox">
-					<img id="footerLogo" src="./images/logo.png"></img>
+					<img id="footerLogo" src="./images/logo.jpg"></img>
 				</div>
 			</div>
 		</section>
