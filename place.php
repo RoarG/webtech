@@ -103,19 +103,13 @@
 			<div class="account">
 				<h3 id="accountHeader"> Din Konto</h3> 
 				<span class="accountNav">
-<<<<<<< HEAD
+				
   					<button class="button" id="accountButton" onclick="location.href='account.php'">Konto</button>
   					<button class="button" id="accountButton" onclick="location.href='price.php'">Pris</button>
   					<button class="button" id="accountButton" onclick="location.href='notifications.php'">Varslinger</button>
   					<button class="button" id="accountButton" onclick="location.href='place.php'">Steder</button>
-  					<button class="button" id="accountButton" onclick="location.href='info.html'">Kontakt</button>
-=======
-  					<button class="button" onclick="location.href='account.php'">Konto</button>
-  					<button class="button" onclick="location.href='price.php'">Pris</button>
-  					<button class="button" onclick="location.href='notifications.php'">Varslinger</button>
-  					<button class="button" onclick="location.href='place.php'">Steder</button>
-  					<button class="button" onclick="location.href='info.php'">Kontakt</button>
->>>>>>> da5ee456cfeca8fb772c6cdc417f0b44b678e0d8
+  					<button class="button" id="accountButton" onclick="location.href='info.php'">Synlig profil</button>
+
 				</span>
 
 				<div class="accountView" id="accountView">
@@ -158,11 +152,18 @@
 					<a href="./siteMap.html">Site map</a><br><br>
 					<a href="./references.html">Referanser</a>
 				</div>
+				<div id="socialMedia" class="footerBox">
+					<div id="facebook" class="socialMediaBox"><img id="facebookLogo" src="./images/fbblue.png"></div>
+					<div id="twitter" class="socialMediaBox"><img id="twitterLogo" src="https://g.twimg.com/Twitter_logo_blue.png"></div>
+					<div id="linkedin" class="socialMediaBox"><img id="linkedinLogo" src="./images/linkedIn.png"></div>
+					<div id="google" class="socialMediaBox"><img id="googleLogo" src="./images/g+64.png"></div>
+				</div>
 				<div id="copyright" class="footerBox">
 					<span id="copyrightSpan" class="copy"><p id="copyrightSymbol">&copy; </p></span> 
 					<span id="names" class="copy">Roar Gjøvaag <br> 
 					Runar Heggset <br> Audun Sæther</span>
 				</div>
+				
 				<div id="logo" class="footerBox">
 					<img id="footerLogo" src="./images/logo.jpg"></img>
 				</div>

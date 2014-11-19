@@ -218,9 +218,9 @@ img:hover {
 }
 
 .footerBox{
-	height: 340px;
 	margin-left: 30px;
 	float: left;
+	width: 250px;
 }
 .footerHeader{
 	margin-bottom: -20px;
@@ -253,12 +253,31 @@ img:hover {
 
 #divLinks{
 	width: 270px;
+	height: 120px;
+}
+#socialMedia{
+	width: 240px;
+	height: 160px;
+	margin-left: 50px;
+	padding-left: 20px;
+}
+.socialMediaBox{
+	float: left;
+	margin-left: 20px;
+	margin-top: 20px;
+	height: 50px;
+	width: 70px;
 }
 #copyright {
-	margin-top: 50px;
-	width: 290px;
-	height: 100px;
+	margin-top: 80px;
+	width: 270px;
+	height: 120px;
 }
+#twitterLogo, #linkedinLogo, #googleLogo{
+	width: 58px;
+	height: 58px;
+}
+
 .copy{
 	float: left;
 	height: 100px;
@@ -278,16 +297,14 @@ img:hover {
 }
 
 #logo{
-	width: 290px;
-	height: 180px;
+	width: 270px;
+	height: 120px;
 	position: relative;
+	margin-top: 20px;
 }
 #footerLogo{
 	margin-top: 40px;
 	width: 250px;
-	bottom: 10px;
-	right: 20px;
-	position: absolute;
 }
 
 .css-slideshow{
@@ -332,29 +349,53 @@ img:hover {
 
 figure:nth-child(1) {
    animation: xfade 48s 42s infinite;
+  -moz-animation: xfade 48s 42s infinite; /* Firefox */
+  -webkit-animation: xfade 48s 42s infinite; /* Safari and Chrome */
+  -o-animation: xfade 48s 42s infinite;
 }
 figure:nth-child(2) {
    animation: xfade 48s 36s infinite;
+   -moz-animation: xfade 48s 36s infinite; /* Firefox */
+   -webkit-animation: xfade 48s 36s infinite; /* Safari and Chrome */
+   -o-animation: xfade 48s 36s infinite;
 }
 figure:nth-child(3) {
    animation: xfade 48s 30s infinite;
+   -moz-animation: xfade 48s 30s infinite; /* Firefox */
+  -webkit-animation: xfade 48s 30s infinite; /* Safari and Chrome */
+  -o-animation: xfade 48s 30s infinite;
 }
 figure:nth-child(4) {
    animation: xfade 48s 24s infinite;
+   -moz-animation: xfade 48s 24s infinite; /* Firefox */
+  -webkit-animation: xfade 48s 24s infinite; /* Safari and Chrome */
+  -o-animation: xfade 48s 24s infinite;
 }
 figure:nth-child(5) {
    animation: xfade 48s 18s infinite;
+   -moz-animation: xfade 48s 18s infinite; /* Firefox */
+  -webkit-animation: xfade 48s 18s infinite; /* Safari and Chrome */
+  -o-animation: xfade 48s 18s infinite;
 }
 figure:nth-child(6) {
    animation: xfade 48s 12s infinite;
+   -moz-animation: xfade 48s 12s infinite; /* Firefox */
+  -webkit-animation: xfade 48s 12s infinite; /* Safari and Chrome */
+  -o-animation: xfade 48s 12s infinite;
 }
 figure:nth-child(7) {
    animation: xfade 48s 6s infinite;
+   -moz-animation: xfade 48s 6s infinite; /* Firefox */
+  -webkit-animation: xfade 48s 6s infinite; /* Safari and Chrome */
+  -o-animation: xfade 48s 6s infinite;
 }
 figure:nth-child(8) {
    animation: xfade 48s 0s infinite;
+   -moz-animation: xfade 48s 0s infinite; /* Firefox */
+  -webkit-animation: xfade 48s 0s infinite; /* Safari and Chrome */
+  -o-animation: xfade 48s 0s infinite;
 }
-
+/*
 @keyframes xfade{
    0%{
       opacity: 1;
@@ -371,5 +412,79 @@ figure:nth-child(8) {
    100% {
       opacity:1;
    }
+}*/
+
+@-webkit-keyframes xfade{ /* Safari and Chrome */
+  0%{
+    opacity: 0;
+  }
+  2%{
+    opacity: 1;
+  }
+  25% {
+    opacity: 1;
+  }
+  40%{
+    opacity: 0;
+  }
 }
 
+ @-moz-keyframes xfade { 
+  0%{
+    opacity: 0;
+  }
+  2%{
+    opacity: 1;
+  }
+  25% {
+    opacity: 1;
+  }
+  40%{
+    opacity: 0;
+  }
+}
+
+ @-o-keyframes xfade { 
+  0%{
+    opacity: 0;
+  }
+  2%{
+    opacity: 1;
+  }
+  25% {
+    opacity: 1;
+  }
+  40%{
+    opacity: 0;
+  }
+}
+
+ @-ms-keyframes xfade { 
+  0%{
+    opacity: 0;
+  }
+  2%{
+    opacity: 1;
+  }
+  25% {
+    opacity: 1;
+  }
+  40%{
+    opacity: 0;
+  }
+}
+
+@keyframes xfade{
+  0%{
+    opacity: 0;
+  }
+  2%{
+    opacity: 1;
+  }
+  25% {
+    opacity: 1;
+  }
+  40%{
+    opacity: 0;
+  }
+}
