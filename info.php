@@ -85,9 +85,21 @@
 					echo('Could not connect: ' . mysqli_error($db));
 				}
 				
-				//Må hente id fra et sted
-				$id = 1497403270535912;
+				$id = "0";
+				$cookie_name = "userId";
 				
+				if(isset($_GET['id'])) {
+					$id = $_GET['id'];				
+				} else {
+					if(isset($_COOKIE[$cookie_name])){
+						$id = $_COOKIE[$cookie_name];
+					}
+					else{
+						header("Location: ./index.html");
+						die();
+					}
+				}
+
 				$query = "SELECT * FROM medlemmer
 							WHERE id = '".$id."';";
 				$result = mysqli_query($db, $query);
@@ -98,18 +110,20 @@
 				$bio = "";
 				$categories = "";
 				
-				if ($result->num_rows > 0) {
-					while($row = $result->fetch_assoc()) {
-						$name = $row['navn'];
-						$email = $row["mail"];
-						$bio = $row['bio'];
+				while($row = $result->fetch_assoc()) {
+					$name = $row['navn'];
+					$email = $row["mail"];
+					$bio = $row['bio'];
+					if($row['bildeURL']){
 						$image = $row['bildeURL'];
 					}
-				} else {
-					echo "0 results";
+					else{
+						$image = "./images/defaultUser";
+					}
 				}
 				
-				$query2 = "SELECT selgerId, ROUND(avg(rating),2) as rating
+				
+				$query2 = "SELECT selgerId, ifnull(ROUND(avg(rating),2),0) as rating
 						FROM jobber
 						WHERE selgerId='".$id."'
 						GROUP BY selgerId;";
@@ -121,7 +135,7 @@
 						$rating = $row['rating'];
 					}
 				} else {
-					echo "0 results for rating";
+					$rating = 0;
 				}
 				
 				$query3 = "SELECT navn FROM kategori WHERE personId='".$id."';";
@@ -133,9 +147,9 @@
 						$categories[] = $row['navn'];
 					}
 				} else {
-					echo "0 results for kategori";
+					$categories = "";
 				}
-				
+				mysqli_close($db);
 			?>
 			
 			<div class="account">
@@ -196,6 +210,7 @@
 						
 						//Finner ut hvor langt vi skal fylle opp den siste stjernen
 						var sliceOfLastStar = nextStar+Math.ceil((rest*24));
+						
 						
 						//Fyller ut stjernene.
 						labels[labelNum].style.background = "url('stars.png') -"+nextStar+"px -24px";

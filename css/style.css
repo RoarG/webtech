@@ -188,14 +188,87 @@ img:hover {
 	top: 10px;
 }
 
+#topliste{
+	width: 320px;
+	height: 370px;
+	margin-left: 50px;
+	background-color: #4a5a66;
+	border: 1px solid #4a5a66;
+	float: left;
+}
+#toplisteHeader{
+	background-color: #grey;
+	height: 30px;
+	text-align: center;
+	padding-top: 5px;
+	font-size: 20px;
+	color: white;
+}
+.topUser{
+	width: 320px;
+	height: 50px;
+	background-color: #DFDDDA;
+	margin-top: 5px;
+	float: left;
+	
+}
+.topUserImage{
+	height: 50px;
+	width: 50px;
+	float: left;
+	margin-right: 10px;
+}
+.topUserName{
+	width: 200px;
+	height: 25px;
+	float: left;
+	font-size: 18px;
+}
+.topUserRating{
+	height: 25px;
+	float: left;
+}
+.topUserJobs{
+	float: left;
+	height: 25px;
+	margin-left: 15px;
+	margin-top: 5px;
+}
 
-.main > #topliste > p {
-	float: right;
-	position: relative;
-	width: 300px;
-	margin: 20px;
-	border: 2px;
+.starRating{
+  display        : inline-block;
+  position       : relative;
+  height         : 24px;
+  background     : url('stars.png') repeat-x 0 0;
+  vertical-align : bottom;
+}
 
+.starRating div{
+  float    : left;
+  position : relative;
+  height   : 24px;
+}
+
+.starRating input{
+  position : relative;
+  z-index  : 1;
+  width    : 24px;
+  height   : 24px;
+  margin   : 0;
+  padding  : 0;
+  opacity  : 0;
+}
+
+.starRating label{
+  position : absolute;
+  top      : 0;
+  left     : 0;
+  width    : 100%;
+  height   : 24px;
+}
+
+.starRating span{
+  display : none;
 }
 
 .main > #text1 > p {
@@ -256,27 +329,30 @@ img:hover {
 	height: 120px;
 }
 #socialMedia{
-	width: 240px;
+	width: 200px;
 	height: 160px;
 	margin-left: 50px;
 	padding-left: 20px;
+	margin-top: 20px;
 }
 .socialMediaBox{
 	float: left;
-	margin-left: 20px;
+	margin-left: 10px;
 	margin-top: 20px;
 	height: 50px;
 	width: 70px;
 }
+#facebookLogo, #twitterLogo, #linkedinLogo, #googleLogo{
+	width: 40px;
+	height: 40px;
+}
+
 #copyright {
 	margin-top: 80px;
 	width: 270px;
 	height: 120px;
 }
-#twitterLogo, #linkedinLogo, #googleLogo{
-	width: 58px;
-	height: 58px;
-}
+
 
 .copy{
 	float: left;

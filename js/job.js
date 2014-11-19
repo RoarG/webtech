@@ -1,10 +1,9 @@
 window.onload = function (){
-	getLocation();
 	initializeCal();
-	loadMap();
 	if(sessionStorage.category){
 		showUnderCat(sessionStorage.category);
 	}
+	getLocationAndLoadMap();
 }
 
 function submitJob(){
@@ -102,8 +101,13 @@ var workerMarkers = [];
 var userLat;
 var userLng;
 
-function getLocation(){
+function getLocationAndLoadMap(){
 	var userId = parseInt(getCookie("userId"));
+	
+	//For testing
+	if(!userId){
+		userId = 1497403270535912 ;
+	}
 
 	xmlRequest = new XMLHttpRequest();
 	
@@ -113,17 +117,10 @@ function getLocation(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 			/*Lagrer XML-string fra database*/
 			var x = xmlhttp.responseText;
-						
 			/*Parser string til DOM-objekt*/
-			var xmlDoc;
-			if(window.DOMParser){
-				var parser = new DOMParser();
-				xmlDoc = parser.parseFromString(x,'text/xml');
-			}else{//code for IE
-				xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
-				xmlDoc.async=false;
-				xmlDoc.loadXML(x);  
-			}
+			var xmlDoc;		
+			var parser = new DOMParser();
+			xmlDoc = parser.parseFromString(x,'text/xml');
 			var info = xmlDoc.getElementsByTagName('info');
 			if (info.length<1){
 				userLat=63.4;
@@ -133,12 +130,13 @@ function getLocation(){
 				userLat = parseFloat(info[i].childNodes[1].childNodes[0].nodeValue);
 				userLng = parseFloat(info[i].childNodes[3].childNodes[0].nodeValue);
 			}
+			loadMap();
 		}
 	}
 	xmlhttp.open("GET", "./getLocation.php?id="+userId, true);
 	xmlhttp.send();	
 }	
-			
+		
 function getCookie(cname) {
 	var name = cname + "=";
 	var ca = document.cookie.split(';');
@@ -249,19 +247,21 @@ function setMapMarkers(workersXML){
 		return;
 	}
 	for(var i=0; i<workers.length; i++){
-		var marker = new google.maps.Marker({
-			position: {lat: parseFloat(workers[i].childNodes[3].childNodes[0].nodeValue), 
-						lng: parseFloat(workers[i].childNodes[5].childNodes[0].nodeValue)},
-			map: map,
-			title: "Id:"+workers[i].childNodes[1].childNodes[0].nodeValue,
-			icon: {
-				url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-			}
-		});
-		workerMarkers.push(marker);
-		google.maps.event.addListener(marker, 'click', function(){
-			highlightWorkerAndMarker(this.getTitle());
-		});
+		if(workers[i].childNodes[7].childNodes[0].nodeValue != 0){	
+			var marker = new google.maps.Marker({
+				position: {lat: parseFloat(workers[i].childNodes[3].childNodes[0].nodeValue), 
+							lng: parseFloat(workers[i].childNodes[5].childNodes[0].nodeValue)},
+				map: map,
+				title: "Id:"+workers[i].childNodes[1].childNodes[0].nodeValue,
+				icon: {
+					url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+				}
+			});
+			workerMarkers.push(marker);
+			google.maps.event.addListener(marker, 'click', function(){
+				highlightWorkerAndMarker(this.getTitle());
+			});
+		}
 	}
 }	
 function removeMapMarkers(){
@@ -352,24 +352,36 @@ function setWorkersList(){
 		
 		var pictureSpan = document.createElement('span');
 		pictureSpan.className = "workerPicture";
-		pictureSpan.innerHTML = "Bilde";
+		
+		var image = document.createElement('img');
+		image.className = "userImage";
+		//Sjekker om personen har bilde. Mest for testing.
+		if(workers[i].childNodes[13].childNodes[0]){
+			image.setAttribute('src', workers[i].childNodes[13].childNodes[0].nodeValue);
+		}
+		else{
+			image.setAttribute('src', './images/defaultUser');
+		}
+		pictureSpan.appendChild(image);
 		
 		var radioLabel = document.createElement('label');
 		radioLabel.className = "labels";
 		
-		radioLabel.innerHTML += "Navn: "+workers[i].childNodes[11].childNodes[0].nodeValue+" <br>";
-		radioLabel.innerHTML += "Rating: "+workers[i].childNodes[13].childNodes[0].nodeValue+" <br>";
-		radioLabel.innerHTML += "Avstand fra deg: "+workers[i].childNodes[9].childNodes[0].nodeValue +"km <br>";
-		radioLabel.innerHTML += "Bio: "+workers[i].childNodes[7].childNodes[0].nodeValue +"<br>";
+		radioLabel.innerHTML += "Navn: "+workers[i].childNodes[9].childNodes[0].nodeValue+" <br>";
+		radioLabel.innerHTML += "Rating: "+workers[i].childNodes[11].childNodes[0].nodeValue+" <br>";
+		radioLabel.innerHTML += "Avstand fra deg: "+workers[i].childNodes[7].childNodes[0].nodeValue +"km <br>";
 		
 		newSpan.appendChild(radioButtonSpan);
 		newSpan.appendChild(pictureSpan);
 		newSpan.appendChild(radioLabel);
 		
-		parent.appendChild(newSpan);
+		if(workers[i].childNodes[7].childNodes[0].nodeValue != 0){
+			parent.appendChild(newSpan);
+			workersArray.push(newSpan);
+			labels.push(radioLabel);
+		}
+	
 		
-		workersArray.push(newSpan);
-		labels.push(radioLabel);
 	}
 	for(var j=0; j<workersArray.length; j++){
 		workersArray[j].onclick = function(){

@@ -1,9 +1,5 @@
 <?php
 	ini_set('display_errors',1);
-		
-	$cat = strval($_GET['cat']);
-	$lat = strval($_GET['lat']);
-	$long = strval($_GET['long']);
 	
 	$db = mysqli_connect("mysql.stud.ntnu.no","audunasa_webtek","it2805","audunasa_prosjekt");
 	//$db = myqsli_connect("localhost","roargcom_audun","it2805","roargcom_webtek");
@@ -12,18 +8,13 @@
 	  echo('Could not connect: ' . mysqli_error($db));
 	}
 	
-	$query = "SELECT id,m.navn AS navn,bildeURL, breddegrad, lengdegrad, bio, ifnull(m2.r,0) as rating,
-			ROUND((6371 * ACOS( COS( RADIANS(".$lat.") ) * COS( RADIANS(breddegrad) ) 
-			* COS( RADIANS(".$long.") - RADIANS(lengdegrad) ) + 
-			SIN( RADIANS(".$lat.") ) * SIN( RADIANS(breddegrad) ) ) ),2) AS avstand
+	$query = "SELECT id,navn,bildeURL,ifnull(m2.s,0) as jobber, ifnull(m2.r,0) as rating
 			FROM medlemmer AS m 
-			LEFT JOIN kategori AS c ON m.id=c.personId
-			LEFT JOIN (SELECT selgerId, avg(rating) as r
+			LEFT JOIN (SELECT selgerId,count(*) as s, avg(rating) as r
 						FROM jobber
 						GROUP BY selgerId) AS m2 on m2.selgerId=m.id
-			WHERE c.navn='".$cat."'
-			HAVING avstand<100
-			ORDER BY avstand;";
+			ORDER BY rating DESC
+			LIMIT 6;";
 	
 	$result = mysqli_query($db, $query);
 	
@@ -44,18 +35,10 @@
 		$id = $xml->createElement("id");
 		$id->appendChild($xml->createTextNode($row['id']));
 		$person->appendChild($id);
-		
-		$breddegrad = $xml->createElement("breddegrad");
-		$breddegrad->appendChild($xml->createTextNode($row['breddegrad']));
-		$person->appendChild($breddegrad);
-		
-		$lengdegrad = $xml->createElement("lengdegrad");
-		$lengdegrad->appendChild($xml->createTextNode($row['lengdegrad']));
-		$person->appendChild($lengdegrad);
 				
-		$avstand = $xml->createElement("avstand");
-		$avstand->appendChild($xml->createTextNode($row['avstand']));
-		$person->appendChild($avstand);
+		$bilde = $xml->createElement("bilde");
+		$bilde->appendChild($xml->createTextNode($row['bildeURL']));
+		$person->appendChild($bilde);
 		
 		$navn = $xml->createElement("navn");
 		$navn->appendChild($xml->createTextNode($row['navn']));
@@ -65,9 +48,9 @@
 		$rating->appendChild($xml->createTextNode($row['rating']));
 		$person->appendChild($rating);
 		
-		$bilde = $xml->createElement("bilde");
-		$bilde->appendChild($xml->createTextNode($row['bildeURL']));
-		$person->appendChild($bilde);
+		$numJobs = $xml->createElement("antall");
+		$numJobs->appendChild($xml->createTextNode($row['jobber']));
+		$person->appendChild($numJobs);
 		
 		$root->appendChild($person);
 	}
