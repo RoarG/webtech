@@ -2,7 +2,7 @@
 	ini_set('display_errors',1);
 	
 	//$db = mysqli_connect("mysql.stud.ntnu.no","audunasa_webtek","it2805","audunasa_prosjekt");
-	$db = myqsli_connect("localhost","roargcom_audun","it2805","roargcom_webtek");
+	$db = new mysqli("localhost","roargcom_audun","it2805","roargcom_webtek");
 		
 	if (!$db) {
 	  echo('Could not connect: ' . mysqli_error($db));
@@ -10,13 +10,14 @@
 	
 	$query = "SELECT id,navn,bildeURL,ifnull(m2.s,0) as jobber, ifnull(m2.r,0) as rating
 			FROM medlemmer AS m 
-			LEFT JOIN (SELECT selgerId,count(*) as s, avg(rating) as r
+			LEFT JOIN (SELECT selgerId, count(*) as s, avg(rating) as r
 						FROM jobber
 						GROUP BY selgerId) AS m2 on m2.selgerId=m.id
-			ORDER BY rating DESC
+			ORDER BY rating DESC, jobber
 			LIMIT 6;";
 	
 	$result = mysqli_query($db, $query);
+
 	
 	if (!$result) {
 		printf("Error: %s\n", mysqli_error($db));

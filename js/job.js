@@ -10,12 +10,13 @@ function submitJob(){
 	if(!checkForm()){
 		return;
 	}
+	var buyerId = parseInt(getCookie("userId"));
 	var date = document.getElementById('mydate').value;
 	var time = document.getElementById('mytime').value;
 	var worker = document.querySelector('input[name="workersGroup"]:checked').value;
 	var message = "Jobbforespørsel sendt! <br> Dato: "+date+"<br> Tid:"+time+"<br> Arbeidstaker:"+worker;
 	console.log(date, time, worker, chosenUnderCat);
-	var params = "date="+date+"&time="+time+"&worker="+worker+"&cat="+chosenUnderCat;
+	var params = "id="+buyerId+"&date="+date+"&time="+time+"&worker="+worker+"&cat="+chosenUnderCat;
 			
 	xmlhttp = new XMLHttpRequest();
 	
@@ -29,7 +30,17 @@ function submitJob(){
 	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp.send(params);
 }
-
+function getCookie(cname) {
+	var name = cname + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0; i<ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1);
+		if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+	}
+	return "";
+}
+			
 function checkForm(){
 	var dateElement = document.getElementById("mydate");
 	var timeElement = document.getElementById("mytime");
@@ -360,7 +371,7 @@ function setWorkersList(){
 			image.setAttribute('src', workers[i].childNodes[13].childNodes[0].nodeValue);
 		}
 		else{
-			image.setAttribute('src', './images/defaultUser');
+			image.setAttribute('src', './images/defaultUser.png');
 		}
 		pictureSpan.appendChild(image);
 		

@@ -6,13 +6,13 @@
 	$long = strval($_GET['long']);
 	
 	//$db = mysqli_connect("mysql.stud.ntnu.no","audunasa_webtek","it2805","audunasa_prosjekt");
-	$db = myqsli_connect("localhost","roargcom_audun","it2805","roargcom_webtek");
+	$db = new mysqli("localhost","roargcom_audun","it2805","roargcom_webtek");
 		
 	if (!$db) {
 	  echo('Could not connect: ' . mysqli_error($db));
 	}
 	
-	$query = "SELECT id,m.navn AS navn,bildeURL, breddegrad, lengdegrad, bio, ifnull(m2.r,0) as rating,
+	$query = "SELECT id,m.navn AS navn,bildeURL, breddegrad, lengdegrad, bio, ROUND(ifnull(m2.r,0),2) as rating,
 			ROUND((6371 * ACOS( COS( RADIANS(".$lat.") ) * COS( RADIANS(breddegrad) ) 
 			* COS( RADIANS(".$long.") - RADIANS(lengdegrad) ) + 
 			SIN( RADIANS(".$lat.") ) * SIN( RADIANS(breddegrad) ) ) ),2) AS avstand

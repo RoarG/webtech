@@ -57,7 +57,7 @@ function setTopList(xmlDoc){
 			image.setAttribute('src', persons[i].childNodes[3].childNodes[0].nodeValue);
 		}
 		else{
-			image.setAttribute('src', './images/defaultUser');
+			image.setAttribute('src', './images/defaultUser.png');
 		}
 		imageDiv.appendChild(image);
 		
@@ -111,9 +111,9 @@ function setTopList(xmlDoc){
 		var sliceOfLastStar = nextStar+Math.ceil((rest*24));
 		
 		//Fyller ut stjernene.
-		if(labelNum == 5){
-			labels[labelNum-1].style.background = "url('stars.png') -"+nextStar+"px -24px";
-			labels[labelNum-1].position = "absolute";
+		if(labelNum > 4){
+			labels[4].style.background = "url('stars.png') -"+nextStar+"px -24px";
+			labels[4].position = "absolute";
 		}
 		else{
 			labels[labelNum].style.background = "url('stars.png') -"+nextStar+"px -24px";

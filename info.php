@@ -41,14 +41,14 @@
 				</div>
 				<div class="box">
 					<span id="categoryImg">
-					<button class="header-button" id="minside" onclick="location.href='./account.php'"> Min Side </button>
+					<button class="header-button" id="minside" onclick="location.href='./account.php'"> Min side </button>
 					</span>
 				</div>
 				<div class="box">
 					<button class="header-button" id="hjelp" onclick="location.href='./faq.html'"> Hjelp</button>
 				</div>
 				<div class="box">
-					<button class="header-button" id="omsiden" onclick="location.href='./omsiden.html'"> Om Siden </button>
+					<button class="header-button" id="omsiden" onclick="location.href='./omsiden.html'"> Om siden </button>
 				</div>
 			</div>
 			
@@ -213,12 +213,17 @@
 						
 						
 						//Fyller ut stjernene.
-						labels[labelNum].style.background = "url('stars.png') -"+nextStar+"px -24px";
-						labels[labelNum].position = "absolute";
-						
-						//Clip tar et utklipp i form av et rektangel(top, right, bottom, left) av den siste stjernen
-						//tilsvarende hvor mye den skal utfylles. SliceOfLastStar forteller hvor langt til høyre utklippet skal gå, dvs hvor mye stjernen skal fylles opp.
-						labels[labelNum].style.clip = "rect(0, "+sliceOfLastStar+"px, 24px, 0)";
+						if(labelNum > 4){
+							labels[4].style.background = "url('stars.png') -"+nextStar+"px -24px";
+							labels[4].position = "absolute";
+						}
+						else{
+							labels[labelNum].style.background = "url('stars.png') -"+nextStar+"px -24px";
+							labels[labelNum].position = "absolute";
+							//Clip tar et utklipp i form av et rektangel(top, right, bottom, left) av den siste stjernen
+							//tilsvarende hvor mye den skal utfylles. SliceOfLastStar forteller hvor langt til høyre utklippet skal gå, dvs hvor mye stjernen skal fylles opp.
+							labels[labelNum].style.clip = "rect(0, "+sliceOfLastStar+"px, 24px, 0)";
+						}
 					</script>
 				
 					<div id="userBio" class="infoBox">Om <? echo($name);?> :<br><br> <? echo($bio);?></div>

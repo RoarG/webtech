@@ -1,8 +1,7 @@
 <?php
-	/*TODO: kjoperId/brukerId, lengdegrad, breddegrad må hentes fra Facebook*/
-
 	ini_set('display_errors',1);
 	
+	$id = strval($_POST['id']);
 	$date = strval($_POST['date']);
 	$time = strval($_POST['time']);
 	$worker = strval($_POST['worker']);
@@ -12,7 +11,7 @@
 	$dateFormatted = "$dateArray[2]-$dateArray[1]-$dateArray[0] $time:00";
 	
 	//$db = mysqli_connect("mysql.stud.ntnu.no","audunasa_webtek","it2805","audunasa_prosjekt");
-	$db = myqsli_connect("localhost","roargcom_audun","it2805","roargcom_webtek");
+	$db = new mysqli("localhost","roargcom_audun","it2805","roargcom_webtek");
 	
 	if (!$db) {
 	  die('Could not connect: ' . mysqli_error($db));
@@ -22,8 +21,8 @@
 	
 	$query ="INSERT INTO
 			jobber (jobbId,kjoperId, selgerId, tidspunkt, breddegrad, lengdegrad, pris, varighet,kommentar, tilbakemelding, rating, kategorinavn)
-			VALUES (NULL,1,".$worker.",'".$dateFormatted."',
-			NULL,NULL,NULL,NULL,NULL,NULL, 0, '".$category."');";
+			VALUES (NULL,'".$id."','".$worker."','".$dateFormatted."',
+			NULL,NULL,NULL,NULL,NULL,NULL, NULL, '".$category."');";
 	
 	$result = mysqli_query($db, $query) or die(mysqli_error($db));
 
