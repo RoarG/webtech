@@ -6,23 +6,51 @@ a. Form Controls
 - job.html: bruker velger dato og tidspunkt i tekstfelt, og arbeidstaker blant en gruppering radiobuttons. En submit-knapp for å sende forespørselen.
 - notifications.php: bruker huker av checkboxer for om den vil motta epost- og sms-varsler og skriver inn epostadresse og tlfnummer i tekstfelt.
 - place.php: bruker velger radius for sitt arbeidsområde vha. en slider.
-- pric.php: bruker velger timespris vha. en slider.
-- alle sider: det er en checkbox i navigasjonsbaren der en velge om denne skal vises eller ikke.
+- price.php: bruker velger timespris vha. en slider.
+- kontosidene har en lagre-knapp for å lagre brukerinformasjon i database.
+- alle sider: det er en checkbox i navigasjonsbaren der en velge om denne baren skal vises eller ikke.
 - alle sider: som en del av footeren er det et kontaktskjema der man kan sende meldinger ved å skrive inn navn og mailadresse i tekstfelt, og meldingen i et textarea. En submit-knapp for å sende meldingen.
 
 b. CSS
 
-- alle sider: ett css.dokument('style.css') er brukt på samtlige sider for layout på header, navigasjonsbar, footer og sidebakgrunn.
+- alle sider: ett css.dokument(style.css) er brukt på samtlige sider for layout på header, navigasjonsbar, footer og sidebakgrunn.
 - account.css gir layout til alle kontosider, og er derfor external style sheet.
+- faq.html, omsiden.html og siteMap.html bruker internal style sheet. Dette fordi css-en er begrenset i omfang og bare gjelder en side.  
 - jobsite.css git layout til jobbsiden. Denne brukes ikke av andre sider, men er såpass omfattende at det ville blitt rotete å ha i headeren til html-dokumentet.
-- faq.html og siteMap.html bruker internal style sheet. Dette fordi css-en er begrenset i omfang og bare gjelder en side.  
 
 c. XML
 
-- faq.html: faq.xml lagrer data om frequently asked questions. Bruker JavaScript for å hente å ut info herfra å vise frem i faq.html. Gjør det lett å legge til nye FAQs.
-- job.html: henter arbeidstakere i gitt kategori i nærheten fra database vha. php hvor det lages et xml-dokument som sendes tilbake til klienten.
+- faq.html: faq.xml lagrer data om frequently asked questions. Bruker JavaScript for å hente å ut info herfra å vise det frem i faq.html. Gjør det lett å legge til nye FAQs (slipper å endre html- eller JavaScript-koden).
+- job.html: henter arbeidstakere i gitt kategori i nærheten fra database vha. php hvor det lages et XML-dokument som sendes tilbake til klienten. Henter også den innloggede brukerens lokasjon med samme metode.
+- index.html: henter de høyest ratede brukere vha. av php som returnerer et XML-dokument. Å strukturere dataene slik, gjør det lettere å dem på klientsiden.
 
 d. JavaScript
 
-- 
+- alle sider: slide.js kontrollerer om navigasjonsbaren vises eller ikke. Også funksjon for å navigere til job.html ved trykk på en kategori.
+	      login.js *****(hvorfor på alle sider?)******
+- job.html: (job.js) JavaScript-funksjoner for å håndtere brukerinput. Viser frem underkategorier basert på brukers valg av kategori. Sender forespørsel til php for å hente innlogget brukers lokasjon, og plasserer en markør 
+	    i et kart som hentes fra Google Maps. Sender forespørsel til et php-skript om å returnere arbeidere i en underkategori, basert på brukers valg av underkategori. Viser så disse frem i en liste, og plasserer markører på kartet.
+	    Også funksjoner for å endre css ved trykking på kategoriknapper og en arbeidstaker i listen av arbeidere for å vise brukerne hva den har valgt og at den har valgt.  
+	    Når bruker vil sende jobbforespørselen sjekkes det at inputen er riktig. Popupvindu vises hvis kategori ikke er valgt. De øvrige input fra bruker (tid, dato og valg av arbeidstaker) håndteres av required-attributtet i html-koden.
+	    Hvis alt er i orden hentes brukerens valg av dato, tid og arbeidstaker inn og sendes til et php-skrift for innsetting i database.
+- faq.html: (faq.js) Funksjoner for å hente inn XML-dokumentet, og for å lager div-elementer som plasseres i faq.html med spørsmålene og svarene.
+- index.html: (toplist.js) Funksjoner for å be om toppbrukerne fra databasen via php, for legge til div-elementer med innhentet informasjon i html-koden og for å navigere til ny side ved trykk på en av brukerne.
+- place.php: (map.js) Funksjon var å laste inn kart, med markør. Også funksjon for å tegne radius rundt denne markøren for å vise brukers valgte arbeidsområde.
+- account.php: Funksjon som innhenter informasjonen som er i skjemaet i det lagreknappen trykkes, og sender disse verdiene til updateUser.php som setter inn informasjonen i databasen. Også funksjon for å vise underkategorier når det trykkes
+	       på en kategori.
+- info.php: Funksjon for å tegne rating i stjerner basert på et ratingtall. 
+- notifications.php: Funksjon som kalles ved trykk på lagreknappen, og sender mailadresse og sms til updateUser.php som oppdaterer databasen.
+- place.php: Funksjon som kalles ved trykk på lagreknappen, og som sender lengde- og breddegrad til updateUser.php som oppdaterer databasen.
+- price.php: Funksjon som som sender pris til updateUser.php ved trykk på lagreknappen.
+
 e. PHP
+
+- job.html: getLocation.php henter brukers lokasjon fra databasen, som så returneres til job.html som etterspurte den. getUsersNearBy.php henter arbeidstakere i nærheten fra databasen, basert på kategori og brukers lokasjon og sender tilbake til job.html.
+	    submitJob.php setter den informasjon om en jobb som job.js sender inn i databasen. 
+- index.html: getTopList.php henter de 6 brukerne med høyest rating fra databasen og returnerer til index.html.
+- account.php: Henter informasjon fra databasen om en bruker, og lagrer den i variabler som så kan brukes i html-koden.
+- info.php: Henter informasjon om en gitt bruker (enten innlogget bruker, eller brukeren en ønsker å se profilen til). Lagrer informasjonen i variabler som så vises frem i html-koden.
+- notifications.php: Henter mail (og sms?) for den innloggede bruker, lagrer informasjonen i variabler og viser innholdet i html-koden.
+- place.php: Henter lengde- og breddegrad (og rating?) for den innloggede bruker, lagrer informasjonen i variabler og viser innholdet i html-koden.
+- price.php: Henter timepris for den innloggede bruker, lagrer denne informasjonen og viser den frem i html.koden.
+

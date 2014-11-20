@@ -14,8 +14,8 @@ function submitJob(){
 	var date = document.getElementById('mydate').value;
 	var time = document.getElementById('mytime').value;
 	var worker = document.querySelector('input[name="workersGroup"]:checked').value;
-	var message = "Jobbforespørsel sendt! <br> Dato: "+date+"<br> Tid:"+time+"<br> Arbeidstaker:"+worker;
-	console.log(date, time, worker, chosenUnderCat);
+	var message = "Jobbforespørsel sendt! <br> Dato: "+date+"<br> Tid:"+time+"<br>Kategori:"+chosenUnderCat;
+
 	var params = "id="+buyerId+"&date="+date+"&time="+time+"&worker="+worker+"&cat="+chosenUnderCat;
 			
 	xmlhttp = new XMLHttpRequest();
@@ -29,16 +29,6 @@ function submitJob(){
 	xmlhttp.open("POST", "./submitJob.php", true);
 	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp.send(params);
-}
-function getCookie(cname) {
-	var name = cname + "=";
-	var ca = document.cookie.split(';');
-	for(var i=0; i<ca.length; i++) {
-		var c = ca[i];
-		while (c.charAt(0)==' ') c = c.substring(1);
-		if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
-	}
-	return "";
 }
 			
 function checkForm(){

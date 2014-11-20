@@ -118,7 +118,7 @@
 						$image = $row['bildeURL'];
 					}
 					else{
-						$image = "./images/defaultUser";
+						$image = "./images/defaultUser.png";
 					}
 				}
 				
@@ -147,7 +147,7 @@
 						$categories[] = $row['navn'];
 					}
 				} else {
-					$categories = "";
+					$categories[] = "";
 				}
 				mysqli_close($db);
 			?>
