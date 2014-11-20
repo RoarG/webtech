@@ -9,9 +9,18 @@
 	$price = strval($_POST['price']);
 	$bio = strval($_POST['bio']);
 	$image = strval($_POST['image']);
-	$husarb = $_POST['husarb'];
-	$assistent = $_POST['assistent'];
-	$handyman = $_POST['handyman'];
+	
+	$plenklipping = $_POST['plenklipping'];
+	$vasking = $_POST['vasking'];
+	$rydding = $_POST['rydding'];
+	$snomaking = $_POST['snomaking'];
+	$lekser = $_POST['lekser'];
+	$hund = $_POST['hund'];
+	$handling = $_POST['handling'];
+	$flytting = $_POST['flytting'];
+	$ikea = $_POST['ikea'];
+	$pchjelp = $_POST['pchjelp'];
+	$bilderedigering = $_POST['bilderedigering'];
 	$diverse = $_POST['diverse'];
 	
 	if ($name != null) {
@@ -70,27 +79,12 @@
 		echo('Updated db!');
 	}
 	
-	if ($husarb != null) {
-		if ($husarb == "true") {
-			$query = "INSERT INTO kategori (personId, navn) VALUES ('".$id."', 'Husarbeid');";
+	if ($plenklipping != null) {
+		if ($plenklipping == "true") {
+			$query = "INSERT INTO kategori (personId, navn) VALUES ('".$id."', 'Plenklipping');";
 			$result = mysqli_query($db, $query);
 		} else {
-			$query = "DELETE FROM kategori WHERE personId='".$id."' AND navn='Husarbeid';";
-			$result = mysqli_query($db, $query);
-		}
-		if (!$result) {
-			echo('Could not update db, '.mysqli_error($db));
-		} else {
-			echo('Updated db!');
-		}
-	}
-	
-	if ($assistent != null) {
-		if ($assistent == "true") {
-			$query = "INSERT INTO kategori (personId, navn) VALUES ('".$id."', 'Personlig Assistent');";
-			$result = mysqli_query($db, $query);
-		} else {
-			$query = "DELETE FROM kategori WHERE personId='".$id."' AND navn='Personlig Assistent';";
+			$query = "DELETE FROM kategori WHERE personId='".$id."' AND navn='Plenklipping';";
 			$result = mysqli_query($db, $query);
 		}
 		if (!$result) {
@@ -100,12 +94,147 @@
 		}
 	}
 	
-	if ($handyman != null) {
-		if ($handyman == "true") {
-			$query = "INSERT INTO kategori (personId, navn) VALUES ('".$id."', 'Handyman');";
+	if ($vasking != null) {
+		if ($vasking == "true") {
+			$query = "INSERT INTO kategori (personId, navn) VALUES ('".$id."', 'Vasking');";
 			$result = mysqli_query($db, $query);
 		} else {
-			$query = "DELETE FROM kategori WHERE personId='".$id."' AND navn='Handyman';";
+			$query = "DELETE FROM kategori WHERE personId='".$id."' AND navn='Vasking';";
+			$result = mysqli_query($db, $query);
+		}
+		if (!$result) {
+			echo('Could not update db, '.mysqli_error($db));
+		} else {
+			echo('Updated db!');
+		}
+	}
+	
+	if ($rydding != null) {
+		if ($rydding == "true") {
+			$query = "INSERT INTO kategori (personId, navn) VALUES ('".$id."', 'Rydding');";
+			$result = mysqli_query($db, $query);
+		} else {
+			$query = "DELETE FROM kategori WHERE personId='".$id."' AND navn='Rydding';";
+			$result = mysqli_query($db, $query);
+		}
+		if (!$result) {
+			echo('Could not update db, '.mysqli_error($db));
+		} else {
+			echo('Updated db!');
+		}
+	}
+	
+	if ($snomaking != null) {
+		if ($snomaking == "true") {
+			$query = "INSERT INTO kategori (personId, navn) VALUES ('".$id."', 'Snomaking');";
+			$result = mysqli_query($db, $query);
+		} else {
+			$query = "DELETE FROM kategori WHERE personId='".$id."' AND navn='Snomaking';";
+			$result = mysqli_query($db, $query);
+		}
+		if (!$result) {
+			echo('Could not update db, '.mysqli_error($db));
+		} else {
+			echo('Updated db!');
+		}
+	}
+	
+	if ($lekser != null) {
+		if ($lekser == "true") {
+			$query = "INSERT INTO kategori (personId, navn) VALUES ('".$id."', 'Lekser');";
+			$result = mysqli_query($db, $query);
+		} else {
+			$query = "DELETE FROM kategori WHERE personId='".$id."' AND navn='Lekser';";
+			$result = mysqli_query($db, $query);
+		}
+		if (!$result) {
+			echo('Could not update db, '.mysqli_error($db));
+		} else {
+			echo('Updated db!');
+		}
+	}
+	
+	if ($hund != null) {
+		if ($hund == "true") {
+			$query = "INSERT INTO kategori (personId, navn) VALUES ('".$id."', 'Ga tur med hunden');";
+			$result = mysqli_query($db, $query);
+		} else {
+			$query = "DELETE FROM kategori WHERE personId='".$id."' AND navn='Ga tur med hunden';";
+			$result = mysqli_query($db, $query);
+		}
+		if (!$result) {
+			echo('Could not update db, '.mysqli_error($db));
+		} else {
+			echo('Updated db!');
+		}
+	}
+	
+	if ($handling != null) {
+		if ($handling == "true") {
+			$query = "INSERT INTO kategori (personId, navn) VALUES ('".$id."', 'Handling');";
+			$result = mysqli_query($db, $query);
+		} else {
+			$query = "DELETE FROM kategori WHERE personId='".$id."' AND navn='Handling';";
+			$result = mysqli_query($db, $query);
+		}
+		if (!$result) {
+			echo('Could not update db, '.mysqli_error($db));
+		} else {
+			echo('Updated db!');
+		}
+	}
+	
+	if ($flytting != null) {
+		if ($flytting == "true") {
+			$query = "INSERT INTO kategori (personId, navn) VALUES ('".$id."', 'Flytting');";
+			$result = mysqli_query($db, $query);
+		} else {
+			$query = "DELETE FROM kategori WHERE personId='".$id."' AND navn='Flytting';";
+			$result = mysqli_query($db, $query);
+		}
+		if (!$result) {
+			echo('Could not update db, '.mysqli_error($db));
+		} else {
+			echo('Updated db!');
+		}
+	}
+	
+	if ($ikea != null) {
+		if ($ikea == "true") {
+			$query = "INSERT INTO kategori (personId, navn) VALUES ('".$id."', 'Mobelsammensetting');";
+			$result = mysqli_query($db, $query);
+		} else {
+			$query = "DELETE FROM kategori WHERE personId='".$id."' AND navn='Mobelsammensetting';";
+			$result = mysqli_query($db, $query);
+		}
+		if (!$result) {
+			echo('Could not update db, '.mysqli_error($db));
+		} else {
+			echo('Updated db!');
+		}
+	}
+	
+	if ($pchjelp != null) {
+		if ($pchjelp == "true") {
+			$query = "INSERT INTO kategori (personId, navn) VALUES ('".$id."', 'PC-hjelp');";
+			$result = mysqli_query($db, $query);
+		} else {
+			$query = "DELETE FROM kategori WHERE personId='".$id."' AND navn='PC-hjelp';";
+			$result = mysqli_query($db, $query);
+		}
+		if (!$result) {
+			echo('Could not update db, '.mysqli_error($db));
+		} else {
+			echo('Updated db!');
+		}
+	}
+	
+	if ($bilderedigering != null) {
+		if ($bilderedigering == "true") {
+			$query = "INSERT INTO kategori (personId, navn) VALUES ('".$id."', 'Bilderedigering');";
+			$result = mysqli_query($db, $query);
+		} else {
+			$query = "DELETE FROM kategori WHERE personId='".$id."' AND navn='Bilderedigering';";
 			$result = mysqli_query($db, $query);
 		}
 		if (!$result) {

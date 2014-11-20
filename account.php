@@ -99,24 +99,56 @@
 				$query = "SELECT * FROM kategori WHERE personId = '".$id."';";
 				$result = mysqli_query($db, $query);
 				
-				$husarb = false;
-				$handyman = false;
-				$assistent = false;
+				$plenklipping = false;
+				$vasking = false;
+				$rydding = false;
+				$snomaking = false;
+				$lekser = false;
+				$hund = false;
+				$handling = false;
+				$flytting = false;
+				$ikea = false;
+				$pchjelp = false;
+				$bilderedigering = false;
 				$diverse = false;
 				
 				if ($result->num_rows > 0) {
 					while($row = $result->fetch_assoc()) {
-						if ($row["navn"] == "Husarbeid") {
-							$husarb = true;
+						if ($row["navn"] == "Plenklipping") {
+							$plenklipping = true;
 						}
-						if ($row["navn"] == "Personlig Assistent") {
-							$assistent = true;
+						if ($row["navn"] == "Vasking") {
+							$vasking = true;
+						}
+						if ($row["navn"] == "Rydding") {
+							$rydding = true;
+						}
+						if ($row["navn"] == "Snomaking") {
+							$snomaking = true;
+						}
+						if ($row["navn"] == "Lekser") {
+							$lekser = true;
+						}
+						if ($row["navn"] == "Ga tur med hunden") {
+							$hund = true;
+						}
+						if ($row["navn"] == "Handling") {
+							$handling = true;
+						}
+						if ($row["navn"] == "Flytting") {
+							$flytting = true;
+						}
+						if ($row["navn"] == "Mobelsammensetting") {
+							$ikea = true;
+						}
+						if ($row["navn"] == "PC-hjelp") {
+							$pchjelp = true;
+						}
+						if ($row["navn"] == "Bilderedigering") {
+							$bilderedigering = true;
 						}
 						if ($row["navn"] == "Diverse") {
 							$diverse = true;
-						}
-						if ($row["navn"] == "Handyman") {
-							$handyman = true;
 						}
 					}
 				} else {
@@ -159,24 +191,26 @@
 					<form action="">
 						<div id="categoryspan">
 							<label>
-								<input type="checkbox" name="category" value="husarbeid" <?php if ($husarb == true) echo "checked='checked'"; ?><span>Husarbeid</span>
+								<input type="checkbox" name="category" value="husarbeid" onclick="husarbeid();"><span>Husarbeid</span>
 							</label>
 						</div>
 						<div id="categoryspan">
 							<label>
-								<input type="checkbox" name="category" value="Personlig Assistent" <?php if ($assistent == true) echo "checked='checked'"; ?><span>Personlig Assistent</span>
+								<input type="checkbox" name="category" value="Personlig Assistent" onclick="assistent();"><span>Personlig Assistent</span>
 							</label>
 						</div>
 						<div id="categoryspan">
 							<label>
-								<input type="checkbox" name="category" value="Handyman" <?php if ($handyman == true) echo "checked='checked'"; ?><span>Handyman</span>
+								<input type="checkbox" name="category" value="Handyman" onclick="handyman();"><span>Handyman</span>
 							</label>
 						</div>
 						<div id="categoryspan">
 							<label>
-								<input type="checkbox" name="category" value="Diverse" <?php if ($diverse == true) echo "checked='checked'"; ?><span>Diverse</span>
+								<input type="checkbox" name="category" value="Diverse" <?php if ($diverse == true) echo "checked='checked'"; ?>><span>Diverse</span>
 							</label>
 						</div>
+					</form>
+					<form action="" name="subcategories">
 					</form>
 					</div>
 					<button class="button" onclick="updateDatabase();">Lagre</button>
@@ -225,36 +259,316 @@
 		<script src="./js/slide.js"></script>
 		<script src="./js/login.js"></script>
 		<script>
+			var plenklipping = <?php echo json_encode($plenklipping); ?>;
+			var vasking = <?php echo json_encode($vasking); ?>;
+			var rydding = <?php echo json_encode($rydding); ?>;
+			var snomaking = <?php echo json_encode($snomaking); ?>;
+			var lekser = <?php echo json_encode($lekser); ?>;
+			var hund = <?php echo json_encode($hund); ?>;
+			var handling = <?php echo json_encode($handling); ?>;
+			var flytting = <?php echo json_encode($flytting); ?>;
+			var ikea = <?php echo json_encode($ikea); ?>;
+			var pchjelp = <?php echo json_encode($pchjelp); ?>;
+			var bilderedigering = <?php echo json_encode($bilderedigering); ?>;
+			var diverse = <?php echo json_encode($diverse); ?>;
 		
-		function updateDatabase() {
-			var id = parseInt(getCookie("userId"));
-			var first = document.getElementsByName("FirstName")[0].value;
-			var last = document.getElementsByName("LastName")[0].value;
-			var bio = document.getElementsByName("bio")[0].value;
-			var husarb = document.getElementsByName("category")[0].checked;
-			var assistent = document.getElementsByName("category")[1].checked;
-			var handyman = document.getElementsByName("category")[2].checked;
-			var diverse = document.getElementsByName("category")[3].checked;
-		
-			var params = "id="+id+"&name="+first+" "+last+"&bio="+bio+"&husarb="+husarb+"&assistent="+assistent+"&handyman="+handyman+"&diverse="+diverse;
-			
-			xmlhttp = new XMLHttpRequest();	
-			xmlhttp.open("POST", "updateUser.php", true);
-			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			xmlhttp.send(params);
-		}
-		
-		function getCookie(cname) {
-			var name = cname + "=";
-			var ca = document.cookie.split(';');
-			for(var i=0; i<ca.length; i++) {
-				var c = ca[i];
-				while (c.charAt(0)==' ') c = c.substring(1);
-				if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+			function updateDatabase() {
+				var id = parseInt(getCookie("userId"));
+				var first = document.getElementsByName("FirstName")[0].value;
+				var last = document.getElementsByName("LastName")[0].value;
+				var bio = document.getElementsByName("bio")[0].value;
+				var diverse2 = document.getElementsByName("category")[3].checked;
+					
+				var params = "id="+id+"&name="+first+" "+last+"&bio="+bio+
+							"&plenklipping="+plenklipping+"&vasking="+vasking+"&snomaking="+snomaking+"&lekser="+lekser+
+							"&hund="+hund+"&handling="+handling+"&flytting="+flytting+"&ikea="+ikea+
+							"&pchjelp="+pchjelp+"&bilderedigering="+bilderedigering+"&diverse="+diverse2+"&rydding="+rydding;
+				
+				xmlhttp = new XMLHttpRequest();	
+				xmlhttp.open("POST", "updateUser.php", true);
+				xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xmlhttp.send(params);
 			}
-			return "";
-		}
-		
+					
+			function getCookie(cname) {
+				var name = cname + "=";
+				var ca = document.cookie.split(';');
+				for(var i=0; i<ca.length; i++) {
+					var c = ca[i];
+					while (c.charAt(0)==' ') c = c.substring(1);
+					if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+				}
+				return "";
+			}
+			
+			function clearSubcategories() {
+				var form = document.getElementsByName("subcategories")[0];
+				while(form.firstChild){
+					form.removeChild(form.firstChild);
+				}
+			}
+					
+			function husarbeid() {
+				clearSubcategories();
+				document.getElementsByName("category")[1].checked = false;
+				document.getElementsByName("category")[2].checked = false;
+				var button = document.getElementsByName("category")[0].checked;
+				if (button == true) {
+					var form = document.getElementsByName("subcategories")[0];
+					
+					var div = document.createElement("div");
+					div.id = "categoryspan";
+					div.name = "subcategory";
+							
+					var label = document.createElement("label");
+					var input = document.createElement("input");
+					input.type = "checkbox";
+					input.name = "category";
+					input.value = "plenklipping";
+					input.checked = plenklipping;
+					input.onclick = function() { 
+						plenklipping = !plenklipping;
+					};
+					var span = document.createElement("span");
+					span.innerHTML = "Plenklipping";
+							
+					label.appendChild(input);
+					label.appendChild(span);
+					div.appendChild(label);
+					form.appendChild(div);
+							
+					div = document.createElement("div");
+					div.id = "categoryspan";
+					div.name = "subcategory";
+						
+					label = document.createElement("label");
+					input = document.createElement("input");
+					input.type = "checkbox";
+					input.name = "category";
+					input.value = "vasking";
+					input.checked = vasking;
+					input.onclick = function() { 
+						vasking = !vasking;
+					};
+					span = document.createElement("span");
+					span.innerHTML = "Vasking";
+							
+					label.appendChild(input);
+					label.appendChild(span);
+					div.appendChild(label);
+					form.appendChild(div);
+							
+					div = document.createElement("div");
+					div.id = "categoryspan";
+					div.name = "subcategory";
+							
+					label = document.createElement("label");
+					input = document.createElement("input");
+					input.type = "checkbox";
+					input.name = "category";
+					input.value = "rydding";
+					input.checked = rydding;
+					input.onclick = function() { 
+						rydding = !rydding;
+					};
+					span = document.createElement("span");
+					span.innerHTML = "Rydding";
+							
+					label.appendChild(input);
+					label.appendChild(span);
+					div.appendChild(label);
+					form.appendChild(div);
+							
+					div = document.createElement("div");
+					div.id = "categoryspan";
+					div.name = "subcategory";
+							
+					label = document.createElement("label");
+					input = document.createElement("input");
+					input.type = "checkbox";
+					input.name = "category";
+					input.value = "snømåking";
+					input.checked = snomaking;
+					input.onclick = function() { 
+						snomaking = !snomaking;
+					};
+					span = document.createElement("span");
+					span.innerHTML = "Snømåking";
+							
+					label.appendChild(input);
+					label.appendChild(span);
+					div.appendChild(label);
+					form.appendChild(div);
+				}
+			}
+
+			function assistent() {
+				clearSubcategories();
+				document.getElementsByName("category")[0].checked = false;
+				document.getElementsByName("category")[2].checked = false;
+				var button = document.getElementsByName("category")[1].checked;
+				if (button == true) {
+					var form = document.getElementsByName("subcategories")[0];
+					
+					var div = document.createElement("div");
+					div.id = "categoryspan";
+					div.name = "subcategory";
+							
+					var label = document.createElement("label");
+					var input = document.createElement("input");
+					input.type = "checkbox";
+					input.name = "category";
+					input.value = "lekser";
+					input.checked = lekser;
+					input.onclick = function() { 
+						lekser = !lekser;
+					};
+					var span = document.createElement("span");
+					span.innerHTML = "Lekser";
+							
+					label.appendChild(input);
+					label.appendChild(span);
+					div.appendChild(label);
+					form.appendChild(div);
+							
+					div = document.createElement("div");
+					div.id = "categoryspan";
+					div.name = "subcategory";
+						
+					label = document.createElement("label");
+					input = document.createElement("input");
+					input.type = "checkbox";
+					input.name = "category";
+					input.value = "hund";
+					input.checked = hund;
+					input.onclick = function() { 
+						hund = !hund;
+					};
+					span = document.createElement("span");
+					span.innerHTML = "Gå tur med hunden";
+							
+					label.appendChild(input);
+					label.appendChild(span);
+					div.appendChild(label);
+					form.appendChild(div);
+							
+					div = document.createElement("div");
+					div.id = "categoryspan";
+					div.name = "subcategory";
+							
+					label = document.createElement("label");
+					input = document.createElement("input");
+					input.type = "checkbox";
+					input.name = "category";
+					input.value = "handling";
+					input.checked = handling;
+					input.onclick = function() { 
+						handling = !handling;
+					};
+					span = document.createElement("span");
+					span.innerHTML = "Handling";
+							
+					label.appendChild(input);
+					label.appendChild(span);
+					div.appendChild(label);
+					form.appendChild(div);
+				}
+			}
+
+			function handyman() {
+				clearSubcategories();
+				document.getElementsByName("category")[1].checked = false;
+				document.getElementsByName("category")[0].checked = false;
+				var button = document.getElementsByName("category")[2].checked;
+				if (button == true) {
+					var form = document.getElementsByName("subcategories")[0];
+					
+					var div = document.createElement("div");
+					div.id = "categoryspan";
+					div.name = "subcategory";
+							
+					var label = document.createElement("label");
+					var input = document.createElement("input");
+					input.type = "checkbox";
+					input.name = "category";
+					input.value = "flytting";
+					input.checked = flytting;
+					input.onclick = function() { 
+						flytting = !flytting;
+					};
+					var span = document.createElement("span");
+					span.innerHTML = "Flytting";
+							
+					label.appendChild(input);
+					label.appendChild(span);
+					div.appendChild(label);
+					form.appendChild(div);
+							
+					div = document.createElement("div");
+					div.id = "categoryspan";
+					div.name = "subcategory";
+						
+					label = document.createElement("label");
+					input = document.createElement("input");
+					input.type = "checkbox";
+					input.name = "category";
+					input.value = "ikea";
+					input.checked = ikea;
+					input.onclick = function() { 
+						ikea = !ikea;
+					};
+					span = document.createElement("span");
+					span.innerHTML = "Møbelsammensetting";
+							
+					label.appendChild(input);
+					label.appendChild(span);
+					div.appendChild(label);
+					form.appendChild(div);
+							
+					div = document.createElement("div");
+					div.id = "categoryspan";
+					div.name = "subcategory";
+							
+					label = document.createElement("label");
+					input = document.createElement("input");
+					input.type = "checkbox";
+					input.name = "category";
+					input.value = "pchjelp";
+					input.checked = pchjelp;
+					input.onclick = function() { 
+						pchjelp = !pchjelp;
+					};
+					span = document.createElement("span");
+					span.innerHTML = "PC-hjelp";
+							
+					label.appendChild(input);
+					label.appendChild(span);
+					div.appendChild(label);
+					form.appendChild(div);
+					
+					div = document.createElement("div");
+					div.id = "categoryspan";
+					div.name = "subcategory";
+							
+					label = document.createElement("label");
+					input = document.createElement("input");
+					input.type = "checkbox";
+					input.name = "category";
+					input.value = "bilderedigering";
+					input.checked = bilderedigering;
+					input.onclick = function() { 
+						bilderedigering = !bilderedigering;
+					};
+					span = document.createElement("span");
+					span.innerHTML = "Bilderedigering";
+							
+					label.appendChild(input);
+					label.appendChild(span);
+					div.appendChild(label);
+					form.appendChild(div);
+				}
+			}
 		</script>
+
 </body>
 </html>
