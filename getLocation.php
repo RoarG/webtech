@@ -3,8 +3,8 @@
 	
 	$userId = intval($_GET['id']);
 	
-	//$db = new mysqli("localhost", "roargcom_audun", "it2805", "roargcom_webtek");
-	$db = mysqli_connect("mysql.stud.ntnu.no","audunasa_webtek","it2805","audunasa_prosjekt");
+	$db = new mysqli("localhost", "roargcom_audun", "it2805", "roargcom_webtek");
+	//$db = mysqli_connect("mysql.stud.ntnu.no","audunasa_webtek","it2805","audunasa_prosjekt");
 	
 	if (!$db) {
 		echo('Could not connect: ' . mysqli_error($db));

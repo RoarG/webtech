@@ -11,8 +11,8 @@
 	$dateArray = explode(".", $date);
 	$dateFormatted = "$dateArray[2]-$dateArray[1]-$dateArray[0] $time:00";
 	
-	$db = mysqli_connect("mysql.stud.ntnu.no","audunasa_webtek","it2805","audunasa_prosjekt");
-	//$db = myqsli_connect("localhost","roargcom_audun","it2805","roargcom_webtek");
+	//$db = mysqli_connect("mysql.stud.ntnu.no","audunasa_webtek","it2805","audunasa_prosjekt");
+	$db = myqsli_connect("localhost","roargcom_audun","it2805","roargcom_webtek");
 	
 	if (!$db) {
 	  die('Could not connect: ' . mysqli_error($db));

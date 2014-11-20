@@ -118,6 +118,10 @@
     color: black;
 }
 
+input[type="checkbox"] {
+    display:none;
+}
+
 /*
 .underCatButton{
   margin-top: 15px;
