@@ -36,6 +36,10 @@
 	top: 35px;
 }
 
+#filler {
+	height: 200px;
+}
+
 /*.box > a {
 	position: relative;
 	top: 10px;
@@ -185,7 +189,7 @@ img:hover {
 .main {
 	height: 400px;
 	position: relative;
-	top: 10px;
+	top: 40px;
 }
 
 #topliste{
