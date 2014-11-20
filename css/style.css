@@ -37,18 +37,8 @@
 }
 
 #filler {
-	height: 200px;
+	height: 100px;
 }
-
-/*.box > a {
-	position: relative;
-	top: 10px;
-}*/
-
-/*.img {
-	max-height: 100%;
-	max-width: 100%;
-}*/
 
 
 /*Må justere litt på fagene*/
@@ -178,7 +168,7 @@ vertical-align: middle;
 
 }
 
-img:hover {
+.category > img:hover {
  -webkit-filter: invert(80%);  
  -moz-filter: invert(80%);
 
