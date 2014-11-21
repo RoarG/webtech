@@ -101,7 +101,7 @@
   					<button class="button" id="accountButton" onclick="location.href='price.php'">Pris</button>
   					<button class="button" id="accountButton" onclick="location.href='notifications.php'">Varslinger</button>
   					<button class="button" id="accountButton" onclick="location.href='place.php'">Steder</button>
-  					<button class="button" id="accountButton" onclick="location.href='info.php'">Kontakt</button>
+  					<button class="button" id="accountButton" onclick="location.href='info.php'">Synlig profil</button>
 
 				</span>
 
