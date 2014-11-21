@@ -19,6 +19,10 @@
 			background-color: #DFDDDA;
 			border-bottom: 1px solid grey;
 		}
+		#userCategories{
+			height: 110px;
+			overflow: auto;
+		}
 	</style>
 </head>
 <body>
@@ -144,7 +148,18 @@
 				
 				if ($result3->num_rows > 0) {
 					while($row = $result3->fetch_assoc()) {
-						$categories[] = $row['navn'];
+						if(strcmp(strtolower($row['navn']), "snomaking") == 0 ){
+							$categories[] = "Snømåking";
+						}
+						else if (strcmp(strtolower($row['navn']), "ga tur med hunden") == 0 ){
+							$categories[] = "Gå tur med hunden";
+						}
+						else if (strcmp(strtolower($row['navn']), "mobelsammensetting") == 0 ){
+							$categories[] = "Møbelsammensetting";
+						}
+						else {
+							$categories[] = ucfirst($row['navn']);
+						}
 					}
 				} else {
 					$categories[] = "";
