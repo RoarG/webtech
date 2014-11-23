@@ -144,6 +144,22 @@ input[type="checkbox"] {
 	text-align: center;
 }
 */
+.noteBox{
+	width: 380px;
+	height: 400px;
+	float: left;
+	margin: 20px;
+	margin-left: 40px;
+	background-color: #DFDDDA;
+}
+
+.notifications {
+	height: 330px;
+	width: 370px;
+	overflow: auto;
+	float: left;
+	padding: 5px;
+}
 
 
 .starRating{

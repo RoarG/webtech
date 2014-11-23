@@ -30,8 +30,8 @@
 	LAST_INSERT_ID henter jobbId fra den nettopp insatte jobben*/
 	
 	$query2 = "INSERT INTO
-				varslinger (varslingId, brukerId, jobbId, tidspunkt, lest)
-				VALUES (NULL, 1, LAST_INSERT_ID(), NOW(), false );";
+				varslinger (varslingId,jobbId, tidspunkt, lest)
+				VALUES (NULL, LAST_INSERT_ID(), NOW(), false );";
 	
 	$result2 = mysqli_query($db, $query2) or die(mysqli_error($db));
 	

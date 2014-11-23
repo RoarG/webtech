@@ -13,7 +13,7 @@
 			LEFT JOIN (SELECT selgerId, count(*) as s, avg(rating) as r
 						FROM jobber
 						GROUP BY selgerId) AS m2 on m2.selgerId=m.id
-			ORDER BY rating DESC, jobber
+			ORDER BY rating DESC, jobber DESC
 			LIMIT 6;";
 	
 	$result = mysqli_query($db, $query);

@@ -91,6 +91,53 @@
 				} else {
 					echo "0 results";
 				}
+				
+				$query2 = "SELECT * 
+							FROM jobber as j
+							LEFT JOIN (SELECT id, navn FROM medlemmer) as m on m.id=j.kjoperId
+							WHERE j.selgerId='".$id."'
+							ORDER BY jobbId DESC
+							LIMIT 5;";
+				
+				$receivedNotes = mysqli_query($db, $query2);
+				
+				$rNotes = array();
+				
+				if ($receivedNotes->num_rows > 0) {
+					while($row = $receivedNotes->fetch_assoc()) {
+						$job[] = array();
+						$job['buyer'] = $row['navn'];
+						$job['jobtime'] = $row['tidspunkt'];
+						$job['category'] = $row['kategorinavn'];
+						$rNotes[] = $job;
+					}
+				} else {
+					//echo "0 results";
+				}
+							
+				$query3 = "SELECT * 
+							FROM jobber as j 
+							LEFT JOIN (SELECT id,navn FROM medlemmer) as m on m.id=j.selgerId
+							WHERE j.kjoperId='".$id."'
+							ORDER BY jobbId DESC
+							LIMIT 5;";
+				
+				$sentNotes = mysqli_query($db, $query3);
+				
+				$sNotes = array();
+				
+				if ($sentNotes->num_rows > 0) {
+					while($row = $sentNotes->fetch_assoc()) {
+						$sjob[] = array();
+						$sjob['seller'] = $row['navn'];
+						$sjob['jobtime'] = $row['tidspunkt'];
+						$sjob['category'] = $row['kategorinavn'];
+						$sNotes[] = $sjob;
+					}
+				} else {
+					//echo "0 results";
+				}
+				
 			?>
 			
 			<div class="account">
@@ -107,7 +154,7 @@
 
 				<div class="accountView" id="accountView">
 					<div class="accountCont">
-						Notifikasjoner
+						Varslinger
 					</div>
 
 					<div class="summary">
@@ -118,6 +165,47 @@
 						</form>
 						
 						<button class="button" onclick="updateDatabase();">Lagre</button>
+					</div>
+					
+					<div class="noteBox">
+						<h4 class="noteHeader">De 5 siste innkommende varslinger</h4>
+						<div id="receivedNotes" class="notifications">
+							<?php
+							if(count($rNotes)>0){
+								for($x=0; $x<count($rNotes); $x++){
+									echo ($rNotes[$x]['buyer']);
+									echo " sendte deg en jobbforespørsel i kategorien ";
+									echo ($rNotes[$x]['category']);
+									echo " for utførelse ";
+									echo ($rNotes[$x]['jobtime']);
+									echo "<br><hr>";
+								}
+							}
+							else {
+								echo "Ingen har sendt jobbforespørsel til deg";
+							}
+							?>
+						</div>
+					</div> 
+					<div class="noteBox">
+						<h4 class="noteHeader">De 5 siste utsendte varslinger</h4>
+						<div id="sentNotes" class="notifications">
+							<?php
+							if(count($sNotes)>0){
+								for($x=0; $x<count($sNotes); $x++){
+									echo "Du sendte en jobbforespørsel til ";
+									echo ($sNotes[$x]['seller']);
+									echo " om å utføre jobb i kategorien ";
+									echo ($sNotes[$x]['category']);
+									echo " ";
+									echo ($sNotes[$x]['jobtime']);
+									echo "<br><hr>";
+								}
+							}else {
+								echo "Du har ikke send noen jobbforepørsler ennå!";
+							}
+							?>
+						</div>
 					</div>
 	
 			</div>
