@@ -84,11 +84,13 @@
 				
 				$lat = 63.41;
 				$lng = 10.44;
+				$radius = 0;
 				
 				if ($result->num_rows > 0) {
 					while($row = $result->fetch_assoc()) {
 						$lat = $row["breddegrad"];
 						$lng = $row["lengdegrad"];
+						$radius = $row["radius"];
 					}
 				} else {
 					echo "0 results";
@@ -125,8 +127,8 @@
 						</div>
 						
 						<h4 id="radiusHeader" class="inputHeader">Velg radius for ditt arbeidsområde</h4>
-						<input type="range" id="radiusSlider" min="0" max="100" value="0" step="1" onchange="setCircleRadius(this.value)"/>
-						<span id="range">0</span><br>
+						<input type="range" id="radiusSlider" min="0" max="100" value=<?php echo($radius);?> step="1" onchange="setCircleRadius(this.value)"/>
+						<span id="range"><?php echo($radius."km");?></span><br>
 						
 						<button class="button" onclick="updateDatabase();">Lagre</button>
 					</div>
@@ -179,8 +181,9 @@
 			var id = parseInt(getCookie("userId"));
 			var lat = marker.getPosition().lat();
 			var lng = marker.getPosition().lng();
+			var radius = document.getElementById("radiusSlider").value;
 			
-			var params = "id="+id+"&latitude="+lat+"&longitude="+lng;
+			var params = "id="+id+"&latitude="+lat+"&longitude="+lng+"&radius="+radius;
 				
 			xmlhttp = new XMLHttpRequest();	
 			xmlhttp.open("POST", "updateUser.php", true);

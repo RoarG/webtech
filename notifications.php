@@ -83,10 +83,12 @@
 				$result = mysqli_query($db, $query);
 				
 				$email = "";
+				$sms = "";
 				
 				if ($result->num_rows > 0) {
 					while($row = $result->fetch_assoc()) {
 						$email = $row["mail"];
+						$sms = $row["sms"];
 					}
 				} else {
 					echo "0 results";
@@ -161,7 +163,8 @@
 						<form action="">
 						<input type="checkbox" name="Mail" value="mail">Motta oppdatteringer på E-Post
 						<input type="text" name="emailtext" value=<?php echo($email);?>><br>
-						<input type="checkbox" name="Sms" value="sms">Motta  oppdateringer på Sms<input type="text">
+						<input type="checkbox" name="Sms" value="sms">Motta  oppdateringer på Sms
+						<input type="text" name="smstext" value=<?php echo($sms);?>>
 						</form>
 						
 						<button class="button" onclick="updateDatabase();">Lagre</button>
@@ -254,8 +257,9 @@
 		function updateDatabase() {
 			var id = parseInt(getCookie("userId"));
 			var email = document.getElementsByName("emailtext")[0].value;
+			var sms = document.getElementsByName("smstext")[0].value;
 		
-			var params = "id="+id+"&email="+email;
+			var params = "id="+id+"&email="+email+"&sms="+sms;
 			
 			xmlhttp = new XMLHttpRequest();	
 			xmlhttp.open("POST", "updateUser.php", true);

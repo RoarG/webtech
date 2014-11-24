@@ -4,8 +4,10 @@
 	$id = strval($_POST['id']);
 	$name = strval($_POST['name']);
 	$email = strval($_POST['email']);
+	$sms = strval($_POST['sms']);
 	$latitude = floatval($_POST['latitude']);
 	$longitude = floatval($_POST['longitude']);
+	$radius = intval($_POST['radius']);
 	$price = strval($_POST['price']);
 	$bio = strval($_POST['bio']);
 	$image = strval($_POST['image']);
@@ -23,10 +25,22 @@
 	$bilderedigering = $_POST['bilderedigering'];
 	$diverse = $_POST['diverse'];
 	
+	if ($radius != null) {
+		$radius = "radius='".$radius."'";
+	} else {
+		$radius = "";
+	}
+	
 	if ($name != null) {
 		$name = "navn='".$name."',";
 	} else {
 		$name = "";
+	}
+	
+	if ($sms != null) {
+		$sms = "sms='".$sms."',";
+	} else {
+		$sms = "";
 	}
 	
 	if ($email != null) {
@@ -42,7 +56,7 @@
 	}
 	
 	if ($longitude != null) {
-		$longitude = "lengdegrad='".$longitude."'";
+		$longitude = "lengdegrad='".$longitude."',";
 	} else {
 		$longitude = "";
 	}
@@ -66,7 +80,7 @@
 	}
 	
 	$query = "UPDATE medlemmer
-				SET ".$name." ".$email." ".$latitude." ".$longitude." ".$price." ".$bio."
+				SET ".$name." ".$sms." ".$email." ".$latitude." ".$longitude." ".$radius." ".$price." ".$bio."
 				WHERE id = '".$id."';";
 	
 	echo($query);
