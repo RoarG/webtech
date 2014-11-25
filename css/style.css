@@ -36,7 +36,7 @@
 	top: 35px;
 }
 
-#filler {
+.filler {
 	height: 100px;
 }
 
@@ -357,6 +357,7 @@ vertical-align: middle;
 	text-align: center;
 	vertical-align: center;
 	margin-left: 50px;
+	display: block;
 }
 #copyrightSymbol {
 	transform: scale(1.7);

@@ -12,11 +12,11 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 		<script src="lib/glDatePicker-2.0/glDatePicker.js"></script>
 		<script src="lib/jonthornton-jquery-timepicker-1.4.13-5-g917772a/jonthornton-jquery-timepicker-917772a/jquery.timepicker.min.js"></script>
-		<script src="./js/login.js"></script>
+		<!--<script src="./js/login.js"></script>-->
 	</head>
 	<body>
-		<script>
-			var userId = parseInt(getCookie("userId"));
+		<!--<script>
+			/*var userId = parseInt(getCookie("userId"));
 			
 			//Sjekker om bruker er innlogget. Hvis ikke skal den ikke kunne bestille jobb.
 			if(!userId){
@@ -32,14 +32,14 @@
 					if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
 				}
 				return "";
-			}
-		</script>
+			}*/
+		</script>-->
 		<section class="page">
 			<div class="header">
 				<div class="login">
 					<div class="loginId">
-						<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-						</fb:login-button>
+						<!--<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+						</fb:login-button>-->
 					</div>
 					<div class="loginId">
 						<div id="name">
@@ -48,7 +48,7 @@
 				</div>
 				<div class="logo">
 					<a href="./index.html">
-						<img src="./images/logo.jpg"  height="130" width="450" />
+						<img src="./images/logo.jpg"  height="130" width="450" alt="logo">
 					</a>
 				</div>
 				<div class="box">
@@ -66,19 +66,19 @@
 			
 			<div class="nav" id="nav">
 				<div class="category" onclick="showUnderCat('husarbeid')"> 
-					<img src="./images/house4.png">
+					<img src="./images/house4.png" alt="husarbeid">
 					<a>Husarbeid</a>
 				</div>
 				<div class="category" onclick="showUnderCat('personlig assistent')">
-					<img src="./images/assistent.svg">
+					<img src="./images/assistent.svg" alt="personlig assistent">
 					<a>Personlig assistent</a>
 				</div>
 				<div class="category" onclick="showUnderCat('handyman')">
-					<img src="./images/flyttingbil.svg">
+					<img src="./images/flyttingbil.svg" alt="handyman">
 					<a>Handyman</a>
 				</div>
 				<div class="category" onclick="showUnderCat('annet')">
-					<img src="./images/annet.svg">
+					<img src="./images/annet.svg" alt="annet">
 					<a>Annet</a>
 				</div>
 				<div class="button">
@@ -109,7 +109,6 @@
 				</div>
 				<div id="map" class="inputbox" >
 					<h3 id="mapHeader" class="inputHeader">3. Velg arbeidstaker i nærheten av deg <p id="changingUnderCat"></p></h3>
-					<!--<input id="search" type="text" placeholder="Skriv inn din adresse">-->
 					<div id="map-canvas"></div>
 					<div id="people"></div>
 				</div>
@@ -139,19 +138,19 @@
 					<a href="./references.html">Referanser</a>
 				</div>
 				<div id="socialMedia" class="footerBox">
-					<div id="facebook" class="socialMediaBox"><img id="facebookLogo" src="./images/fbblue.png"></div>
-					<div id="twitter" class="socialMediaBox"><img id="twitterLogo" src="https://g.twimg.com/Twitter_logo_blue.png"></div>
-					<div id="linkedin" class="socialMediaBox"><img id="linkedinLogo" src="./images/linkedIn.png"></div>
-					<div id="google" class="socialMediaBox"><img id="googleLogo" src="./images/g+64.png"></div>
+					<div id="facebook" class="socialMediaBox"><img id="facebookLogo" src="./images/fbblue.png" alt="facebook"></div>
+					<div id="twitter" class="socialMediaBox"><img id="twitterLogo" src="https://g.twimg.com/Twitter_logo_blue.png" alt="twitter"></div>
+					<div id="linkedin" class="socialMediaBox"><img id="linkedinLogo" src="./images/linkedIn.png" alt="linkedin"></div>
+					<div id="google" class="socialMediaBox"><img id="googleLogo" src="./images/g+64.png" alt="google+"></div>
 				</div>
 				<div id="copyright" class="footerBox">
-					<span id="copyrightSpan" class="copy"><p id="copyrightSymbol">&copy; </p></span> 
+					<div id="copyrightSpan" class="copy"><p id="copyrightSymbol">&copy; </p></div> 
 					<span id="names" class="copy">Roar Gjøvaag <br> 
 					Runar Heggset <br> Audun Sæther</span>
 				</div>
 				
 				<div id="logo" class="footerBox">
-					<img id="footerLogo" src="./images/logo.jpg">
+					<img id="footerLogo" src="./images/logo.jpg" alt="logo">
 				</div>
 			</div>
 		</section>

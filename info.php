@@ -40,7 +40,7 @@
 				</div>
 				<div class="logo">
 					<a href="./index.html">
-						<img src="./images/logo.jpg"  height="130" width="450" />
+						<img src="./images/logo.jpg"  height="130" width="450" alt="logo">
 					</a>
 				</div>
 				<div class="box">
@@ -58,19 +58,19 @@
 			
 			<div class="nav" id="nav">
 				<div class="category" onclick="openCategoryPage('husarbeid')"> 
-					<img src="./images/house4.png">
+					<img src="./images/house4.png" alt="husarbeid">
 					<a>Husarbeid</a>
 				</div>
 				<div class="category" onclick="openCategoryPage('personlig assistent')">
-					<img src="./images/assistent.svg">
+					<img src="./images/assistent.svg" alt="personlig assistent">
 					<a>Personlig assistent</a>
 				</div>
 				<div class="category" onclick="openCategoryPage('handyman')">
-					<img src="./images/flyttingbil.svg">
+					<img src="./images/flyttingbil.svg" alt="handyman">
 					<a>Handyman</a>
 				</div>
 				<div class="category" onclick="openCategoryPage('annet')">
-					<img src="./images/annet.svg">
+					<img src="./images/annet.svg" alt="annet">
 					<a>Annet</a>
 				</div>
 				<div>
@@ -108,11 +108,11 @@
 							WHERE id = '".$id."';";
 				$result = mysqli_query($db, $query);
 				
-				$name = "";
-				$image = "";
-				$rating = "";
-				$bio = "";
-				$categories = "";
+				$name = "Mickey Mouse";
+				$image = ".images/defaultUser.png";
+				$rating = "4";
+				$bio = "bio";
+				$categories[] = "plenklipping";
 				
 				while($row = $result->fetch_assoc()) {
 					$name = $row['navn'];
@@ -172,17 +172,17 @@
 
 					
 				<span class="accountNav">
-  					<button class="button" id="accountButton" onclick="location.href='account.php'">Konto</button>
-  					<button class="button" id="accountButton" onclick="location.href='price.php'">Pris</button>
-  					<button class="button" id="accountButton" onclick="location.href='notifications.php'">Varslinger</button>
-  					<button class="button" id="accountButton" onclick="location.href='place.php'">Steder</button>
-  					<button class="button" id="accountButton" onclick="location.href='info.html'">Synlig Profil</button>
+  					<button class="accountButton" onclick="location.href='account.php'">Konto</button>
+  					<button class="accountButton" onclick="location.href='price.php'">Pris</button>
+  					<button class="accountButton" onclick="location.href='notifications.php'">Varslinger</button>
+  					<button class="accountButton" onclick="location.href='place.php'">Steder</button>
+  					<button class="accountButton" onclick="location.href='info.html'">Synlig profil</button>
 				</span>
 
 				<div class="accountView" id="accountView">
 					<div id="userInfo">
 						<div id="userName" class="infoBox"><? echo($name);?></div>
-						<div id="userImage" class="infoBox"><img src=<?php echo($image);?> id="accountImg"></img></div>
+						<div id="userImage" class="infoBox"><img src=<?php echo($image);?> id="accountImg" alt="brukerbilde"></div>
 						
 						<div id="userRating" class="infoBox">
 							<div class="starRating" id="ratingDiv">
@@ -248,6 +248,7 @@
 					for ($x=0; $x <count($categories); $x++){echo($categories[$x]);echo('<br>');}}
 					?></div>
 				</div>
+			</div>
 			<div class="footer">
 				<div id="contact" class="footerBox">
 					<h4 class="footerHeader">Kontakt oss</h4>
@@ -269,19 +270,19 @@
 					<a href="./references.html">Referanser</a>
 				</div>
 				<div id="socialMedia" class="footerBox">
-					<div id="facebook" class="socialMediaBox"><img id="facebookLogo" src="./images/fbblue.png"></div>
-					<div id="twitter" class="socialMediaBox"><img id="twitterLogo" src="https://g.twimg.com/Twitter_logo_blue.png"></div>
-					<div id="linkedin" class="socialMediaBox"><img id="linkedinLogo" src="./images/linkedIn.png"></div>
-					<div id="google" class="socialMediaBox"><img id="googleLogo" src="./images/g+64.png"></div>
+					<div id="facebook" class="socialMediaBox"><img id="facebookLogo" src="./images/fbblue.png" alt="facebook"></div>
+					<div id="twitter" class="socialMediaBox"><img id="twitterLogo" src="https://g.twimg.com/Twitter_logo_blue.png" alt="twitter"></div>
+					<div id="linkedin" class="socialMediaBox"><img id="linkedinLogo" src="./images/linkedIn.png" alt="linkedin"></div>
+					<div id="google" class="socialMediaBox"><img id="googleLogo" src="./images/g+64.png" alt="google+"></div>
 				</div>
 				<div id="copyright" class="footerBox">
-					<span id="copyrightSpan" class="copy"><p id="copyrightSymbol">&copy; </p></span> 
+					<div id="copyrightSpan" class="copy"><p id="copyrightSymbol">&copy; </p></div> 
 					<span id="names" class="copy">Roar Gjøvaag <br> 
 					Runar Heggset <br> Audun Sæther</span>
 				</div>
 				
 				<div id="logo" class="footerBox">
-					<img id="footerLogo" src="./images/logo.jpg"></img>
+					<img id="footerLogo" src="./images/logo.jpg" alt="logo">
 				</div>
 			</div>
 		</section>

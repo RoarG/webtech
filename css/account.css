@@ -15,20 +15,17 @@
 	font-size: 30px;
 }
 
-.button {
-  padding:0px;
-  background-color: #dcdcdc;
-  border: 1px solid #666;
-  color:#000;
-  text-decoration:none;
-}
-
 #accountImg {
 	height: 100px;
 	width: 100px;
 }
 
-#accountButton {
+.accountButton {
+  padding:0px;
+  background-color: #dcdcdc;
+  border: 1px solid #666;
+  color:#000;
+  text-decoration:none;
   border-top: 1px solid #6d6c6c;
   background: #6d6c6c;
   background: -webkit-gradient(linear, left top, left bottom, from(#6d6c6c), to(#6d6c6c));
@@ -51,13 +48,13 @@
   vertical-align: middle;
 }
 
-#accountButton:hover {
+.accountButton:hover {
   border-top-color: #e45f56;
   background: #e45f56;
   color: #ffffff;
 }
 
-#accountButton:active {
+.accountButton:active {
   border-top-color: #6d6c6c;
   background: #6d6c6c;
 }
@@ -84,7 +81,7 @@
   margin: 50px 200px;
 }
 
-#categoryspan {
+.categoryspan {
     margin:10px;
     background-color:#EFEFEF;
     border-radius:4px;
@@ -93,27 +90,27 @@
     float:left;
 }
 
-#categoryspan:hover {
+.categoryspan:hover {
     background:#E45F56 ;
 }
 
-#categoryspan label {
+.categoryspan label {
     float:center;
     width:4.0em;
 }
 
-#categoryspan label span {
+.categoryspan label span {
     text-align:center;
     padding:5px 5px;
     display:block;
 }
 
-#categoryspan label input {
+.categoryspan label input {
     position:absolute;
     top:-20px;
 }
 
-#categoryspan input:checked + span {
+.categoryspan input:checked + span {
     background-color:#e45f56;
     color: black;
 }
