@@ -129,7 +129,7 @@
 						<input type="range" id="radiusSlider" min="0" max="100" value=<?php echo($radius);?> step="1" onchange="setCircleRadius(this.value)"/>
 						<span id="range"><?php echo($radius."km");?></span><br>
 						
-						<button class="button" onclick="updateDatabase();">Lagre</button>
+						<button class="button" id="lagreB" onclick="updateDatabase();saved();">Lagre</button>
 					</div>
 				</div>
 			</div>
@@ -200,6 +200,10 @@
 				if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
 			}
 			return "";
+		}
+
+		function saved () {
+				document.getElementById("lagreB").innerHTML = "Lagret"
 		}
 		</script>
 </body>

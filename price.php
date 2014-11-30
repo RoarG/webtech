@@ -131,7 +131,7 @@
 
 						</select>
 
-						<button class="button" onclick="updateDatabase();">Lagre</button>
+						<button class="button" id="lagreB" onclick="updateDatabase();saved();">Lagre</button>
 					</div>
 				</div>
 			</div>
@@ -196,6 +196,10 @@
 					if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
 				}
 				return "";
+			}
+
+			function saved () {
+				document.getElementById("lagreB").innerHTML = "Lagret"
 			}
 		</script>
 </body>
