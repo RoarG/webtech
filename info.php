@@ -108,11 +108,11 @@
 							WHERE id = '".$id."';";
 				$result = mysqli_query($db, $query);
 				
-				$name = "Mickey Mouse";
-				$image = ".images/defaultUser.png";
-				$rating = "4";
-				$bio = "bio";
-				$categories[] = "plenklipping";
+				$name = "";
+				$image = "./images/defaultUser.png";
+				$rating = "0";
+				$bio = "";
+				$categories = "";
 				
 				while($row = $result->fetch_assoc()) {
 					$name = $row['navn'];
