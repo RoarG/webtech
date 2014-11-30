@@ -279,7 +279,7 @@
 		}
 		
 		function saved () {
-				document.getElementsById("lagreB").innerHTML = "Lagret"
+				document.getElementById("lagreB").innerHTML = "Lagret"
 			}
 		</script>
 </body>

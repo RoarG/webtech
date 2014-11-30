@@ -6,11 +6,6 @@
 	<link rel="stylesheet" href="css/account.css">
 	<meta charset="UTF-8">
 
-	<script>
-	function saved () {
-				document.getElementById("lagreB").innerHTML = "Lagret"
-	}
-	</script>
 </head>
 <body>
 		<section class="page">
@@ -219,7 +214,7 @@
 					<form action="demo_form.asp" name="subcategories">
 					</form>
 					</div>
-					<button class="button" id="lagreB" onclick="saved();updateDatabase();">Lagre</button>
+					<button class="button" id="lagreB" onclick="updateDatabase();saved();">Lagre</button>
 
 
 
@@ -576,7 +571,7 @@
 			}
 
 			function saved () {
-				document.getElementsById("lagreB").innerHTML = "Lagret"
+				document.getElementById("lagreB").innerHTML = "Lagret"
 			}
 		</script>
 
