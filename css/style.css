@@ -63,8 +63,9 @@
 	font-weight: bold;
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 	text-decoration: none;
-vertical-align: middle;
+	vertical-align: middle;
    }
+   
 .header-button:hover {
    border-top-color: #ed7842;
    background: #ed7842;
