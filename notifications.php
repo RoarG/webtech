@@ -167,7 +167,7 @@
 						<input type="text" name="smstext" value="<?php echo($sms);?>">
 						</form>
 						
-						<button class="button" onclick="updateDatabase();">Lagre</button>
+						<button class="button" id="lagreB" onclick="updateDatabase();saved();">Lagre</button>
 					</div>
 					
 					<div class="noteBox">
@@ -278,6 +278,9 @@
 			return "";
 		}
 		
+		function saved () {
+				document.getElementsById("lagreB").innerHTML = "Lagret"
+			}
 		</script>
 </body>
 </html>

@@ -172,6 +172,8 @@
 .category > img:hover {
  -webkit-filter: invert(80%);  
  -moz-filter: invert(80%);
+ 	cursor: hand;
+ 	cursor: pointer;
 
 }
 
