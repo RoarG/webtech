@@ -21,7 +21,7 @@
 				</div>
 				<div class="logo">
 					<a href="./index.html">
-						<img src="./images/logo.jpg"  height="130" width="450" />
+						<img src="./images/logo.jpg"  height="130" width="450" alt="logo">
 					</a>
 				</div>
 				<div class="box">
@@ -39,19 +39,19 @@
 			
 			<div class="nav" id="nav">
 				<div class="category" onclick="openCategoryPage('husarbeid')"> 
-					<img src="./images/house4.png">
+					<img src="./images/house4.png" alt="husarbeid">
 					<a>Husarbeid</a>
 				</div>
 				<div class="category" onclick="openCategoryPage('personlig assistent')">
-					<img src="./images/assistent.svg">
+					<img src="./images/assistent.svg" alt="personlig assistent">
 					<a>Personlig assistent</a>
 				</div>
 				<div class="category" onclick="openCategoryPage('handyman')">
-					<img src="./images/flyttingbil.svg">
+					<img src="./images/flyttingbil.svg" alt="handyman">
 					<a>Handyman</a>
 				</div>
 				<div class="category" onclick="openCategoryPage('annet')">
-					<img src="./images/annet.svg">
+					<img src="./images/annet.svg" alt="annet">
 					<a>Annet</a>
 				</div>
 				<div>
@@ -83,10 +83,12 @@
 				$result = mysqli_query($db, $query);
 				
 				$email = "";
+				$sms = "";
 				
 				if ($result->num_rows > 0) {
 					while($row = $result->fetch_assoc()) {
 						$email = $row["mail"];
+						$sms = $row["sms"];
 					}
 				} else {
 					echo "0 results";
@@ -144,11 +146,11 @@
 				<h3 id="accountHeader"> Din Konto</h3> 
 				<span class="accountNav">
 
-  					<button class="button" id="accountButton" onclick="location.href='account.php'">Konto</button>
-  					<button class="button" id="accountButton" onclick="location.href='price.php'">Pris</button>
-  					<button class="button" id="accountButton" onclick="location.href='notifications.php'">Varslinger</button>
-  					<button class="button" id="accountButton" onclick="location.href='place.php'">Steder</button>
-  					<button class="button" id="accountButton" onclick="location.href='info.php'">Synlig profil</button>
+  					<button class="accountButton" onclick="location.href='account.php'">Konto</button>
+  					<button class="accountButton" onclick="location.href='price.php'">Pris</button>
+  					<button class="accountButton" onclick="location.href='notifications.php'">Varslinger</button>
+  					<button class="accountButton" onclick="location.href='place.php'">Steder</button>
+  					<button class="accountButton" onclick="location.href='info.php'">Synlig profil</button>
 
 				</span>
 
@@ -158,10 +160,11 @@
 					</div>
 
 					<div class="summary">
-						<form action="">
+						<form action="demo_form.asp">
 						<input type="checkbox" name="Mail" value="mail">Motta oppdatteringer på E-Post
-						<input type="text" name="emailtext" value=<?php echo($email);?>><br>
-						<input type="checkbox" name="Sms" value="sms">Motta  oppdateringer på Sms<input type="text">
+						<input type="text" name="emailtext" value="<?php echo($email);?>"><br>
+						<input type="checkbox" name="Sms" value="sms">Motta  oppdateringer på Sms
+						<input type="text" name="smstext" value="<?php echo($sms);?>">
 						</form>
 						
 						<button class="button" onclick="updateDatabase();">Lagre</button>
@@ -207,7 +210,7 @@
 							?>
 						</div>
 					</div>
-	
+				</div>
 			</div>
 					
 			<div class="footer">
@@ -231,19 +234,19 @@
 					<a href="./references.html">Referanser</a>
 				</div>
 				<div id="socialMedia" class="footerBox">
-					<div id="facebook" class="socialMediaBox"><img id="facebookLogo" src="./images/fbblue.png"></div>
-					<div id="twitter" class="socialMediaBox"><img id="twitterLogo" src="https://g.twimg.com/Twitter_logo_blue.png"></div>
-					<div id="linkedin" class="socialMediaBox"><img id="linkedinLogo" src="./images/linkedIn.png"></div>
-					<div id="google" class="socialMediaBox"><img id="googleLogo" src="./images/g+64.png"></div>
+					<div id="facebook" class="socialMediaBox"><img id="facebookLogo" src="./images/fbblue.png" alt="facebook"></div>
+					<div id="twitter" class="socialMediaBox"><img id="twitterLogo" src="https://g.twimg.com/Twitter_logo_blue.png" alt="twitter"></div>
+					<div id="linkedin" class="socialMediaBox"><img id="linkedinLogo" src="./images/linkedIn.png" alt="linkedin"></div>
+					<div id="google" class="socialMediaBox"><img id="googleLogo" src="./images/g+64.png" alt="google+"></div>
 				</div>
 				<div id="copyright" class="footerBox">
-					<span id="copyrightSpan" class="copy"><p id="copyrightSymbol">&copy; </p></span> 
+					<div id="copyrightSpan" class="copy"><p id="copyrightSymbol">&copy; </p></div> 
 					<span id="names" class="copy">Roar Gjøvaag <br> 
 					Runar Heggset <br> Audun Sæther</span>
 				</div>
 				
 				<div id="logo" class="footerBox">
-					<img id="footerLogo" src="./images/logo.jpg"></img>
+					<img id="footerLogo" src="./images/logo.jpg" alt="logo">
 				</div>
 			</div>
 		</section>
@@ -254,8 +257,9 @@
 		function updateDatabase() {
 			var id = parseInt(getCookie("userId"));
 			var email = document.getElementsByName("emailtext")[0].value;
+			var sms = document.getElementsByName("smstext")[0].value;
 		
-			var params = "id="+id+"&email="+email;
+			var params = "id="+id+"&email="+email+"&sms="+sms;
 			
 			xmlhttp = new XMLHttpRequest();	
 			xmlhttp.open("POST", "updateUser.php", true);

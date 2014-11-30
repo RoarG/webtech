@@ -21,7 +21,7 @@
 				</div>
 				<div class="logo">
 					<a href="./index.html">
-						<img src="./images/logo.jpg"  height="130" width="450" />
+						<img src="./images/logo.jpg"  height="130" width="450" alt="logo">
 					</a>
 				</div>
 				<div class="box">
@@ -39,19 +39,19 @@
 			
 			<div class="nav" id="nav">
 				<div class="category" onclick="openCategoryPage('husarbeid')"> 
-					<img src="./images/house4.png">
+					<img src="./images/house4.png" alt="husarbeid">
 					<a>Husarbeid</a>
 				</div>
 				<div class="category" onclick="openCategoryPage('personlig assistent')">
-					<img src="./images/assistent.svg">
+					<img src="./images/assistent.svg" alt="personlig assistent">
 					<a>Personlig assistent</a>
 				</div>
 				<div class="category" onclick="openCategoryPage('handyman')">
-					<img src="./images/flyttingbil.svg">
+					<img src="./images/flyttingbil.svg" alt="handyman">
 					<a>Handyman</a>
 				</div>
 				<div class="category" onclick="openCategoryPage('annet')">
-					<img src="./images/annet.svg">
+					<img src="./images/annet.svg" alt="annet">
 					<a>Annet</a>
 				</div>
 				<div>
@@ -160,11 +160,11 @@
 				<h3 id="accountHeader"> Din Konto</h3> 
 				<span class="accountNav">
 
-  					<button class="button" id="accountButton" onclick="location.href='account.php'">Konto</button>
-  					<button class="button" id="accountButton" onclick="location.href='price.php'">Pris</button>
-  					<button class="button" id="accountButton" onclick="location.href='notifications.php'">Varslinger</button>
-  					<button class="button" id="accountButton" onclick="location.href='place.php'">Steder</button>
-  					<button class="button" id="accountButton" onclick="location.href='info.php'">Synlig Profil</button>
+  					<button class="accountButton" onclick="location.href='account.php'">Konto</button>
+  					<button class="accountButton" onclick="location.href='price.php'">Pris</button>
+  					<button class="accountButton" onclick="location.href='notifications.php'">Varslinger</button>
+  					<button class="accountButton" onclick="location.href='place.php'">Steder</button>
+  					<button class="accountButton" onclick="location.href='info.php'">Synlig Profil</button>
 
 				</span>
 
@@ -172,13 +172,13 @@
 					<div id="imagename">
 						<div class="form" id="nameform">
 							<form action="demo_form.asp">
-								First name: <input id="namform" size="25" type="text" name="FirstName" value=<?php echo($firstname);?>><br>
-								Last name: <input id="namform" size="25" type="text" name="LastName" value=<?php echo($lastname);?>><br>
+								First name: <input size="25" type="text" name="FirstName" value=<?php echo($firstname);?>><br>
+								Last name: <input size="25" type="text" name="LastName" value=<?php echo($lastname);?>><br>
 							</form>
 						</div>
 
-						<div class="image" id="accountImg">
-							<img src=<?php echo($image);?> id="accountImg"></img>
+						<div class="image">
+							<img src=<?php echo($image);?> id="accountImg" alt="brukerbilde">
 						</div>
 					</div>
 
@@ -188,29 +188,29 @@
 					</div>
 
 					<div class="categoryCont">
-					<form action="">
-						<div id="categoryspan">
+					<form action="demo_form.asp">
+						<div class="categoryspan">
 							<label>
 								<input type="checkbox" name="category" value="husarbeid" onclick="husarbeid();"><span>Husarbeid</span>
 							</label>
 						</div>
-						<div id="categoryspan">
+						<div class="categoryspan">
 							<label>
 								<input type="checkbox" name="category" value="Personlig Assistent" onclick="assistent();"><span>Personlig Assistent</span>
 							</label>
 						</div>
-						<div id="categoryspan">
+						<div class="categoryspan">
 							<label>
 								<input type="checkbox" name="category" value="Handyman" onclick="handyman();"><span>Handyman</span>
 							</label>
 						</div>
-						<div id="categoryspan">
+						<div class="categoryspan">
 							<label>
 								<input type="checkbox" name="category" value="Diverse" <?php if ($diverse == true) echo "checked='checked'"; ?>><span>Diverse</span>
 							</label>
 						</div>
 					</form>
-					<form action="" name="subcategories">
+					<form action="demo_form.asp" name="subcategories">
 					</form>
 					</div>
 					<button class="button" onclick="updateDatabase();">Lagre</button>
@@ -240,19 +240,19 @@
 					<a href="./references.html">Referanser</a>
 				</div>
 				<div id="socialMedia" class="footerBox">
-					<div id="facebook" class="socialMediaBox"><img id="facebookLogo" src="./images/fbblue.png"></div>
-					<div id="twitter" class="socialMediaBox"><img id="twitterLogo" src="https://g.twimg.com/Twitter_logo_blue.png"></div>
-					<div id="linkedin" class="socialMediaBox"><img id="linkedinLogo" src="./images/linkedIn.png"></div>
-					<div id="google" class="socialMediaBox"><img id="googleLogo" src="./images/g+64.png"></div>
+					<div id="facebook" class="socialMediaBox"><img id="facebookLogo" src="./images/fbblue.png" alt="facebook"></div>
+					<div id="twitter" class="socialMediaBox"><img id="twitterLogo" src="https://g.twimg.com/Twitter_logo_blue.png" alt="twitter"></div>
+					<div id="linkedin" class="socialMediaBox"><img id="linkedinLogo" src="./images/linkedIn.png" alt="linkedin"></div>
+					<div id="google" class="socialMediaBox"><img id="googleLogo" src="./images/g+64.png" alt="google+"></div>
 				</div>
 				<div id="copyright" class="footerBox">
-					<span id="copyrightSpan" class="copy"><p id="copyrightSymbol">&copy; </p></span> 
+					<div id="copyrightSpan" class="copy"><p id="copyrightSymbol">&copy; </p></div> 
 					<span id="names" class="copy">Roar Gjøvaag <br> 
 					Runar Heggset <br> Audun Sæther</span>
 				</div>
 				
 				<div id="logo" class="footerBox">
-					<img id="footerLogo" src="./images/logo.jpg"></img>
+					<img id="footerLogo" src="./images/logo.jpg" alt="logo">
 				</div>
 			</div>
 		</section>
@@ -317,7 +317,7 @@
 					var form = document.getElementsByName("subcategories")[0];
 					
 					var div = document.createElement("div");
-					div.id = "categoryspan";
+					div.className = "categoryspan";
 					div.name = "subcategory";
 							
 					var label = document.createElement("label");
@@ -338,7 +338,7 @@
 					form.appendChild(div);
 							
 					div = document.createElement("div");
-					div.id = "categoryspan";
+					div.className = "categoryspan";
 					div.name = "subcategory";
 						
 					label = document.createElement("label");
@@ -359,7 +359,7 @@
 					form.appendChild(div);
 							
 					div = document.createElement("div");
-					div.id = "categoryspan";
+					div.className = "categoryspan";
 					div.name = "subcategory";
 							
 					label = document.createElement("label");
@@ -380,7 +380,7 @@
 					form.appendChild(div);
 							
 					div = document.createElement("div");
-					div.id = "categoryspan";
+					div.className = "categoryspan";
 					div.name = "subcategory";
 							
 					label = document.createElement("label");
@@ -411,7 +411,7 @@
 					var form = document.getElementsByName("subcategories")[0];
 					
 					var div = document.createElement("div");
-					div.id = "categoryspan";
+					div.className = "categoryspan";
 					div.name = "subcategory";
 							
 					var label = document.createElement("label");
@@ -432,7 +432,7 @@
 					form.appendChild(div);
 							
 					div = document.createElement("div");
-					div.id = "categoryspan";
+					div.className = "categoryspan";
 					div.name = "subcategory";
 						
 					label = document.createElement("label");
@@ -453,7 +453,7 @@
 					form.appendChild(div);
 							
 					div = document.createElement("div");
-					div.id = "categoryspan";
+					div.className = "categoryspan";
 					div.name = "subcategory";
 							
 					label = document.createElement("label");
@@ -484,7 +484,7 @@
 					var form = document.getElementsByName("subcategories")[0];
 					
 					var div = document.createElement("div");
-					div.id = "categoryspan";
+					div.className = "categoryspan";
 					div.name = "subcategory";
 							
 					var label = document.createElement("label");
@@ -505,7 +505,7 @@
 					form.appendChild(div);
 							
 					div = document.createElement("div");
-					div.id = "categoryspan";
+					div.className = "categoryspan";
 					div.name = "subcategory";
 						
 					label = document.createElement("label");
@@ -526,7 +526,7 @@
 					form.appendChild(div);
 							
 					div = document.createElement("div");
-					div.id = "categoryspan";
+					div.className = "categoryspan";
 					div.name = "subcategory";
 							
 					label = document.createElement("label");
@@ -547,7 +547,7 @@
 					form.appendChild(div);
 					
 					div = document.createElement("div");
-					div.id = "categoryspan";
+					div.className = "categoryspan";
 					div.name = "subcategory";
 							
 					label = document.createElement("label");

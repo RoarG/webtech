@@ -21,7 +21,7 @@
 				</div>
 				<div class="logo">
 					<a href="./index.html">
-						<img src="./images/logo.jpg"  height="130" width="450" />
+						<img src="./images/logo.jpg"  height="130" width="450" alt="logo">
 					</a>
 				</div>
 				<div class="box">
@@ -39,19 +39,19 @@
 			
 			<div class="nav" id="nav">
 				<div class="category" onclick="openCategoryPage('husarbeid')"> 
-					<img src="./images/house4.png">
+					<img src="./images/house4.png" alt="husarbeid">
 					<a>Husarbeid</a>
 				</div>
 				<div class="category" onclick="openCategoryPage('personlig assistent')">
-					<img src="./images/assistent.svg">
+					<img src="./images/assistent.svg" alt="personlig assistent">
 					<a>Personlig assistent</a>
 				</div>
 				<div class="category" onclick="openCategoryPage('handyman')">
-					<img src="./images/flyttingbil.svg">
+					<img src="./images/flyttingbil.svg" alt="handyman">
 					<a>Handyman</a>
 				</div>
 				<div class="category" onclick="openCategoryPage('annet')">
-					<img src="./images/annet.svg">
+					<img src="./images/annet.svg" alt="annet">
 					<a>Annet</a>
 				</div>
 				<div>
@@ -84,11 +84,13 @@
 				
 				$lat = 63.41;
 				$lng = 10.44;
+				$radius = 0;
 				
 				if ($result->num_rows > 0) {
 					while($row = $result->fetch_assoc()) {
 						$lat = $row["breddegrad"];
 						$lng = $row["lengdegrad"];
+						$radius = $row["radius"];
 					}
 				} else {
 					echo "0 results";
@@ -104,11 +106,11 @@
 				<h3 id="accountHeader"> Din Konto</h3> 
 				<span class="accountNav">
 				
-  					<button class="button" id="accountButton" onclick="location.href='account.php'">Konto</button>
-  					<button class="button" id="accountButton" onclick="location.href='price.php'">Pris</button>
-  					<button class="button" id="accountButton" onclick="location.href='notifications.php'">Varslinger</button>
-  					<button class="button" id="accountButton" onclick="location.href='place.php'">Steder</button>
-  					<button class="button" id="accountButton" onclick="location.href='info.php'">Synlig profil</button>
+  					<button class="accountButton" onclick="location.href='account.php'">Konto</button>
+  					<button class="accountButton" onclick="location.href='price.php'">Pris</button>
+  					<button class="accountButton" onclick="location.href='notifications.php'">Varslinger</button>
+  					<button class="accountButton" onclick="location.href='place.php'">Steder</button>
+  					<button class="accountButton" onclick="location.href='info.php'">Synlig profil</button>
 
 				</span>
 
@@ -120,16 +122,16 @@
 					<div class="summary">
 						<div id="map" class="inputbox" >
 							<h3 id="mapHeader" class="inputHeader">Velg et utgangspunkt for ditt arbeidsområde ved å trykke på kartet</h3>
-							<!--<input id="search" type="text" placeholder="Skriv inn din adresse">-->
 							<div id="map-canvas"></div>
 						</div>
 						
 						<h4 id="radiusHeader" class="inputHeader">Velg radius for ditt arbeidsområde</h4>
-						<input type="range" id="radiusSlider" min="0" max="100" value="0" step="1" onchange="setCircleRadius(this.value)"/>
-						<span id="range">0</span><br>
+						<input type="range" id="radiusSlider" min="0" max="100" value=<?php echo($radius);?> step="1" onchange="setCircleRadius(this.value)"/>
+						<span id="range"><?php echo($radius."km");?></span><br>
 						
 						<button class="button" onclick="updateDatabase();">Lagre</button>
 					</div>
+				</div>
 			</div>
 						
 			<div class="footer">
@@ -153,19 +155,19 @@
 					<a href="./references.html">Referanser</a>
 				</div>
 				<div id="socialMedia" class="footerBox">
-					<div id="facebook" class="socialMediaBox"><img id="facebookLogo" src="./images/fbblue.png"></div>
-					<div id="twitter" class="socialMediaBox"><img id="twitterLogo" src="https://g.twimg.com/Twitter_logo_blue.png"></div>
-					<div id="linkedin" class="socialMediaBox"><img id="linkedinLogo" src="./images/linkedIn.png"></div>
-					<div id="google" class="socialMediaBox"><img id="googleLogo" src="./images/g+64.png"></div>
+					<div id="facebook" class="socialMediaBox"><img id="facebookLogo" src="./images/fbblue.png" alt="facebook"></div>
+					<div id="twitter" class="socialMediaBox"><img id="twitterLogo" src="https://g.twimg.com/Twitter_logo_blue.png" alt="twitter"></div>
+					<div id="linkedin" class="socialMediaBox"><img id="linkedinLogo" src="./images/linkedIn.png" alt="linkedin"></div>
+					<div id="google" class="socialMediaBox"><img id="googleLogo" src="./images/g+64.png" alt="google+"></div>
 				</div>
 				<div id="copyright" class="footerBox">
-					<span id="copyrightSpan" class="copy"><p id="copyrightSymbol">&copy; </p></span> 
+					<div id="copyrightSpan" class="copy"><p id="copyrightSymbol">&copy; </p></div> 
 					<span id="names" class="copy">Roar Gjøvaag <br> 
 					Runar Heggset <br> Audun Sæther</span>
 				</div>
 				
 				<div id="logo" class="footerBox">
-					<img id="footerLogo" src="./images/logo.jpg"></img>
+					<img id="footerLogo" src="./images/logo.jpg" alt="logo">
 				</div>
 			</div>
 		</section>
@@ -179,8 +181,9 @@
 			var id = parseInt(getCookie("userId"));
 			var lat = marker.getPosition().lat();
 			var lng = marker.getPosition().lng();
+			var radius = document.getElementById("radiusSlider").value;
 			
-			var params = "id="+id+"&latitude="+lat+"&longitude="+lng;
+			var params = "id="+id+"&latitude="+lat+"&longitude="+lng+"&radius="+radius;
 				
 			xmlhttp = new XMLHttpRequest();	
 			xmlhttp.open("POST", "updateUser.php", true);
